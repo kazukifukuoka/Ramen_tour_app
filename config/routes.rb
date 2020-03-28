@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  root to: 'ramen#top'
-  get 'ramen/index', to: 'ramen#index'
-  get 'ramen/id', to: 'ramen#show'
+  root to: 'ramens#top'
+  get 'ramens/index', to: 'ramens#index'
+  get 'ramens/id', to: 'ramens#show'
 
-  get 'user/new', to: 'user#new'
-  get 'user/id/', to: 'user#show'
+  get 'users/new', to: 'users#new'
+  get 'users/id/', to: 'users#show'
 end

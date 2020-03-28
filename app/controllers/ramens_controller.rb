@@ -1,4 +1,4 @@
-class RamenController < ApplicationController
+class RamensController < ApplicationController
 
   def top
   end
