@@ -7,6 +7,7 @@ class RamenController < ApplicationController
   end
 
   def show
+
   end
 
 end
