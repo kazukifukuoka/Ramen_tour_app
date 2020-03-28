@@ -7,7 +7,7 @@ class RamensController < ApplicationController
   end
 
   def show
-
+    @ramen = Ramen.find(params[:id])
   end
 
 end
