@@ -1,3 +1,8 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get '/top', to: 'ramen#top'
+  get '/index', to: 'ramen#index'
+  get '/id', to: 'ramen#show'
+
+  get 'user/new', to: 'user#new'
+  get 'user/id/show', to: 'user#show'
 end
