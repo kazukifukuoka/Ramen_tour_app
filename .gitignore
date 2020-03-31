@@ -30,8 +30,5 @@
 yarn-debug.log*
 .yarn-integrity
 
-/config/database.yml
-docker-compose.yml
-
 .DS_Store
-Vendor/bundle
+vendor/bundle
