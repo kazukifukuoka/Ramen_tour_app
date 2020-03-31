@@ -32,3 +32,6 @@ yarn-debug.log*
 
 /config/database.yml
 docker-compose.yml
+
+.DS_Store
+Vendor/bundle
