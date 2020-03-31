@@ -5,8 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Ramen.destroy_all
 Ramen.create!(name: "ラーメン1", price: 600)
 Ramen.create!(name: "ラーメン2", price: 700)
 Ramen.create!(name: "ラーメン3", price: 800)
+# テストユーザー情報
+EMAIL = 'test@example.com'
+PASSWORD = 'password'
+
+user = User.find_or_create_by!(email: EMAIL) do |user|
+  user.password = PASSWORD
+  puts 'テストユーザーの初期データインポートに成功しました。'
+end
 
 puts "成功"
