@@ -7,15 +7,15 @@ class RamenStoresController < ApplicationController
   end
 
   def new
-    @ramen = Ramen.new
+    @ramen = RamenStore.new
   end
 
   def create
-    @ramen = Ramen.new(ramen_params)
-    if @ramen.save
+    @ramen = RamenStore.new(ramen_params)
+    if @ramen.save!
       redirect_to root_path
     else
-      render ramens_new_path
+      render 'new'
     end
   end
 
@@ -25,6 +25,6 @@ class RamenStoresController < ApplicationController
 
   private
     def ramen_params
-      params.require(:ramen).permit(:name, :menu, :sale, :address, :parking_space, :phone_number, :sns, :prefecture, :content)
+      params.permit(:name, :menu, :sale, :address, :parking_space, :phone_number, :sns, :prefecture, :content)
     end
 end
