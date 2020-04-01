@@ -22,3 +22,18 @@
 .alert-alert {
   @extend .alert-danger;
 }
+
+// FontAwsomeのスタイル
+
+.fa-sign-out-alt{
+  color:white;
+}
+
+.fa-style{
+  font-size: 1.33333em;
+  line-height: 1rem;
+}
+
+// .nav-ul{
+//   margin:0 auto;
+// }
