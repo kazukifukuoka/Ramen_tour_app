@@ -1,34 +1,33 @@
 <header>
   <nav class="navbar navbar-expand navbar-dark bg-dark">
     <div class="container">
-      <%= link_to "Ramen Tour(仮)", root_path, class: 'navbar-brand' %>
+      <%= link_to "Ramen Tour(仮)", root_path, class: "navbar-brand" %>
       <div id="Navber">
         <ul class="navbar-nav">
           <% if user_signed_in? %>
             <li class="nav-item active">
-              <i class="far fa-address-card nav-link fa-style"></i>
-            </li>
-            <li class="nav-item active pr-3">
-              <%= link_to 'マイページ', edit_user_registration_path, class: 'nav-link' %>
-            </li>
-            <li class="nav-item active">
-              <i class="fas fa-sign-out-alt nav-link fa-style"></i>
+              <%= link_to  edit_user_registration_path, class: "nav-link" do %>
+              <i class="far fa-address-card nav-link fa-style active"></i>
+              <span>マイページ</span>
+              <% end %>
             </li>
             <li class="nav-item active">
-              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+              <%= link_to  destroy_user_session_path, method: :delete, class: "nav-link" do %>
+              <i class="fas fa-sign-out-alt nav-link fa-style active"></i>
+              <span>ログアウト</span>
+              <% end %>
             </li>
         <% else %>
             <li class="nav-item active">
-              <i class="fas fa-users nav-link fa-style"></i>
-            </li>
-            <li class="nav-item active pr-3">
-              <%= link_to "新規登録", new_user_registration_path, class: 'nav-link' %>
-            </li>
+              <%= link_to  new_user_registration_path, class: "nav-link" do %>
+              <i class="fas fa-users nav-link fa-style active"></i>
+              <span>新規登録</span>
+              <% end %>
             <li class="nav-item active">
-              <i class="fas fa-sign-in-alt nav-link fa-style"></i>
-            </li>
-            <li class="nav-item active">
-              <%= link_to "ログイン", new_user_session_path, class: 'nav-link' %>
+              <%= link_to  new_user_session_path, class: "nav-link" do %>
+              <i class="fas fa-sign-in-alt nav-link fa-style active"></i>
+              <span>ログイン</span>
+              <% end %>
             </li>
           <% end %>
         </ul>
@@ -40,28 +39,28 @@
     <div class="container">
       <ul class="navbar-nav mx-auto">
         <li class="nav-item active">
-          <i class="fas fa-table nav-link fa-style"></i>
-        </li>
-        <li class="nav-item active pr-4">
-          <%= link_to 'ラーメン一覧', ramens_path, class: 'nav-link' %>
-        </li>
-        <li class="nav-item active">
-          <i class="fas fa-search nav-link fa-style"></i>
-        </li>
-        <li class="nav-item active pr-4">
-          <%= link_to '見つける', root_path, class: 'nav-link' %>
+          <%= link_to ramens_path, class: "nav-link" do %>
+          <i class="fas fa-table nav-link fa-style active"></i>
+          <span>ラーメン一覧</span>
+          <% end %>
         </li>
         <li class="nav-item active">
-          <i class="fas fa-crown nav-link fa-style"></i>
-        </li>
-        <li class="nav-item active pr-4">
-          <%= link_to "ランキング", root_path, class: 'nav-link' %>
-        </li>
-        <li class="nav-item active">
-          <i class="fas fa-rss nav-link fa-style"></i>
+          <%= link_to root_path, class: "nav-link" do %>
+          <i class="fas fa-search nav-link fa-style active"></i>
+          <span>見つける</span>
+          <% end %>
         </li>
         <li class="nav-item active">
-          <%= link_to "配信", root_path, class: 'nav-link' %>
+          <%= link_to root_path, class: "nav-link" do %>
+          <i class="fas fa-crown nav-link fa-style active"></i>
+          <span>ランキング</span>
+          <% end %>
+        </li>
+        <li class="nav-item active">
+          <%= link_to root_path, class: "nav-link" do %>
+          <i class="fas fa-rss nav-link fa-style active"></i>
+          <span>配信</span>
+          <% end %>
         </li>
       </ul>
     </div>
