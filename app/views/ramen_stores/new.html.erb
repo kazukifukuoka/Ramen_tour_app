@@ -1,4 +1,16 @@
+
 <%= form_with model:@ramen_store, url: ramens_path, local: true do |f| %>
+<% if @ramen_store.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @ramen_store.errors.count %>件のエラーがあります。</h2>
+      <ul>
+
+      <% @ramen_store.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="form-group">
     <%= f.label :name, "店名" %>
     <%= f.text_field :name, class: "form-control" %>
@@ -27,17 +39,19 @@
     <%= f.label :content, "説明"%>
     <%= f.text_area :content, class: "form-control", rows: 5 %>
   </div>
-  <%= f.fields_for :ramen_store_menu do |m| %>
-    <div class="form-group">
+  <%= f.fields_for :ramen_store_menus do |m| %>
+  <div class="form-inline">
+    <div class="form-group col-8">
       <%= m.label :name, "メニュー" %>
       <%= m.text_field :name, class: "form-control" %>
     </div>
-    <div class="form-group">
+    <div class="form-group col-4">
       <%= m.label :price, "金額" %>
       <%= m.text_field :price, class: "form-control" %>
     </div>
+  </div>
   <% end %>
-  <div class="form-group">
+  <div class="form-group pt-4">
     <%= f.label :prefecture_id, "都道府県"%>
     <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name %>
   </div>

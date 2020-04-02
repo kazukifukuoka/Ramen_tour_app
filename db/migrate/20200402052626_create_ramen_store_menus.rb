@@ -3,7 +3,7 @@ class CreateRamenStoreMenus < ActiveRecord::Migration[6.0]
     create_table :ramen_store_menus do |t|
       t.string :name, null: false
       t.integer :price, null: false
-      t.integer :ramen_store_id
+      t.references :ramen_store, null: false, foreign_key: true
 
       t.timestamps
     end
