@@ -8,7 +8,7 @@ class CreateRamenStores < ActiveRecord::Migration[6.0]
       t.string :sns, null: false
       t.string :phone_number, null: false
       t.string :parking_space, null: false
-      t.string :prefecture, null: false, index: true
+      t.integer :prefecture_id, null: false, index: true
 
       t.timestamps
     end

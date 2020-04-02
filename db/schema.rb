@@ -10,11 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_01_053900) do
+ActiveRecord::Schema.define(version: 2020_04_02_052626) do
 
-  create_table "ramen", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name"
-    t.integer "price"
+  create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "prefecture_id"
+    t.string "city"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "ramen_store_menus", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "price", null: false
+    t.integer "ramen_store_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -27,12 +35,12 @@ ActiveRecord::Schema.define(version: 2020_04_01_053900) do
     t.string "sns", null: false
     t.string "phone_number", null: false
     t.string "parking_space", null: false
-    t.string "prefecture", null: false
+    t.integer "prefecture_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_ramen_stores_on_name"
     t.index ["phone_number"], name: "index_ramen_stores_on_phone_number", unique: true
-    t.index ["prefecture"], name: "index_ramen_stores_on_prefecture"
+    t.index ["prefecture_id"], name: "index_ramen_stores_on_prefecture_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

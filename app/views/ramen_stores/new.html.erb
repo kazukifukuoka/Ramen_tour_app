@@ -4,34 +4,42 @@
     <%= f.text_field :name, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :sale, "営業時間"%>
-    <%= f.text_field :sale, class: "form-control" %>
-  </div>
-  <div class="form-group">
     <%=f.label :address, "場所"%>
     <%= f.text_field :address, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :parking_space, "駐車場" %>
-    <%= f.text_field :parking_space, class: "form-control" %>
   </div>
   <div class="form-group">
     <%= f.label :phone_number, "電話番号" %>
     <%= f.text_field :phone_number, class: "form-control" %>
   </div>
   <div class="form-group">
+    <%= f.label :sale, "営業時間"%>
+    <%= f.text_field :sale, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :parking_space, "駐車場" %>
+    <%= f.text_field :parking_space, class: "form-control" %>
+  </div>
+  <div class="form-group">
     <%= f.label :sns, "SNS" %>
     <%= f.text_field :sns, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :prefecture, "都道府県"%>
-    <%= f.select :prefecture,
-    [["北海道", "北海道"],
-     ["青森", "青森"]]%>
-  </div>
-  <div class="form-group">
     <%= f.label :content, "説明"%>
     <%= f.text_area :content, class: "form-control", rows: 5 %>
+  </div>
+  <%= f.fields_for :menu do |m| %>
+    <div class="form-group">
+      <%= m.label :name, "メニュー" %>
+      <%= m.text_field :name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= m.label :price, "金額" %>
+      <%= m.text_field :price, class: "form-control" %>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :prefecture_id, "都道府県"%>
+    <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name %>
   </div>
   <%= f.submit "送信", class: "btn btn-primary" %>
 <% end %>

@@ -8,10 +8,12 @@ class RamenStoresController < ApplicationController
 
   def new
     @ramen_store = RamenStore.new
+    # ramen_store_menu = @ramen_store.ramen_store_menus.build
   end
 
   def create
     @ramen_store = RamenStore.new(ramen_store_params)
+    @ramen_store_menu = @ramen_store.ramen_store_menus.build
     if @ramen_store.save
       flash[:success] = "店舗を登録しました"
       redirect_to root_path
@@ -27,6 +29,6 @@ class RamenStoresController < ApplicationController
 
   private
     def ramen_store_params
-      params.require(:ramen_store).permit(:name, :sale, :address, :parking_space, :phone_number, :sns, :prefecture, :content)
+      params.require(:ramen_store).permit(:name, :sale, :address, :parking_space, :phone_number, :sns, :content, :prefecture_id, menu_attributes:[:name, :price])
     end
 end
