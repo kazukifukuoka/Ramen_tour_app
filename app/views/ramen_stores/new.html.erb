@@ -1,1 +1,37 @@
-ラーメン投稿画面
+<%= form_with model:@ramen_store, url: ramens_path, local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :name, "店名" %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :sale, "営業時間"%>
+    <%= f.text_field :sale, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%=f.label :address, "場所"%>
+    <%= f.text_field :address, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :parking_space, "駐車場" %>
+    <%= f.text_field :parking_space, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :phone_number, "電話番号" %>
+    <%= f.text_field :phone_number, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :sns, "SNS" %>
+    <%= f.text_field :sns, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :prefecture, "都道府県"%>
+    <%= f.select :prefecture,
+    [["北海道", "北海道"],
+     ["青森", "青森"]]%>
+  </div>
+  <div class="form-group">
+    <%= f.label :content, "説明"%>
+    <%= f.text_area :content, class: "form-control", rows: 5 %>
+  </div>
+  <%= f.submit "送信", class: "btn btn-primary" %>
+<% end %>
