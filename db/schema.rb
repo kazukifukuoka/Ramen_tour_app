@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_01_053900) do
+ActiveRecord::Schema.define(version: 2020_04_02_052626) do
 
-  create_table "ramen", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name"
-    t.integer "price"
+  create_table "ramen_store_menus", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "price", null: false
+    t.bigint "ramen_store_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["ramen_store_id"], name: "index_ramen_store_menus_on_ramen_store_id"
   end
 
   create_table "ramen_stores", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -27,12 +29,12 @@ ActiveRecord::Schema.define(version: 2020_04_01_053900) do
     t.string "sns", null: false
     t.string "phone_number", null: false
     t.string "parking_space", null: false
-    t.string "prefecture", null: false
+    t.integer "prefecture_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_ramen_stores_on_name"
     t.index ["phone_number"], name: "index_ramen_stores_on_phone_number", unique: true
-    t.index ["prefecture"], name: "index_ramen_stores_on_prefecture"
+    t.index ["prefecture_id"], name: "index_ramen_stores_on_prefecture_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -47,4 +49,5 @@ ActiveRecord::Schema.define(version: 2020_04_01_053900) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "ramen_store_menus", "ramen_stores"
 end

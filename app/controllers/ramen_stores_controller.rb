@@ -8,6 +8,7 @@ class RamenStoresController < ApplicationController
 
   def new
     @ramen_store = RamenStore.new
+    ramen_store_menu = @ramen_store.ramen_store_menus.build
   end
 
   def create
@@ -27,6 +28,6 @@ class RamenStoresController < ApplicationController
 
   private
     def ramen_store_params
-      params.require(:ramen_store).permit(:name, :sale, :address, :parking_space, :phone_number, :sns, :prefecture, :content)
+      params.require(:ramen_store).permit(:name, :sale, :address, :parking_space, :phone_number, :sns, :content, :prefecture_id, ramen_store_menus_attributes:[:id, :name, :price])
     end
 end
