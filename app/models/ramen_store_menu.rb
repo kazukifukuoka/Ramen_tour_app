@@ -1,3 +1,3 @@
 class RamenStoreMenu < ApplicationRecord
-  belongs_to :ramen_store
+  belongs_to :ramen_store ,optional: true
 end

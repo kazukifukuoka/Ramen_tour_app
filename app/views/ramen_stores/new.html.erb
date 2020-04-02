@@ -27,7 +27,7 @@
     <%= f.label :content, "説明"%>
     <%= f.text_area :content, class: "form-control", rows: 5 %>
   </div>
-  <%= f.fields_for :menu do |m| %>
+  <%= f.fields_for :ramen_store_menu do |m| %>
     <div class="form-group">
       <%= m.label :name, "メニュー" %>
       <%= m.text_field :name, class: "form-control" %>
