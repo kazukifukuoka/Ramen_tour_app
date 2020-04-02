@@ -1,6 +1,5 @@
 class RamenStore < ApplicationRecord
-  validates :name, presence: true, uniqueness: true
-  validates :menu, presence: true
+  validates :name, presence: true
   validates :sale, presence: true
   validates :address, presence: true
   validates :parking_space, presence: true
