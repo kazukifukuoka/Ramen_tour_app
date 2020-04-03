@@ -4,6 +4,7 @@ class RamenStoresController < ApplicationController
   end
 
   def index
+    @ramen_stores = RamenStore.all
   end
 
   def new
