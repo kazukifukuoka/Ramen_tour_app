@@ -1,7 +1,7 @@
 <p><%= link_to "ラーメン投稿", ramens_new_path, class: "btn btn-primary" %></p>
 
 <% @ramen_stores.each do |ramen_store| %>
-<table class="table table-bordered">
+<table class="table table-bordered", style="table-layout:fixed;width:100%;">
   <tr><th colspan="2"><%= ramen_store.name %></th></tr>
   <tr><td>営業時間</td><td><%= ramen_store.sale %></td></tr>
   <tr><td>場所</td><td><%= ramen_store.address %></td></tr>
@@ -9,6 +9,9 @@
   <tr><td>電話番号</td><td><%= ramen_store.phone_number %></td></tr>
   <tr><td>SNS</td><td><%= ramen_store.sns %></td></tr>
   <tr><td>説明</td><td><%= ramen_store.content %></td></tr>
-  <tr><td>メニュー</td><td><%= ramen_store.ramen_store_menus.name %></td></tr>
+  <tr><th colspan="2">メニュー</th></tr>
+  <% ramen_store.ramen_store_menus.each do |menu|%>
+    <tr><td><%= menu.name %></td><td><%= menu.price %></td></tr>
+  <% end %>
 </table>
 <% end %>
