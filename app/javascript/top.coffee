@@ -1,6 +1,6 @@
 # CoffeeScript
 $ ->
-  $("div#address_zipcode").jpostal({
+  $("#address_zipcode").jpostal({
     # 郵便番号の入力欄が１つの場合
     # 111-1111と1111111のどちらの入力形式でも住所を自動入力してくれる
     postcode : [ "#address_zipcode" ],
