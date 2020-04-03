@@ -23,13 +23,19 @@ ActiveRecord::Schema.define(version: 2020_04_02_052626) do
 
   create_table "ramen_stores", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
-    t.text "content", null: false
-    t.string "sale", null: false
-    t.string "address", null: false
-    t.string "sns", null: false
-    t.string "phone_number", null: false
-    t.string "parking_space", null: false
+    t.string "postcode", null: false
     t.integer "prefecture_id", null: false
+    t.string "city", null: false
+    t.string "address", null: false
+    t.string "building"
+    t.string "phone_number", null: false
+    t.string "sale", null: false
+    t.string "holiday", null: false
+    t.string "seat", null: false
+    t.string "access", null: false
+    t.string "parking_space", null: false
+    t.string "sns", null: false
+    t.text "content", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_ramen_stores_on_name"

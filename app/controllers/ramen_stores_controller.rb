@@ -4,6 +4,7 @@ class RamenStoresController < ApplicationController
   end
 
   def index
+    @ramen_stores = RamenStore.all
   end
 
   def new
@@ -23,11 +24,11 @@ class RamenStoresController < ApplicationController
   end
 
   def show
-
+    @ramen_store = RamneStore.find_by(params[:id])
   end
 
   private
     def ramen_store_params
-      params.require(:ramen_store).permit(:name, :sale, :address, :parking_space, :phone_number, :sns, :content, :prefecture_id, ramen_store_menus_attributes:[:id, :name, :price])
+      params.require(:ramen_store).permit(:name, :postcode, :prefecture_id, :city, :address, :building, :phone_number, :sale, :holiday, :seat, :access, :parking_space, :sns, :content, ramen_store_menus_attributes:[:id, :name, :price])
     end
 end
