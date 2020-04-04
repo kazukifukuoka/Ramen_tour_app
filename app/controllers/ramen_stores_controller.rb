@@ -12,6 +12,10 @@ class RamenStoresController < ApplicationController
     ramen_store_menu = @ramen_store.ramen_store_menus.build
   end
 
+  def show
+    @ramen_store = RamenStore.find(params[:id])
+  end
+
   def create
     @ramen_store = RamenStore.new(ramen_store_params)
     if @ramen_store.save
@@ -23,9 +27,32 @@ class RamenStoresController < ApplicationController
     end
   end
 
-  def show
-    @ramen_store = RamneStore.find_by(params[:id])
+  def edit
+    @ramen_store = RamenStore.find(params[:id])
   end
+
+  def update
+    @ramen_store = RamenStore.find(params[:id])
+    if @ramen_store.update(ramen_store_params)
+      flash[:success] = "店舗を更新しました"
+      redirect_to ramen_store_path(@ramen_store)
+    else
+      flash[:danger] = "店舗の更新に失敗しました"
+      render :edit
+    end
+  end
+
+  def destroy
+    @ramen_store = RamenStore.find(params[:id])
+    if @ramen_store.destroy
+      flash[:success] = "店舗を削除しました"
+      redirect_to ramen_stores_path
+    else
+      flash[:danger] = "店舗の削除に失敗しました"
+      render :show
+    end
+  end
+
 
   private
     def ramen_store_params

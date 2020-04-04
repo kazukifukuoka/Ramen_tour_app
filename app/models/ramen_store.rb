@@ -8,7 +8,7 @@ class RamenStore < ApplicationRecord
   VALID_PHONE_REGEX = /\A\d{10}$|^\d{11}\z/
 
   validates :name, presence: true
-  validates :postcode, presence: true
+  validates :postcode, presence: true, numericality: { only_integer: true }
   validates :prefecture_id, presence: true
   validates :city, presence: true
   validates :address, presence: true
