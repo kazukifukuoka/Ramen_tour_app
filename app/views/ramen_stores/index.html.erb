@@ -2,7 +2,7 @@
 
 <% @ramen_stores.each do |ramen_store| %>
 <table class="table table-bordered", style="table-layout:fixed;width:100%;">
-  <tr><th colspan="2"><%= link_to "#{ramen_store.name}(#{ramen_store.prefecture.name}#{ramen_store.city}#{ramen_store.address}#{ramen_store.building})", ramen_store_path(ramen_store) %></th></tr>
+  <tr><th><%= link_to "#{ramen_store.name}(#{ramen_store.prefecture.name}#{ramen_store.city}#{ramen_store.address}#{ramen_store.building})", ramen_store_path(ramen_store) %></th><td><%= "作成 #{ramen_store.created_at.to_s(:datetime_jp)} / 更新 #{ramen_store.updated_at.to_s(:datetime_jp)}"%></td></tr>
   <tr><td>電話番号</td><td><%= ramen_store.phone_number %></td></tr>
   <tr><td>営業時間</td><td><%= ramen_store.sale %></td></tr>
   <tr><td>定休日</td><td><%= ramen_store.holiday %></td></tr>

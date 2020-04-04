@@ -29,7 +29,6 @@ class RamenStoresController < ApplicationController
 
   def edit
     @ramen_store = RamenStore.find(params[:id])
-    ramen_store_menu = @ramen_store.ramen_store_menus.build
   end
 
   def update
