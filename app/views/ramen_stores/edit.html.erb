@@ -80,19 +80,19 @@
     </div>
   </div>
   <% end %>
-  <%= f.submit "店舗を登録する", class: "btn btn-primary btn-block" %>
+  <%= f.submit "店舗を更新する", class: "btn btn-primary btn-block" %>
 <% end %>
 
 <script>
-	$(function () {
-		$('#ramen_store_postcode').jpostal({
-			postcode : [
-				'#ramen_store_postcode'
-			],
-			address : {
-				'#ramen_store_prefecture_id'  : '%3',
-				'#ramen_store_city'  : '%4%5'
-			}
-		});
+$(function () {
+	$('#ramen_store_postcode').jpostal({
+		postcode : [
+			'#ramen_store_postcode'
+		],
+		address : {
+			'#ramen_store_prefecture_id'  : '%3',
+			'#ramen_store_city'  : '%4%5'
+		}
 	});
-</script>>
+});
+</script>

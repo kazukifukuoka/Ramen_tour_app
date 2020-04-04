@@ -1,2 +1,19 @@
-<%# <%= @ramen.id %> %>
-ラーメン詳細
+<%= link_to "戻る", ramen_stores_path, class: "btn btn-primary mb-3" %>
+<%= link_to "編集する", edit_ramen_store_path, class: "btn btn-primary mb-3" %>
+<%= link_to "削除する", ramen_store_path, method: :delete, class: "btn btn-primary mb-3" %>
+
+<table class="table table-bordered", style="table-layout:fixed;width:100%;">
+  <tr><th colspan="2"><%= "#{@ramen_store.name}(#{@ramen_store.prefecture.name}#{@ramen_store.city}#{@ramen_store.address}#{@ramen_store.building})" %></th></tr>
+  <tr><td>電話番号</td><td><%= @ramen_store.phone_number %></td></tr>
+  <tr><td>営業時間</td><td><%= @ramen_store.sale %></td></tr>
+  <tr><td>定休日</td><td><%= @ramen_store.holiday %></td></tr>
+  <tr><td>席数</td><td><%= @ramen_store.seat %></td></tr>
+  <tr><td>アクセス</td><td><%= @ramen_store.access %></td></tr>
+  <tr><td>駐車場</td><td><%= @ramen_store.parking_space %></td></tr>
+  <tr><td>SNS</td><td><%= @ramen_store.sns %></td></tr>
+  <tr><td>説明</td><td><%= @ramen_store.content %></td></tr>
+  <tr><th colspan="2">メニュー</th></tr>
+  <% @ramen_store.ramen_store_menus.each do |menu|%>
+    <tr><td><%= menu.name %></td><td><%= menu.price %></td></tr>
+  <% end %>
+</table>
