@@ -11,8 +11,8 @@ class RamenStoresController < ApplicationController
 
   def new
     @ramen_store = RamenStore.new
-    ramen_store_menu = @ramen_store.ramen_store_menus.build
-    ramen_store_user_image = @ramen_store.ramen_store_user_images.build
+    ramen_store_menu = 2.times{@ramen_store.ramen_store_menus.build}
+    ramen_store_user_image = 2.times{@ramen_store.ramen_store_user_images.build}
   end
 
   def show
@@ -22,7 +22,9 @@ class RamenStoresController < ApplicationController
   def create
     @ramen_store = RamenStore.new(ramen_store_params)
     @ramen_store.user_id = current_user.id
-    @ramen_store.ramen_store_user_images[0].user_id = current_user.id
+    @ramen_store.ramen_store_user_images.each do |store_user_image|
+      store_user_image.user_id = current_user.id
+    end
 
     if @ramen_store.save
       flash[:success] = "店舗を登録しました"
