@@ -31,8 +31,8 @@
 yarn-debug.log*
 .yarn-integrity
 
- # Ignore uploaded files in development
- /public/uploads/
+# Ignore uploaded files in development
+/public/uploads/
 
 .DS_Store
 vendor/bundle
