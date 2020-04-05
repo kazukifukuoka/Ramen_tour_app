@@ -15,6 +15,7 @@ class CreateRamenStores < ActiveRecord::Migration[6.0]
       t.string :parking_space, null: false
       t.string :sns, null: false
       t.text :content, null: false
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end
