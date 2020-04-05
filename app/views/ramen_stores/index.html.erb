@@ -15,5 +15,9 @@
   <% ramen_store.ramen_store_menus.each do |menu|%>
     <tr><td><%= menu.name %></td><td><%= menu.price %></td></tr>
   <% end %>
+  <tr><th colspan="2">写真</th></tr>
+  <% ramen_store.ramen_store_user_images.each do |image|%>
+    <tr><td><%= image.name %></td><td><%= image.image %></td></tr>
+  <% end %>
 </table>
 <% end %>

@@ -48,11 +48,13 @@ ActiveRecord::Schema.define(version: 2020_04_05_021800) do
     t.string "parking_space", null: false
     t.string "sns", null: false
     t.text "content", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_ramen_stores_on_name"
     t.index ["phone_number"], name: "index_ramen_stores_on_phone_number", unique: true
     t.index ["prefecture_id"], name: "index_ramen_stores_on_prefecture_id"
+    t.index ["user_id"], name: "index_ramen_stores_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -70,4 +72,5 @@ ActiveRecord::Schema.define(version: 2020_04_05_021800) do
   add_foreign_key "ramen_store_menus", "ramen_stores"
   add_foreign_key "ramen_store_user_images", "ramen_stores"
   add_foreign_key "ramen_store_user_images", "users"
+  add_foreign_key "ramen_stores", "users"
 end

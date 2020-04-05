@@ -1,5 +1,7 @@
 class RamenStoresController < ApplicationController
 
+  before_action :authenticate_user!
+
   def top
   end
 
@@ -19,6 +21,8 @@ class RamenStoresController < ApplicationController
 
   def create
     @ramen_store = RamenStore.new(ramen_store_params)
+    @ramen_store.ramen_store_user_images[0].user_id = current_user.id
+
     if @ramen_store.save
       flash[:success] = "店舗を登録しました"
       redirect_to root_path
@@ -57,6 +61,6 @@ class RamenStoresController < ApplicationController
 
   private
     def ramen_store_params
-      params.require(:ramen_store).permit(:name, :postcode, :prefecture_id, :city, :address, :building, :phone_number, :sale, :holiday, :seat, :access, :parking_space, :sns, :content, ramen_store_menus_attributes:[:id, :name, :price], ramen_store_user_images_attributes:[:name, { images: [] }])
+      params.require(:ramen_store).permit(:user_id, :name, :postcode, :prefecture_id, :city, :address, :building, :phone_number, :sale, :holiday, :seat, :access, :parking_space, :sns, :content, ramen_store_menus_attributes:[:id, :name, :price], ramen_store_user_images_attributes:[:name, :image])
     end
 end
