@@ -43,6 +43,9 @@ gem 'active_hash'
 # 画像の投稿
 gem 'carrierwave', '~> 1.0.0'
 
+# 画像の加工
+gem 'rmagick'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
