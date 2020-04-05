@@ -40,6 +40,9 @@ gem 'devise-bootstrap-views', '~> 1.0'
 # データのハッシュ化
 gem 'active_hash'
 
+# 画像の投稿
+gem 'carrierwave', '~> 1.0.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

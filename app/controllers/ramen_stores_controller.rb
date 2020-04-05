@@ -10,6 +10,7 @@ class RamenStoresController < ApplicationController
   def new
     @ramen_store = RamenStore.new
     ramen_store_menu = @ramen_store.ramen_store_menus.build
+    ramen_store_user_image = @ramen_store.ramen_store_user_images.build
   end
 
   def show
@@ -56,6 +57,6 @@ class RamenStoresController < ApplicationController
 
   private
     def ramen_store_params
-      params.require(:ramen_store).permit(:name, :postcode, :prefecture_id, :city, :address, :building, :phone_number, :sale, :holiday, :seat, :access, :parking_space, :sns, :content, ramen_store_menus_attributes:[:id, :name, :price])
+      params.require(:ramen_store).permit(:name, :postcode, :prefecture_id, :city, :address, :building, :phone_number, :sale, :holiday, :seat, :access, :parking_space, :sns, :content, ramen_store_menus_attributes:[:id, :name, :price], ramen_store_user_images_attributes:[:name, { images: [] }])
     end
 end
