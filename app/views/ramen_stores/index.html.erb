@@ -17,7 +17,7 @@
   <% end %>
   <tr><th colspan="2">写真</th></tr>
   <% ramen_store.ramen_store_user_images.each do |image|%>
-    <tr><td><%= image.name %></td><td><%= image.image %></td></tr>
+    <tr><td><%= image.name %></td><td><%= image_tag image.image.to_s %></td></tr>
   <% end %>
 </table>
 <% end %>
