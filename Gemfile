@@ -29,22 +29,19 @@ gem 'bcrypt','~>3.1.13'
 gem 'bootsnap', '>= 1.4.2', require: false
 # ログイン機能
 gem 'devise'
-
 # 日本語化
 gem 'rails-i18n', '~> 6.0'
 gem 'devise-i18n'
-
 # Bootstrap
 gem 'devise-bootstrap-views', '~> 1.0'
-
 # データのハッシュ化
 gem 'active_hash'
-
 # 画像の投稿
 gem 'carrierwave', '~> 1.0.0'
-
 # 画像の加工
 gem 'rmagick'
+# タグ機能
+gem 'acts-as-taggable-on', '6.5.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
