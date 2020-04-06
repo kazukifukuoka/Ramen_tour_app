@@ -3,7 +3,7 @@
 <%= link_to "削除する", ramen_store_path, method: :delete, class: "btn btn-primary mb-3" %>
 
 <table class="table table-bordered", style="table-layout:fixed;width:100%;">
-  <tr><th colspan="2"><%= "#{@ramen_store.name}(#{@ramen_store.prefecture.name}#{@ramen_store.city}#{@ramen_store.address}#{@ramen_store.building})" %></th></tr>
+  <tr><th><%= link_to "#{@ramen_store.name}(#{@ramen_store.prefecture.name}#{@ramen_store.city}#{@ramen_store.address}#{@ramen_store.building})", ramen_store_path(@ramen_store) %></th><td><%= "作成: #{@ramen_store.created_at.to_s(:datetime_jp)} / 更新:  #{@ramen_store.updated_at.to_s(:datetime_jp)}" %></td></tr>
   <tr><td>電話番号</td><td><%= @ramen_store.phone_number %></td></tr>
   <tr><td>営業時間</td><td><%= @ramen_store.sale %></td></tr>
   <tr><td>定休日</td><td><%= @ramen_store.holiday %></td></tr>
@@ -15,5 +15,9 @@
   <tr><th colspan="2">メニュー</th></tr>
   <% @ramen_store.ramen_store_menus.each do |menu|%>
     <tr><td><%= menu.name %></td><td><%= menu.price %></td></tr>
+  <% end %>
+  <tr><th colspan="2">写真</th></tr>
+  <% @ramen_store.ramen_store_user_images.each do |image|%>
+    <tr><td><%= image.name %></td><td><%= image_tag image.image.url(:thumb100) %></td></tr>
   <% end %>
 </table>

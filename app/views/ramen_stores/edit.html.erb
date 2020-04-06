@@ -70,13 +70,25 @@
   </div>
   <%= f.fields_for :ramen_store_menus do |m| %>
   <div class="form-inline pb-3">
-    <div class="form-group col-8">
+    <div class="form-group col-6">
       <%= m.label :name, "メニュー" %>
       <%= m.text_field :name, class: "form-control" %>
     </div>
-    <div class="form-group col-4">
+    <div class="form-group col-6">
       <%= m.label :price, "金額" %>
       <%= m.text_field :price, class: "form-control" %>
+    </div>
+  </div>
+  <% end %>
+  <%= f.fields_for :ramen_store_user_images do |i| %>
+  <div class="form-inline pb-3">
+    <div class="form-group col-6">
+      <%= i.label :name, "写真の名前" %>
+      <%= i.text_field :name, class: "form-control" %>
+    </div>
+    <div class="form-group col-6">
+      <%= i.label :image, "写真" %>
+      <%= i.file_field :image, class: "form-control" %>
     </div>
   </div>
   <% end %>
@@ -84,15 +96,17 @@
 <% end %>
 
 <script>
-$(function () {
-	$('#ramen_store_postcode').jpostal({
-		postcode : [
-			'#ramen_store_postcode'
-		],
-		address : {
-			'#ramen_store_prefecture_id'  : '%3',
-			'#ramen_store_city'  : '%4%5'
-		}
+	$(function () {
+		$('#ramen_store_postcode').jpostal({
+			postcode : [
+				'#ramen_store_postcode'
+			],
+			address : {
+				'#ramen_store_prefecture_id'  : '%3',
+        '#ramen_store_city'  : '%4%5',
+        '#ramen_store_address' : '%6',
+        '#ramen_store_building' : '%7'
+			}
+		});
 	});
-});
 </script>
