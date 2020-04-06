@@ -17,11 +17,11 @@
   <% end %>
   <tr><th colspan="2">写真</th></tr>
   <% ramen_store.ramen_store_user_images.each do |image|%>
+  <% if image.image? %>
     <tr><td><%= image.name %></td>
-    <% if image.image? %>
     <td><%= image_tag image.image.url(:thumb100) %></td></tr>
     <% else %>
-      <td><%= image_tag "thumb100_default.png", size: '100x100' %></td>
+      <tr><td colspan="2">写真はまだ投稿されていません</td></tr>
     <% end %>
   <% end %>
   <tr><td>タグ</td>

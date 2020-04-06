@@ -1,6 +1,6 @@
 <%= link_to "戻る", ramen_stores_path, class: "btn btn-primary mb-3" %>
 <%= link_to "編集する", edit_ramen_store_path, class: "btn btn-primary mb-3" %>
-<%= link_to "削除する", ramen_store_path, method: :delete, class: "btn btn-primary mb-3" %>
+<%= link_to "削除する", ramen_store_path, method: :delete, class: "btn btn-primary mb-3", data: { confirm: "本当に削除しますか？" } %>
 
 <table class="table table-bordered", style="table-layout:fixed;width:100%;">
   <tr><th><%= link_to "#{@ramen_store.name}(#{@ramen_store.prefecture.name}#{@ramen_store.city}#{@ramen_store.address}#{@ramen_store.building})", ramen_store_path(@ramen_store) %></th><td><%= "作成: #{@ramen_store.created_at.to_s(:datetime_jp)} / 更新:  #{@ramen_store.updated_at.to_s(:datetime_jp)}" %></td></tr>
@@ -17,12 +17,12 @@
     <tr><td><%= menu.name %></td><td><%= menu.price %></td></tr>
   <% end %>
   <tr><th colspan="2">写真</th></tr>
+  <% if @ramen_store.ramen_store_user_images.nil? %>
+    <tr><td colspan="2">写真はまだ投稿されていません</td></tr>
+  <% else %>
   <% @ramen_store.ramen_store_user_images.each do |image|%>
     <tr><td><%= image.name %></td>
-    <% if image.image? %>
     <td><%= image_tag image.image.url(:thumb100) %></td></tr>
-    <% else %>
-      <td><%= image_tag "thumb100_default.png", size: '100x100' %></td>
     <% end %>
   <% end %>
   <tr><td>タグ</td>
