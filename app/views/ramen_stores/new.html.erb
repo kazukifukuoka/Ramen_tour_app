@@ -92,6 +92,10 @@
     </div>
   </div>
   <% end %>
+  <div class="form-group">
+    <%= f.label :tag_list, "タグ" %>
+    <%= f.text_field :tag_list, value: @ramen_store.tag_list.join(','), class: "form-control" %>
+  </div>
   <%= f.submit "店舗を登録する", class: "btn btn-primary btn-block" %>
 <% end %>
 

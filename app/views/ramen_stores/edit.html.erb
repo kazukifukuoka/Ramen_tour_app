@@ -3,7 +3,6 @@
     <div id="error_explanation">
       <h2><%= @ramen_store.errors.count %>件のエラーがあります。</h2>
       <ul>
-
       <% @ramen_store.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
@@ -92,6 +91,10 @@
     </div>
   </div>
   <% end %>
+  <div class="form-group">
+    <%= f.label :tag_list, "タグ" %>
+    <%= f.text_field :tag_list, value: @ramen_store.tag_list.join(','), class: "form-control" %>
+  </div>
   <%= f.submit "店舗を更新する", class: "btn btn-primary btn-block" %>
 <% end %>
 

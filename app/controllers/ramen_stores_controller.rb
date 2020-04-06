@@ -7,6 +7,9 @@ class RamenStoresController < ApplicationController
 
   def index
     @ramen_stores = RamenStore.all
+    if params[:tag_name]
+      @ramen_stores = RamenStore.tagged_with("#{params[:tag_name]}")
+    end
   end
 
   def new
@@ -64,6 +67,6 @@ class RamenStoresController < ApplicationController
 
   private
     def ramen_store_params
-      params.require(:ramen_store).permit(:name, :postcode, :prefecture_id, :city, :address, :building, :phone_number, :sale, :holiday, :seat, :access, :parking_space, :sns, :content, ramen_store_menus_attributes:[:id, :name, :price], ramen_store_user_images_attributes:[:id, :name, :image])
+      params.require(:ramen_store).permit(:name, :postcode, :prefecture_id, :city, :address, :building, :phone_number, :sale, :holiday, :seat, :access, :parking_space, :sns, :content, :tag_list, ramen_store_menus_attributes:[:name, :price], ramen_store_user_images_attributes:[:id, :name, :image])
     end
 end
