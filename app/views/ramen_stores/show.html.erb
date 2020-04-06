@@ -18,7 +18,12 @@
   <% end %>
   <tr><th colspan="2">写真</th></tr>
   <% @ramen_store.ramen_store_user_images.each do |image|%>
-    <tr><td><%= image.name %></td><td><%= image_tag image.image.url(:thumb100) %></td></tr>
+    <tr><td><%= image.name %></td>
+    <% if image.image? %>
+    <td><%= image_tag image.image.url(:thumb100) %></td></tr>
+    <% else %>
+      <td><%= image_tag "thumb100_default.png", size: '100x100' %></td>
+    <% end %>
   <% end %>
   <tr><td>タグ</td>
   <td><% @ramen_store.tag_list.each do |tag| %>
