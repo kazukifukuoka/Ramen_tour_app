@@ -22,7 +22,7 @@
   <% end %>
   <tr><td>タグ</td>
   <td><% @ramen_store.tag_list.each do |tag| %>
-    <span class="badge badge-primary mr-1 p-2"><%= tag %></span>
+    <span class="badge badge-primary mr-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span>
   <% end %></td>
   </tr>
 </table>

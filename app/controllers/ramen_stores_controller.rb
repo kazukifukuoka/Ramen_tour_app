@@ -7,6 +7,9 @@ class RamenStoresController < ApplicationController
 
   def index
     @ramen_stores = RamenStore.all
+    if params[:tag_name]
+      @tasks = RamenStore.tagged_with("#{params[:tag_name]}")
+    end
   end
 
   def new
