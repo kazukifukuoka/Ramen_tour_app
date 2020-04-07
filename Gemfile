@@ -40,6 +40,8 @@ gem 'active_hash'
 gem 'carrierwave', '~> 1.0.0'
 # 画像の加工
 gem 'rmagick'
+# carrierwaveのi18n
+gem 'carrierwave-i18n'
 # タグ機能
 gem 'acts-as-taggable-on', '6.5.0'
 

@@ -23,7 +23,7 @@ class ImagesUploader < CarrierWave::Uploader::Base
   end
 
   # jpg,jpeg,gif,pngしか受け付けない
-  def extension_white_list
+  def extension_whitelist
     %w(jpg jpeg gif png)
   end
 
