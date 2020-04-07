@@ -1,0 +1,18 @@
+ja:
+  activerecord:
+    models:
+      ramen_store: 店舗
+    attributes:
+      ramen_store:
+        name: 店舗
+        postcode: 郵便番号
+        city: 市町村
+        address: 丁・番地
+        phone_number: 電話番号
+        sale: 営業時間
+        holiday: 定休日
+        seat: 座席
+        access: アクセス
+        parking_space: 駐車場
+        sns: SNS
+        content: 説明
