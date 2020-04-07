@@ -70,6 +70,7 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+    carrierwave-i18n (0.2.0)
     coderay (1.1.2)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
@@ -221,6 +222,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   carrierwave (~> 1.0.0)
+  carrierwave-i18n
   devise
   devise-bootstrap-views (~> 1.0)
   devise-i18n

@@ -11,10 +11,12 @@ class RamenStore < ApplicationRecord
   accepts_nested_attributes_for :ramen_store_menus, allow_destroy: true
   accepts_nested_attributes_for :ramen_store_user_images, allow_destroy: true
 
-  VALID_PHONE_REGEX = /\A\d{10}$|^\d{11}\z/
+  VALID_PHONE_REGEX = /\A(((0(\d{1}[-]{1}\d{4}|\d{2}[-]{1}\d{3}|\d{3}[-]{1}\d{2}|\d{4}[-]{1}\d{1}|[5789]0[-]{1}\d{4})[-]{1})|\d{1,4}\-{1})\d{4}|0120[-]{1}\d{3}[-]{1}\d{3})\z/
+  VALID_POSTCODE_REGEX = /\A\d{3}-{1}\d{4}\z/
+  VALID_TAG_REGEX = /\A.[^ 　]+(?:,.[^ 　]+)*\Z/
 
   validates :name, presence: true
-  validates :postcode, presence: true, numericality: { only_integer: true }
+  validates :postcode, presence: true, format: { with: VALID_POSTCODE_REGEX }
   validates :prefecture_id, presence: true
   validates :city, presence: true
   validates :address, presence: true
@@ -26,4 +28,5 @@ class RamenStore < ApplicationRecord
   validates :parking_space, presence: true
   validates :sns, presence: true
   validates :content, presence: true
+  validates :tag_list, presence: true, format: { with: VALID_TAG_REGEX }
 end

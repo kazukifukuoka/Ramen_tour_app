@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2020_04_06_033846) do
 
   create_table "ramen_stores", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "postcode", null: false
+    t.string "postcode", null: false
     t.integer "prefecture_id", null: false
     t.string "city", null: false
     t.string "address", null: false

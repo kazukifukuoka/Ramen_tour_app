@@ -1,0 +1,8 @@
+ja:
+  activerecord:
+    models:
+      ramen_store_menu: 店舗メニュー
+    attributes:
+      ramen_store/ramen_store_menus:
+        name: メニュー名
+        price: メニュー金額
