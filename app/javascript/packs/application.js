@@ -10,24 +10,10 @@ require("channels")
 require("bootstrap/dist/js/bootstrap")
 require('jquery')
 
+
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
-$(document).on('turbolinks:load', function () {
-  $(function () {
-    $('#ramen_store_postcode').jpostal({
-      postcode : [
-        '#ramen_store_postcode'
-      ],
-      address : {
-        '#ramen_store_prefecture_id'  : '%3',
-        '#ramen_store_city'  : '%4%5',
-        '#ramen_store_address' : '%6',
-        '#ramen_store_building' : '%7'
-      }
-    });
-  });
-});
