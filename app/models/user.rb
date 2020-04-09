@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :ramen_stores
   has_many :ramen_store_user_images
+  mount_uploader :image, ImagesUploader
 end

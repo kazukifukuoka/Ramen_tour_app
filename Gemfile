@@ -44,6 +44,7 @@ gem 'rmagick'
 gem 'carrierwave-i18n'
 # タグ機能
 gem 'acts-as-taggable-on', '6.5.0'
+gem 'jquery-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
