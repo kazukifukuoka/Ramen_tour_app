@@ -5,25 +5,42 @@
     <%= bootstrap_devise_error_messages! %>
 
     <div class="form-group">
+      <%= f.label :nickname, "名前（ニックネーム）" %>
+      <%= f.text_field :nickname, autofocus: true, autocomplete: 'email', class: 'form-control', required: true, autofocus: true %>
+    </div>
+
+    <div class="form-group">
       <%= f.label :email %>
-      <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', required: true %>
+      <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', required: true, autofocus: true %>
     </div>
 
     <div class="form-group">
       <%= f.label :password %>
-      <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control', required: true %>
+      <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control', autofocus: true %>
 
       <small class="form-text text-muted"><%= t('.leave_blank_if_you_don_t_want_to_change_it') %></small>
     </div>
 
     <div class="form-group">
       <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control', required: true  %>
+      <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control', autofocus: true  %>
+    </div>
+
+
+    <div class="form-group">
+      <%= f.label :image, "プロフィール写真" %>
+      <%= image_tag @user.image.url(:thumb), class: "my-3" %>
+      <%= f.file_field :image, class: "form-control", accept: "image/jpg,image/gif,image/jpeg,image/png", required: true, autofocus: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :profile, "自己紹介文" %>
+      <%= f.text_area :profile, class: "form-control", rows: 3, required: true, autofocus: true%>
     </div>
 
     <div class="form-group">
       <%= f.label :current_password %>
-      <%= f.password_field :current_password, autocomplete: 'current-password', class: 'form-control', required: true %>
+      <%= f.password_field :current_password, autocomplete: 'current-password', class: 'form-control', required: true, autofocus: true %>
 
       <small class="form-text text-muted"><%= t('.we_need_your_current_password_to_confirm_your_changes') %></small>
     </div>

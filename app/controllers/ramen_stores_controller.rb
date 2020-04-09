@@ -30,10 +30,10 @@ class RamenStoresController < ApplicationController
     end
 
     if @ramen_store.save
-      flash[:success] = "店舗を登録しました"
+      flash.now[:success] = "店舗を登録しました"
       redirect_to root_path
     else
-      flash[:danger] = "店舗の登録に失敗しました"
+      flash.now[:danger] = "店舗の登録に失敗しました"
       render :new
     end
   end
@@ -45,10 +45,10 @@ class RamenStoresController < ApplicationController
   def update
     @ramen_store = RamenStore.find(params[:id])
     if @ramen_store.update(ramen_store_params)
-      flash[:success] = "店舗を更新しました"
+      flash.now[:success] = "店舗を更新しました"
       redirect_to ramen_store_path(@ramen_store)
     else
-      flash[:danger] = "店舗の更新に失敗しました"
+      flash.now[:danger] = "店舗の更新に失敗しました"
       render :edit
     end
   end
@@ -56,10 +56,10 @@ class RamenStoresController < ApplicationController
   def destroy
     @ramen_store = RamenStore.find(params[:id])
     if @ramen_store.destroy
-      flash[:success] = "店舗を削除しました"
+      flash.now[:success] = "店舗を削除しました"
       redirect_to ramen_stores_path
     else
-      flash[:danger] = "店舗の削除に失敗しました"
+      flash.now[:danger] = "店舗の削除に失敗しました"
       render :show
     end
   end
