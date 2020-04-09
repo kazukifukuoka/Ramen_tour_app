@@ -1,6 +1,6 @@
 class RamenStoresController < ApplicationController
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[top index show]
 
   def top
   end

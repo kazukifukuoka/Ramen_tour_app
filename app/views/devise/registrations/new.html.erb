@@ -5,6 +5,23 @@
     <%= bootstrap_devise_error_messages! %>
 
     <div class="form-group">
+      <%= f.label :nickname, "名前（ニックネーム）" %>
+      <%= f.text_field :nickname, autofocus: true, autocomplete: 'email', class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :sex, "性別" %>
+      <div class="radio-inline">
+        <%= f.label :sex, "男性", value: :male %>
+        <%= f.radio_button :sex, :male, checked: true %>
+      </div>
+      <div class="radio-inline">
+        <%= f.label :sex, "女性", value: :female %>
+        <%= f.radio_button :sex, :female %>
+      </div>
+    </div>
+
+    <div class="form-group">
       <%= f.label :email %>
       <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', required: true %>
     </div>

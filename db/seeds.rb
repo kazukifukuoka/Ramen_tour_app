@@ -9,8 +9,13 @@
 # テストユーザー情報
 EMAIL = 'test@example.com'
 PASSWORD = 'password'
+NICKNAME = 'test_user'
+SEX = 1
+
 
 user = User.find_or_create_by!(email: EMAIL) do |user|
   user.password = PASSWORD
+  user.nickname = NICKNAME
+  user.sex = SEX
   puts 'テストユーザーの初期データインポートに成功しました。'
 end
