@@ -7,9 +7,24 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   # end
 
   # POST /resource/confirmation
-  # def create
-  #   super
-  # end
+  def create
+    self.resource = resource_class.find_by_confirmation_token(params[:authenticity_token])
+
+    if resource.nil? || resource.confirmed?
+      # トークンが不正な場合、アカウント登録(パスワード登録)が済んでいる場合
+      self.resource = resource_class.confirm_by_token(params[:authenticity_token])
+      render :show
+    elsif resource.is_confirmation_period_expired?
+      # アカウント登録メールの期限が切れた場合
+      resource.errors.add(:email, :confirmation_period_expired,
+        period: Devise::TimeInflector.time_ago_in_words(resource_class.confirm_within.ago))
+      render :show
+    else
+      # 正常にアカウント登録ができた場合
+      self.resource = resource_class.confirm_by_token(params[:authenticity_token])
+      redirect_to new_user_session_path, notice: 'メールアドレスを確認しました。'
+    end
+  end
 
   # GET /resource/confirmation?confirmation_token=abcdef
   def show
@@ -25,7 +40,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
         period: Devise::TimeInflector.time_ago_in_words(resource_class.confirm_within.ago))
       render :show
     else
-      # activate
+      # 正常にアカウント登録ができた場合
       self.resource = resource_class.confirm_by_token(params[:confirmation_token])
       redirect_to new_user_session_path, notice: 'メールアドレスを確認しました。'
     end
