@@ -88,6 +88,7 @@
     <div class="form-group col-6">
       <%= i.label :image, "写真" %>
       <%= i.file_field :image, class: "form-control", accept: "image/jpg,image/gif,image/jpeg,image/png" %>
+      <%= image_tag i.img.url(:thumb) %>
     </div>
   </div>
   <% end %>
