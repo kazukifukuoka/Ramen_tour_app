@@ -11,4 +11,13 @@ class User < ApplicationRecord
     # メールアドレス確認メール有効期限チェック(期限はconfig/initializers/devise.rbのconfirm_withinで設定)
     self.confirmation_period_expired?
   end
+
+  def self.new_guest
+    find_or_create_by!(email: "guest@example.com") do |user|
+      user.nickname = "guest_user"
+      user.sex = "male"
+      user.password = "password"
+      user.confirmed_at = Time.now
+    end
+  end
 end

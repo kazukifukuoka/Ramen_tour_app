@@ -30,14 +30,20 @@
 
     <div class="form-group">
       <%= f.label :image, "プロフィール写真" %>
-      <%= image_tag @user.image.url(:thumb), class: "my-3" %>
+      <div class="mb-4">
+      <% if @user.image? %>
+        <%= image_tag @user.image.url(:thumb) %>
+      <% else %>
+        <%= image_tag "no_image.png", size: "300x300" %>
+      <% end %>
+      </div>
       <%= f.file_field :image, class: "form-control", accept: "image/jpg,image/gif,image/jpeg,image/png", autofocus: true %>
       <p><%= f.check_box :remove_image %>画像を削除する</p>
     </div>
 
     <div class="form-group">
       <%= f.label :profile, "自己紹介文" %>
-      <%= f.text_area :profile, class: "form-control", rows: 4, required: true, autofocus: true%>
+      <%= f.text_area :profile, class: "form-control", rows: 4, autofocus: true %>
     </div>
 
     <div class="form-group">
