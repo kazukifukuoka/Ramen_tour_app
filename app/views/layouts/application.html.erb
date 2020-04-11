@@ -14,7 +14,9 @@
 
   <body>
     <%= render 'shared/header'%>
-    <%= render 'shared/flash_messages' %>
+    <% unless current_page?("sessions/new") %>
+      <%= render 'shared/flash_messages' %>
+    <% end %>
     <div class="container">
     <%= yield %>
     </div>

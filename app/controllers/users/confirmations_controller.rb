@@ -25,7 +25,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
         period: Devise::TimeInflector.time_ago_in_words(resource_class.confirm_within.ago))
       render :show
     else
-      # activate
+      # 正常にアカウント登録ができた場合
       self.resource = resource_class.confirm_by_token(params[:confirmation_token])
       redirect_to new_user_session_path, notice: 'メールアドレスを確認しました。'
     end
