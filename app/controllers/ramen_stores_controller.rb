@@ -14,7 +14,7 @@ class RamenStoresController < ApplicationController
 
   def new
     @ramen_store = RamenStore.new
-    ramen_store_menu = 2.times{@ramen_store.ramen_store_menus.build}
+    ramen_store_menu = @ramen_store.ramen_store_menus.build
     ramen_store_user_image = 2.times{@ramen_store.ramen_store_user_images.build}
   end
 
@@ -40,7 +40,6 @@ class RamenStoresController < ApplicationController
 
   def edit
     @ramen_store = RamenStore.find(params[:id])
-    ramen_store_user_image = @ramen_store.ramen_store_user_images.build
   end
 
   def update
