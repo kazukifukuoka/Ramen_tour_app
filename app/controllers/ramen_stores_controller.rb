@@ -40,6 +40,7 @@ class RamenStoresController < ApplicationController
 
   def edit
     @ramen_store = RamenStore.find(params[:id])
+    ramen_store_user_image = @ramen_store.ramen_store_user_images.build
   end
 
   def update
