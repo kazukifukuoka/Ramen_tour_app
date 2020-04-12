@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    models:
+      ramen_store_review: レビュー
+    attributes:
+      ramen_store_review:
+        title: タイトル
+        content: レビュー内容
+        tag_list: タグ

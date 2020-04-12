@@ -71,7 +71,7 @@
   </div>
   <% end %>
   <%= f.fields_for :ramen_store_user_images do |i| %>
-  <div class="form-inline pb-3">
+  <div class="form-inline form-group">
     <div class="form-group col-6">
       <%= i.label :name, "写真の名前" %>
       <%= i.text_field :name, class: "form-control" %>
