@@ -1,6 +1,7 @@
 class RamenStoresController < ApplicationController
 
   before_action :authenticate_user!, except: %i[top index show]
+  before_action :set_ramen_store, only: %i[show edit update destroy]
 
   def top
   end
@@ -19,7 +20,6 @@ class RamenStoresController < ApplicationController
   end
 
   def show
-    @ramen_store = RamenStore.find(params[:id])
   end
 
   def create
@@ -39,11 +39,9 @@ class RamenStoresController < ApplicationController
   end
 
   def edit
-    @ramen_store = RamenStore.find(params[:id])
   end
 
   def update
-    @ramen_store = RamenStore.find(params[:id])
     if @ramen_store.update(ramen_store_params)
       flash[:success] = "店舗を更新しました"
       redirect_to ramen_store_path(@ramen_store)
@@ -54,7 +52,6 @@ class RamenStoresController < ApplicationController
   end
 
   def destroy
-    @ramen_store = RamenStore.find(params[:id])
     if @ramen_store.destroy
       flash[:success] = "店舗を削除しました"
       redirect_to ramen_stores_path
@@ -65,6 +62,11 @@ class RamenStoresController < ApplicationController
   end
 
   private
+
+    def set_ramen_store
+      @ramen_store = RamenStore.find(params[:id])
+    end
+
     def ramen_store_params
       params.require(:ramen_store).permit(:name, :postcode, :prefecture_id, :city, :address, :building, :phone_number, :sale, :holiday, :seat, :access, :parking_space, :sns, :content, :tag_list, ramen_store_menus_attributes:[:name, :price], ramen_store_user_images_attributes:[:id, :name, :image])
     end
