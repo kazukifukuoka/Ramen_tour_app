@@ -8,7 +8,11 @@
   <tr><td colspan="2"><%= @ramen_store_review.content %></td></tr>
   <tr><th colspan="2">写真</th></tr>
   <% @ramen_store_review.images.each do |review| %>
-  <tr><td><%= review.name %></td><td><%=image_tag review.image.url(:thumb100) %></td></tr>
+    <% if review.image? %>
+      <tr><td><%= review.name %></td><td><%=image_tag review.image.url(:thumb100) %></td></tr>
+    <% else %>
+      <tr><td colspan="2", class="text-center">写真は投稿されていません</td></tr>
+    <% end %>
   <% end %>
   <tr><td>タグ</td>
   <td><% @ramen_store_review.tag_list.each do |tag| %>
