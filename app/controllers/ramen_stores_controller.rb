@@ -15,8 +15,8 @@ class RamenStoresController < ApplicationController
 
   def new
     @ramen_store = RamenStore.new
-    ramen_store_menu = @ramen_store.ramen_store_menus.build
-    ramen_store_user_image = 2.times{@ramen_store.ramen_store_user_images.build}
+    ramen_store_menu = @ramen_store.menus.build
+    ramen_store_user_image = 2.times{@ramen_store.registered_images.build}
   end
 
   def show
@@ -25,8 +25,8 @@ class RamenStoresController < ApplicationController
   def create
     @ramen_store = RamenStore.new(ramen_store_params)
     @ramen_store.user_id = current_user.id
-    @ramen_store.ramen_store_user_images.each do |store_user_image|
-      store_user_image.user_id = current_user.id
+    @ramen_store.registered_images.each do |registered_image|
+      registered_image.user_id = current_user.id
     end
 
     if @ramen_store.save
@@ -68,6 +68,6 @@ class RamenStoresController < ApplicationController
     end
 
     def ramen_store_params
-      params.require(:ramen_store).permit(:name, :postcode, :prefecture_id, :city, :address, :building, :phone_number, :sale, :holiday, :seat, :access, :parking_space, :sns, :content, :tag_list, ramen_store_menus_attributes:[:name, :price], ramen_store_user_images_attributes:[:id, :name, :image])
+      params.require(:ramen_store).permit(:name, :postcode, :prefecture_id, :city, :address, :building, :phone_number, :sale, :holiday, :seat, :access, :parking_space, :sns, :content, :tag_list, menus_attributes:[:name, :price], ramen_store_user_images_attributes:[:id, :name, :image])
     end
 end

@@ -57,7 +57,7 @@
     <%= f.label :content, "説明 ※必須"%>
     <%= f.text_area :content, class: "form-control", rows: 3, placeholder: "自由に入力してください", required: true, autofocus: true %>
   </div>
-  <%= f.fields_for :ramen_store_menus do |m| %>
+  <%= f.fields_for :menus do |m| %>
   <div class="form-inline pb-3">
     <div class="form-group col-6">
       <%= m.label :name, "メニュー ※必須" %>
@@ -69,7 +69,7 @@
     </div>
   </div>
   <% end %>
-  <%= f.fields_for :ramen_store_user_images do |i| %>
+  <%= f.fields_for :registered_images do |i| %>
   <div class="form-inline form-group">
     <div class="form-group col-6">
       <%= i.label :name, "写真の名前" %>
@@ -84,11 +84,11 @@
 
   <% if defined?(:edit_local) %>
     <div class="form-inline">
-      <% @ramen_store.ramen_store_user_images.each do |pic| %>
-        <% if pic.image? %>
+      <% @ramen_store.registered_images.each do |registered| %>
+        <% if registered.image? %>
           <div class="form-inline pb-3 pr-5 mx-auto">
-            <%= pic.name %>
-            <%= image_tag pic.image.url(:thumb100) %>
+            <%= registered.name %>
+            <%= image_tag registered.image.url(:thumb100) %>
           </div>
         <% end %>
       <% end %>
