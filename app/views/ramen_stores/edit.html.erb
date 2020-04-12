@@ -1,14 +1,5 @@
 <%= form_with model:@ramen_store, local: true do |f| %>
-<% if @ramen_store.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= @ramen_store.errors.count %>件のエラーがあります。</h2>
-      <ul>
-      <% @ramen_store.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= render partial: "shared/error_messages", locals: { ramen_store: @ramen_store } %>
   <div class="form-group">
     <%= f.label :name, "店名 ※必須" %>
     <%= f.text_field :name, class: "form-control", placeholder: "例：麺屋○○", required: true, autofocus: true %>
@@ -99,7 +90,7 @@
           <%= image_tag pic.image.url(:thumb100) %>
         </div>
       <% end %>
-   <% end %>
+    <% end %>
   </div>
   <div class="form-group">
     <%= f.label :tag_list, "タグ(「,」で区切って入力)  ※必須" %>

@@ -1,0 +1,7 @@
+<table class="table table-bordered mt-3", style="table-layout:fixed;width:100%;">
+  <tr><th><%= link_to "#{@ramen_store_review.title}", ramen_store_review_path(@ramen_store_review) %></th><td><%= "作成: #{@ramen_store_review.created_at.to_s(:datetime_jp)} / 更新:  #{@ramen_store_review.updated_at.to_s(:datetime_jp)}" %></td></tr>
+  <tr><th colspan="2">レビュー</th></tr>
+  <tr><td colspan="2"><%= @ramen_store_review.content %></td></tr>
+  <tr><th colspan="2">写真</th></tr>
+
+</table>

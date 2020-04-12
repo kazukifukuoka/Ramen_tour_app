@@ -8,6 +8,8 @@ class RamenStore < ApplicationRecord
 
   has_many :ramen_store_menus, dependent: :destroy
   has_many :ramen_store_user_images, dependent: :destroy
+  has_many :reviews, class_name: 'RamenStoreReview', dependent: :destroy
+  has_many :images, class_name: 'RamenStoreReviewImage', dependent: :destroy
   accepts_nested_attributes_for :ramen_store_menus, allow_destroy: true
   accepts_nested_attributes_for :ramen_store_user_images, allow_destroy: true
 

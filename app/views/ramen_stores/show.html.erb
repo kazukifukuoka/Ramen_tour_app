@@ -1,8 +1,9 @@
-<%= link_to "戻る", ramen_stores_path, class: "btn btn-primary mb-3" %>
-<%= link_to "編集する", edit_ramen_store_path, class: "btn btn-primary mb-3" %>
-<%= link_to "削除する", ramen_store_path, method: :delete, class: "btn btn-primary mb-3", data: { confirm: "本当に削除しますか？" } %>
+<%= link_to "戻る", ramen_stores_path, class: "btn btn-primary" %>
+<%= link_to "編集する", edit_ramen_store_path, class: "btn btn-primary" %>
+<%= link_to "削除する", ramen_store_path, method: :delete, class: "btn btn-primary", data: { confirm: "本当に削除しますか？" } %>
+<%= link_to "レビューする", new_ramen_store_review_path(@ramen_store), class: "btn btn-primary float-right" %>
 
-<table class="table table-bordered", style="table-layout:fixed;width:100%;">
+<table class="table table-bordered mt-3", style="table-layout:fixed;width:100%;">
   <tr><th><%= link_to "#{@ramen_store.name}(#{@ramen_store.prefecture.name}#{@ramen_store.city}#{@ramen_store.address}#{@ramen_store.building})", ramen_store_path(@ramen_store) %></th><td><%= "作成: #{@ramen_store.created_at.to_s(:datetime_jp)} / 更新:  #{@ramen_store.updated_at.to_s(:datetime_jp)}" %></td></tr>
   <tr><td>電話番号</td><td><%= @ramen_store.phone_number %></td></tr>
   <tr><td>営業時間</td><td><%= @ramen_store.sale %></td></tr>
@@ -29,6 +30,11 @@
   <tr><td>タグ</td>
   <td><% @ramen_store.tag_list.each do |tag| %>
     <span class="badge badge-primary mr-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span>
-  <% end %></td>
-  </tr>
+  <% end %></td></tr>
 </table>
+
+<% @ramen_store.reviews.each do |review| %>
+<table class="table table-bordered mt-3", style="table-layout:fixed;width:100%;">
+  <tr><th><%= link_to "#{review.title}", ramen_store_review_path(@ramen_store,review) %></th><td><%= "作成: #{review.created_at.to_s(:datetime_jp)} / 更新:  #{review.updated_at.to_s(:datetime_jp)}" %></td></tr>
+</table>
+<% end %>

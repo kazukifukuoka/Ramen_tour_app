@@ -3,9 +3,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
-  has_many :ramen_stores, dependent: :destroy
-  has_many :ramen_store_user_images, dependent: :destroy
+  has_many :ramen_stores
+  has_many :ramen_store_user_images
   mount_uploader :image, ImagesUploader
+
+  validates :nickname, presence: true, length: { maximum: 10 }
+  validates :sex, presence: true
 
   def is_confirmation_period_expired?
     # メールアドレス確認メール有効期限チェック(期限はconfig/initializers/devise.rbのconfirm_withinで設定)
@@ -17,6 +20,7 @@ class User < ApplicationRecord
       user.nickname = "guest_user"
       user.sex = "male"
       user.password = "password"
+      user.image = File.open("./app/assets/images/guest_sample.png")
       user.confirmed_at = Time.now
     end
   end
