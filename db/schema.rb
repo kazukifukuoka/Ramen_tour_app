@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_06_033846) do
+ActiveRecord::Schema.define(version: 2020_04_12_032102) do
 
   create_table "ramen_store_menus", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -19,6 +19,28 @@ ActiveRecord::Schema.define(version: 2020_04_06_033846) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["ramen_store_id"], name: "index_ramen_store_menus_on_ramen_store_id"
+  end
+
+  create_table "ramen_store_review_images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.string "image"
+    t.bigint "ramen_store_id", null: false
+    t.bigint "ramen_store_review_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ramen_store_id"], name: "index_ramen_store_review_images_on_ramen_store_id"
+    t.index ["ramen_store_review_id"], name: "index_ramen_store_review_images_on_ramen_store_review_id"
+  end
+
+  create_table "ramen_store_reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "content", null: false
+    t.bigint "ramen_store_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ramen_store_id"], name: "index_ramen_store_reviews_on_ramen_store_id"
+    t.index ["user_id"], name: "index_ramen_store_reviews_on_user_id"
   end
 
   create_table "ramen_store_user_images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -104,6 +126,10 @@ ActiveRecord::Schema.define(version: 2020_04_06_033846) do
   end
 
   add_foreign_key "ramen_store_menus", "ramen_stores"
+  add_foreign_key "ramen_store_review_images", "ramen_store_reviews"
+  add_foreign_key "ramen_store_review_images", "ramen_stores"
+  add_foreign_key "ramen_store_reviews", "ramen_stores"
+  add_foreign_key "ramen_store_reviews", "users"
   add_foreign_key "ramen_store_user_images", "ramen_stores"
   add_foreign_key "ramen_store_user_images", "users"
   add_foreign_key "ramen_stores", "users"

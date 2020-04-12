@@ -64,7 +64,6 @@ class RamenStoresController < ApplicationController
     end
   end
 
-
   private
     def ramen_store_params
       params.require(:ramen_store).permit(:name, :postcode, :prefecture_id, :city, :address, :building, :phone_number, :sale, :holiday, :seat, :access, :parking_space, :sns, :content, :tag_list, ramen_store_menus_attributes:[:name, :price], ramen_store_user_images_attributes:[:id, :name, :image])

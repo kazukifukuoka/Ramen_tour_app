@@ -1,0 +1,28 @@
+<%= form_with model: [@ramen_store, @ramen_store_review], url: ramen_store_reviews_path,  local: true do |f| %>
+<%= render partial: "shared/error_messages", locals: { ramen_store: @ramen_store_review } %>
+<div class="form-group">
+  <%= f.label :title, "タイトル ※必須" %>
+  <%= f.text_field :title, class: "form-control", required: true, autofocus: true %>
+</div>
+<div class="form-group">
+  <%= f.label :content, "レビュー ※必須" %>
+  <%= f.text_area :content, class: "form-control", rows: 5, required: true, autofocus: true %>
+</div>
+<%= f.fields_for :images do |i| %>
+  <div class="form-inline form-group">
+    <div class="form-group col-6">
+      <%= i.label :name, "写真の名前"%>
+      <%= i.text_field :name, class: "form-control" %>
+    </div>
+    <div class="form-group col-6">
+      <%= i.label :image, "写真"%>
+      <%= i.file_field :image, class: "form-control", accept: "image/jpg,image/gif,image/jpeg,image/png" %>
+    </div>
+  </div>
+<% end %>
+<div class="form-group">
+  <%= f.label :tag_list, "タグ(「,」で区切って入力)  ※必須" %>
+  <%= f.text_field :tag_list, value: @ramen_store_review.tag_list.join(','), class: "form-control", placeholder: "人気店,こってり,駅近、など" , required: true, autofocus: true %>
+</div>
+<%= f.submit "レビューを投稿する", class: "btn btn-primary btn-block mt-5" %>
+<% end %>

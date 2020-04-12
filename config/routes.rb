@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   end
   root to: 'homes#top'
 
-  resources :ramen_stores
+  resources :ramen_stores do
+    resources :ramen_store_reviews, as: :reviews, path: '/reviews'
+  end
 
 end
