@@ -13,9 +13,9 @@ class RamenStore < ApplicationRecord
   accepts_nested_attributes_for :menus, allow_destroy: true
   accepts_nested_attributes_for :registered_images, allow_destroy: true
 
-  VALID_PHONE_REGEX = /\A(((0(\d{1}[-]{1}\d{4}|\d{2}[-]{1}\d{3}|\d{3}[-]{1}\d{2}|\d{4}[-]{1}\d{1}|[5789]0[-]{1}\d{4})[-]{1})|\d{1,4}\-{1})\d{4}|0120[-]{1}\d{3}[-]{1}\d{3})\z/
-  VALID_POSTCODE_REGEX = /\A\d{3}-{1}\d{4}\z/
-  VALID_TAG_REGEX = /\A[^ 　]+(?:,.[^ 　]+)*\Z/
+  VALID_PHONE_REGEX = /\A(((0(\d{1}[-]{1}\d{4}|\d{2}[-]{1}\d{3}|\d{3}[-]{1}\d{2}|\d{4}[-]{1}\d{1}|[5789]0[-]{1}\d{4})[-]{1})|\d{1,4}\-{1})\d{4}|0120[-]{1}\d{3}[-]{1}\d{3})\z/.freeze
+  VALID_POSTCODE_REGEX = /\A\d{3}-{1}\d{4}\z/.freeze
+  VALID_TAG_REGEX = /\A[^ 　]+(?:,.[^ 　]+)*\Z/.freeze
 
   validates :name, presence: true
   validates :postcode, presence: true, format: { with: VALID_POSTCODE_REGEX }

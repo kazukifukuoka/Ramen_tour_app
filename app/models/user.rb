@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
   has_many :ramen_stores
   has_many :ramen_store_user_images
+  has_many :ramen_store_reviews
   mount_uploader :image, ImagesUploader
 
   validates :nickname, presence: true, length: { maximum: 10 }

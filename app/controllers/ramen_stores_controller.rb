@@ -3,11 +3,13 @@ class RamenStoresController < ApplicationController
   before_action :authenticate_user!, except: %i[top index show]
   before_action :set_ramen_store, only: %i[show edit update destroy]
 
+  PER = 10
+
   def top
   end
 
   def index
-    @ramen_stores = RamenStore.all
+    @ramen_stores = RamenStore.page(params[:page]).per(PER)
     if params[:tag_name]
       @ramen_stores = RamenStore.tagged_with("#{params[:tag_name]}")
     end
