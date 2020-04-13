@@ -1,47 +1,44 @@
 class ImagesUploader < CarrierWave::Uploader::Base
-
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
   # 画像の上限を640x480にする
-  process :resize_to_limit => [640, 480]
+  process resize_to_limit: [640, 480]
 
   # 保存形式をJPGにする
-  process :convert => 'jpg'
+  process convert: 'jpg'
 
   # サムネイルを生成する設定
   version :thumb do
-    process :resize_to_limit => [300, 300]
+    process resize_to_limit: [300, 300]
   end
 
   version :thumb100 do
-    process :resize_to_limit => [100, 100]
+    process resize_to_limit: [100, 100]
   end
 
   version :thumb30 do
-    process :resize_to_limit => [30, 30]
+    process resize_to_limit: [30, 30]
   end
 
   # jpg,jpeg,gif,pngしか受け付けない
   def extension_whitelist
-    %w(jpg jpeg gif png)
+    %w[jpg jpeg gif png]
   end
 
   # 拡張子が同じでないとGIFをJPGとかにコンバートできないので、ファイル名を変更
+  # ファイル名を日付にするとタイミングのせいでサムネイル名がずれる
+  # ファイル名はランダムで一意になる
   def filename
     super.chomp(File.extname(super)) + '.jpg' if original_filename.present?
-  end
-
-  # ファイル名を日付にするとタイミングのせいでサムネイル名がずれる
-  #ファイル名はランダムで一意になる
-  def filename
     "#{secure_token}.#{file.extension}" if original_filename.present?
   end
 
   protected
+
   def secure_token
     var = :"@#{mounted_as}_secure_token"
-    model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.uuid)
+    model.instance_variable_get(var) || model.instance_variable_set(var, SecureRandom.uuid)
   end
 
   # Choose what kind of storage to use for this uploader:
@@ -57,9 +54,9 @@ class ImagesUploader < CarrierWave::Uploader::Base
   # Provide a default URL as a default if there hasn't been a file uploaded:
   def default_url
     # For Rails 3.1+ asset pipeline compatibility:
-    # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-    # ActionController::Base.helpers.asset_path("images/" + [version_name, "default.png"].compact.join('_'))
-    "no_image.png"
+    # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_')) #rubocop:disable Layout/LineLength
+    # ActionController::Base.helpers.asset_path("images/" + [version_name, "default.png"].compact.join('_')) #rubocop:disable Layout/LineLength
+    'no_image.png'
     # "/images/" + [version_name, "default.png"].compact.join('_')
   end
 
@@ -86,5 +83,4 @@ class ImagesUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
-
 end

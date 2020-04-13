@@ -1,10 +1,10 @@
 module DeviseHelper
-  def bootstrap_devise_error_messages!
-    return "" if resource.errors.empty?
+  def devise_error_messages!
+    return '' if resource.errors.empty?
 
-    html = ""
+    html = ''
     resource.errors.full_messages.each do |error_message|
-      html += <<-EOF
+      html += <<-HTML
       <div class="alert alert-danger alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert">
           <span aria-hidden="true">&times;</span>
@@ -12,8 +12,8 @@ module DeviseHelper
         </button>
         #{error_message}
       </div>
-      EOF
+      HTML
     end
-    html.html_safe
+    content_tag(:html, html)
   end
 end
