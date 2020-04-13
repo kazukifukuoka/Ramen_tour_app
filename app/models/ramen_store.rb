@@ -6,12 +6,12 @@ class RamenStore < ApplicationRecord
 
   belongs_to :user
 
-  has_many :ramen_store_menus, dependent: :destroy
-  has_many :ramen_store_user_images, dependent: :destroy
+  has_many :menus, class_name: "RamenStoreMenu", dependent: :destroy
+  has_many :registered_images, class_name: "RamenStoreUserImage", dependent: :destroy
   has_many :reviews, class_name: 'RamenStoreReview', dependent: :destroy
   has_many :images, class_name: 'RamenStoreReviewImage', dependent: :destroy
-  accepts_nested_attributes_for :ramen_store_menus, allow_destroy: true
-  accepts_nested_attributes_for :ramen_store_user_images, allow_destroy: true
+  accepts_nested_attributes_for :menus, allow_destroy: true
+  accepts_nested_attributes_for :registered_images, allow_destroy: true
 
   VALID_PHONE_REGEX = /\A(((0(\d{1}[-]{1}\d{4}|\d{2}[-]{1}\d{3}|\d{3}[-]{1}\d{2}|\d{4}[-]{1}\d{1}|[5789]0[-]{1}\d{4})[-]{1})|\d{1,4}\-{1})\d{4}|0120[-]{1}\d{3}[-]{1}\d{3})\z/
   VALID_POSTCODE_REGEX = /\A\d{3}-{1}\d{4}\z/
