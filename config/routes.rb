@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   root to: 'homes#top'
 
   resources :ramen_stores do
-    resources :ramen_store_reviews, as: :reviews, path: '/reviews'
+    resources :ramen_store_reviews, as: :reviews, path: '/reviews', except: [:index]
   end
 
 end

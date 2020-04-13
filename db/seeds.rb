@@ -6,16 +6,22 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# テストユーザー情報
-EMAIL = 'test@example.com'
-PASSWORD = 'password'
-NICKNAME = 'test_user'
-SEX = 1
-
-
-user = User.find_or_create_by!(email: EMAIL) do |user|
-  user.password = PASSWORD
-  user.nickname = NICKNAME
-  user.sex = SEX
-  puts 'テストユーザーの初期データインポートに成功しました。'
+5.times do |n|
+  RamenStore.create!(
+    name: "店舗#{n}",
+    postcode: "112-857#{n}",
+    prefecture_id: n,
+    city: "#{n}市",
+    address: "#{n}番地",
+    phone_number: "0123-45-678#{n}",
+    sale: "#{n}時から",
+    holiday: "#{n}日",
+    seat: "カウンター#{n}席",
+    access: "駅から#{n}分",
+    parking_space: "無し",
+    sns: "無し",
+    content: "テスト",
+    user_id: "1"
+    tag_list: "人気店,駅近"
+  )
 end

@@ -46,6 +46,11 @@ gem 'carrierwave-i18n'
 gem 'acts-as-taggable-on', '6.5.0'
 gem 'jquery-rails'
 
+# コードチェック
+gem 'rails_best_practices'
+gem 'rubocop', require: false
+gem 'rubocop-rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
