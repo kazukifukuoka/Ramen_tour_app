@@ -1,6 +1,6 @@
 class RamenStoresController < ApplicationController
   before_action :authenticate_user!, except: %i[top index show]
-  before_action :set_ramen_store, only: %i[show edit update destroy]
+  before_action :set_ramen_store, only: %i[show update destroy]
 
   PER = 10
 
@@ -36,7 +36,15 @@ class RamenStoresController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @ramen_store = current_user.ramen_stores.find_by(params[:id])
+    if @ramen_store
+      RamenStore.find(params[:id])
+    else
+      flash[:danger] = '投稿者のみ編集できます'
+      redirect_to ramen_store_path(params[:id])
+    end
+  end
 
   def update
     if @ramen_store.update(ramen_store_params)

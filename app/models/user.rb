@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
+  ratyrate_rater
+
   has_many :ramen_stores # rubocop:disable Rails/HasManyOrHasOneDependent
   has_many :ramen_store_user_images # rubocop:disable Rails/HasManyOrHasOneDependent
   has_many :ramen_store_reviews # rubocop:disable Rails/HasManyOrHasOneDependent
