@@ -1,4 +1,4 @@
-class CreateOverallAverages < ActiveRecord::Migration[6.0]
+class CreateOverallAverages < ActiveRecord::Migration[5.0]
 
   def self.up
     create_table :overall_averages do |t|

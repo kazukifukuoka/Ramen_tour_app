@@ -1,4 +1,4 @@
-class CreateRatingCaches < ActiveRecord::Migration[6.0]
+class CreateRatingCaches < ActiveRecord::Migration[5.0]
 
   def self.up
       create_table :rating_caches do |t|
