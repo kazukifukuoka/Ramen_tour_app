@@ -7,7 +7,9 @@
   </div>
 </div>
 
-<p>Speed : <%= rating_for @ramen_store_review, 'title' %></p>
+<%= hidden_field_tag :ramen_store_review_id, 4 %>
+<p>Speed : <%= rating_for @ramen_store, 'name' %></p>
+
 
 <div class='form-group row'>
   <%= f.label :content, 'レビュー内容 ※必須', class:'col-md-3 col-form-label' %>

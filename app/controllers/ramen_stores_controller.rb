@@ -32,7 +32,8 @@ class RamenStoresController < ApplicationController
     if @ramen_store.save
       redirect_to ramen_stores_path, success: '店舗を登録しました'
     else
-      render :new, danger: '店舗の登録に失敗しました'
+      flash[:danger] = '店舗の登録に失敗しました'
+      render :new
     end
   end
 
@@ -48,8 +49,7 @@ class RamenStoresController < ApplicationController
 
   def update
     if @ramen_store.update(ramen_store_params)
-      flash[:success] = '店舗を更新しました'
-      redirect_to ramen_store_path(@ramen_store)
+      redirect_to ramen_store_path(@ramen_store), success: '店舗を更新しました'
     else
       flash[:danger] = '店舗の更新に失敗しました'
       render :edit
@@ -58,8 +58,7 @@ class RamenStoresController < ApplicationController
 
   def destroy
     if @ramen_store.destroy
-      flash[:success] = '店舗を削除しました'
-      redirect_to ramen_stores_path
+      redirect_to ramen_stores_path, success: '店舗を削除しました'
     else
       flash[:danger] = '店舗の削除に失敗しました'
       render :show

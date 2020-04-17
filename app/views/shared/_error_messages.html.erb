@@ -1,8 +1,7 @@
-<% if ramen_store.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= ramen_store.errors.count %>件のエラーがあります。</h2>
-    <ul>
-    <% ramen_store.errors.full_messages.each do |msg| %>
+<% if object.errors.any? %>
+  <div class='alert alert-danger'>
+    <ul class='mb-0 pl-0'>
+    <% object.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
     </ul>

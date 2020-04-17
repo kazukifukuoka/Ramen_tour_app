@@ -40,11 +40,13 @@ $(function(){
       click: function(score, evt) {
         var _this = this;
         if (score == null) { score = 0; }
-        $.post('<%= Rails.application.class.routes.url_helpers.rate_path %>',
+        $.post('/rate',
         {
           score: score,
           dimension: $(this).attr('data-dimension'),
           id: $(this).attr('data-id'),
+          id: $('#ramen_store_id').val(),
+          id: $('#ramen_store_review_id').val(),
           klass: $(this).attr('data-classname')
         },
         function(data) {

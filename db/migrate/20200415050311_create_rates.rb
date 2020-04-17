@@ -1,5 +1,5 @@
-class CreateRates < ActiveRecord::Migration[5.1]
-  def self.change
+class CreateRates < ActiveRecord::Migration[6.0]
+  def self.up
     create_table :rates do |t|
       t.belongs_to :rater
       t.belongs_to :rateable, polymorphic: true
@@ -8,5 +8,8 @@ class CreateRates < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     add_index :rates, [:rateable_id, :rateable_type]
+  end
+  def self.down
+    drop_table :rates
   end
 end
