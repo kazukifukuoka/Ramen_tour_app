@@ -45,14 +45,14 @@ gem 'carrierwave-i18n'
 # タグ機能
 gem 'acts-as-taggable-on', '6.5.0'
 gem 'jquery-rails'
-
 # コードチェック
 gem 'rails_best_practices'
 gem 'rubocop', require: false
 gem 'rubocop-rails'
-
 # ページネーション
 gem 'kaminari'
+# 星形評価
+gem 'ratyrate'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

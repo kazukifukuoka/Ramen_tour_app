@@ -3,6 +3,7 @@ class RamenStoreReviewsController < ApplicationController
   before_action :set_ramen_store_review, only: %i[show edit update destroy]
 
   def new
+    @ramen_store = RamenStore.find(params[:ramen_store_id])
     @ramen_store_review = RamenStoreReview.new
     @ramen_store_review_image = @ramen_store_review.images.build
   end
@@ -14,9 +15,10 @@ class RamenStoreReviewsController < ApplicationController
       review_image.ramen_store_id = @ramen_store.id
     end
     if @ramen_store_review.save
-      redirect_to ramen_store_path(@ramen_store), notice: 'レビューを投稿しました'
+      redirect_to ramen_store_path(@ramen_store), success: 'レビューを投稿しました'
     else
-      render :new, danger: 'レビュー投稿に失敗しました'
+      flash[:danger] = 'レビュー投稿に失敗しました'
+      render :new
     end
   end
 
@@ -36,8 +38,7 @@ class RamenStoreReviewsController < ApplicationController
 
   def destroy
     if @ramen_store_review.destroy
-      flash[:success] = 'レビューを削除しました'
-      redirect_to ramen_store_path(@ramen_store)
+      redirect_to ramen_store_path(@ramen_store), success: 'レビューを削除しました'
     else
       flash[:danger] = 'レビューの削除に失敗しました'
       render :show

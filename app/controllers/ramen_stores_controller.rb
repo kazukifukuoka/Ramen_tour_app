@@ -1,6 +1,6 @@
 class RamenStoresController < ApplicationController
   before_action :authenticate_user!, except: %i[top index show]
-  before_action :set_ramen_store, only: %i[show edit update destroy]
+  before_action :set_ramen_store, only: %i[show update destroy]
 
   PER = 10
 
@@ -32,16 +32,24 @@ class RamenStoresController < ApplicationController
     if @ramen_store.save
       redirect_to ramen_stores_path, success: '店舗を登録しました'
     else
-      render :new, danger: '店舗の登録に失敗しました'
+      flash[:danger] = '店舗の登録に失敗しました'
+      render :new
     end
   end
 
-  def edit; end
+  def edit
+    @ramen_store = current_user.ramen_stores.find_by(params[:id])
+    if @ramen_store
+      RamenStore.find(params[:id])
+    else
+      flash[:danger] = '投稿者のみ編集できます'
+      redirect_to ramen_store_path(params[:id])
+    end
+  end
 
   def update
     if @ramen_store.update(ramen_store_params)
-      flash[:success] = '店舗を更新しました'
-      redirect_to ramen_store_path(@ramen_store)
+      redirect_to ramen_store_path(@ramen_store), success: '店舗を更新しました'
     else
       flash[:danger] = '店舗の更新に失敗しました'
       render :edit
@@ -50,8 +58,7 @@ class RamenStoresController < ApplicationController
 
   def destroy
     if @ramen_store.destroy
-      flash[:success] = '店舗を削除しました'
-      redirect_to ramen_stores_path
+      redirect_to ramen_stores_path, success: '店舗を削除しました'
     else
       flash[:danger] = '店舗の削除に失敗しました'
       render :show

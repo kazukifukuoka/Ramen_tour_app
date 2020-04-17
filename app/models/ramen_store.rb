@@ -1,12 +1,14 @@
 class RamenStore < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to_active_hash :prefecture
   acts_as_taggable
+  ratyrate_rateable "name"
+  belongs_to_active_hash :prefecture
   belongs_to :user
   has_many :menus, class_name: 'RamenStoreMenu', dependent: :destroy
   has_many :registered_images, class_name: 'RamenStoreUserImage', dependent: :destroy
   has_many :reviews, class_name: 'RamenStoreReview', dependent: :destroy
   has_many :images, class_name: 'RamenStoreReviewImage', dependent: :destroy
+  has_many :score, dependent: :destroy
   accepts_nested_attributes_for :menus, allow_destroy: true
   accepts_nested_attributes_for :registered_images, allow_destroy: true
 
