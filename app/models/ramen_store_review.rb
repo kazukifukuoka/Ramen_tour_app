@@ -1,6 +1,5 @@
 class RamenStoreReview < ApplicationRecord
   acts_as_taggable
-  # ratyrate_rateable "title"
   belongs_to :ramen_store
   belongs_to :user
   has_many :images, class_name: 'RamenStoreReviewImage', dependent: :destroy
