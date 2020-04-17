@@ -10,6 +10,7 @@ require("@rails/activestorage").start()
 require("channels")
 require("bootstrap/dist/js/bootstrap")
 require('jquery')
+
 require('raty/jquery.raty.js')
 require('raty/ratyrate.js.erb')
 
