@@ -1,3 +1,3 @@
-class RatingCache < ActiveRecord::Base
-  belongs_to :cacheable, :polymorphic => true
+class RatingCache < ApplicationRecord
+  belongs_to :cacheable, polymorphic: true
 end
