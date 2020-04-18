@@ -1,4 +1,3 @@
-class OverallAverage < ActiveRecord::Base
-  belongs_to :rateable, :polymorphic => true
+class OverallAverage < ApplicationRecord
+  belongs_to :rateable, polymorphic: true
 end
-
