@@ -13,10 +13,9 @@
   <p>評価</p>
   </div>
   <div class='col-md-9'>
-    <%= rating_for @ramen_store, 'name' %>
+    <%= rating_for @ramen_store, 'name', half_show: true, star_on: 'star-on.png', space: true %>
   </div>
 </div>
-
 
 <div class='form-group row'>
   <%= f.label :content, 'レビュー内容 ※必須', class:'col-md-3 col-form-label' %>
