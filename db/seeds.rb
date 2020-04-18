@@ -14,15 +14,29 @@ PARKING_SPACE = ["有り", "無し", "近くにパーキングエリア多数", 
 SNS = ["無し", "有り"]
 TAG_LIST = ["人気店", "駅近", "こってり", "あっさり", "広々空間", "SNSで話題", "ネギ入れ放題", "替え玉無料", "リーズナブル", "女性に人気", "１人でも入りやすい", "クーポンあり", "テレビで話題"]
 
-User.find_or_create_by!(email: "seed@example.com") do |user|
-  user.nickname = "seed_user"
+User.find_or_create_by!(email: "seed1@example.com") do |user|
+  user.nickname = "seed_user1"
   user.sex = "male"
   user.password = "password"
   user.image = File.open("./app/assets/images/guest_sample.png")
   user.confirmed_at = Time.now
 end
-user = User.find_by(email: "seed@example.com")
-50.times do |n|
+User.find_or_create_by!(email: "seed2@example.com") do |user|
+  user.nickname = "seed_user2"
+  user.sex = "male"
+  user.password = "password"
+  user.image = File.open("./app/assets/images/guest_sample.png")
+  user.confirmed_at = Time.now
+end
+User.find_or_create_by!(email: "seed3@example.com") do |user|
+  user.nickname = "seed_user3"
+  user.sex = "male"
+  user.password = "password"
+  user.image = File.open("./app/assets/images/guest_sample.png")
+  user.confirmed_at = Time.now
+end
+user = User.find_by(email: "seed1@example.com")
+10.times do |n|
   RamenStore.create!(
     name: "店舗#{n + 1}",
     postcode: "112-#{format("%04d", rand(0..999))}",
