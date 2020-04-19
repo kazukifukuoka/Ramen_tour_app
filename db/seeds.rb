@@ -36,7 +36,7 @@ User.find_or_create_by!(email: "seed3@example.com") do |user|
   user.confirmed_at = Time.now
 end
 user = User.find_by(email: "seed1@example.com")
-10.times do |n|
+50.times do |n|
   RamenStore.create!(
     name: "店舗#{n + 1}",
     postcode: "112-#{format("%04d", rand(0..999))}",

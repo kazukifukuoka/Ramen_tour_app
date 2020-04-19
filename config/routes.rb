@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :ramen_stores do
     resources :ramen_store_reviews, as: :reviews, path: '/reviews', except: [:index]
+    resources :likes, only: %i[create destroy]
   end
 
 end
