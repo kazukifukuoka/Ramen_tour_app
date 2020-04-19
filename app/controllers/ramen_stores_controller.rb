@@ -1,5 +1,5 @@
 class RamenStoresController < ApplicationController
-  before_action :authenticate_user!, except: %i[top index show]
+  before_action :authenticate_user!, only: %i[new create edit update destroy]
   before_action :set_ramen_store, only: %i[show update destroy]
 
   PER = 10
