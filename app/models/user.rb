@@ -29,4 +29,8 @@ class User < ApplicationRecord
       user.confirmed_at = Time.zone.now
     end
   end
+
+  def own?(object)
+    object.user_id == id
+  end
 end

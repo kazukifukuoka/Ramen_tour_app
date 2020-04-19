@@ -1,6 +1,8 @@
 <%= link_to "戻る", ramen_stores_path, class: "btn btn-primary" %>
+<% if current_user.try(:own?, @ramen_store) %>
 <%= link_to "編集する", edit_ramen_store_path, class: "btn btn-primary" %>
 <%= link_to "削除する", ramen_store_path, method: :delete, class: "btn btn-primary", data: { confirm: "本当に削除しますか？" } %>
+<% end %>
 <%= link_to "レビューする", new_ramen_store_review_path(@ramen_store), class: "btn btn-primary float-right" %>
 <%= rating_for @ramen_store, 'name', imdb_avg: true, readonly: true %>
 <% content_for(:title, @ramen_store.name) %>
