@@ -57,12 +57,7 @@ class RamenStoresController < ApplicationController
   end
 
   def destroy
-    if @ramen_store.destroy
-      redirect_to ramen_stores_path, success: '店舗を削除しました'
-    else
-      flash[:danger] = '店舗の削除に失敗しました'
-      render :show
-    end
+    redirect_to ramen_stores_path, success: '店舗を削除しました' if @ramen_store.destroy!
   end
 
   private
