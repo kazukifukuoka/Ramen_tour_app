@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_15_050313) do
+ActiveRecord::Schema.define(version: 2020_04_19_092016) do
 
   create_table "average_caches", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "rater_id"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 2020_04_15_050313) do
     t.datetime "updated_at", null: false
     t.index ["rateable_type", "rateable_id"], name: "index_average_caches_on_rateable_type_and_rateable_id"
     t.index ["rater_id"], name: "index_average_caches_on_rater_id"
+  end
+
+  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "ramen_store_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ramen_store_id"], name: "index_likes_on_ramen_store_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "overall_averages", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -179,6 +188,8 @@ ActiveRecord::Schema.define(version: 2020_04_15_050313) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "likes", "ramen_stores"
+  add_foreign_key "likes", "users"
   add_foreign_key "ramen_store_menus", "ramen_stores"
   add_foreign_key "ramen_store_review_images", "ramen_store_reviews"
   add_foreign_key "ramen_store_review_images", "ramen_stores"

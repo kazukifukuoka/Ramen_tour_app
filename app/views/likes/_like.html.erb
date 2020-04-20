@@ -1,0 +1,14 @@
+<% if user_signed_in? %>
+  <% if like = Like.find_by(user_id: current_user.id, ramen_store_id: ramen_store.id) %>
+    <%= link_to ramen_store_like_path(ramen_store, like), method: :delete, id: "like-button", remote: true do %>
+      <i class="fas fa-star"></i>
+    <% end %>
+  <% else %>
+    <%= link_to ramen_store_likes_path(ramen_store), method: :post, id: "like-button", remote: true do %>
+      <i class="far fa-star"></i>
+    <% end %>
+  <% end %>
+<% else %>
+  ない
+<% end %>
+

@@ -20,7 +20,8 @@ class RamenStoresController < ApplicationController
     2.times { @ramen_store.registered_images.build }
   end
 
-  def show; end
+  def show
+  end
 
   def create
     @ramen_store = RamenStore.new(ramen_store_params)
@@ -57,12 +58,7 @@ class RamenStoresController < ApplicationController
   end
 
   def destroy
-    if @ramen_store.destroy
-      redirect_to ramen_stores_path, success: '店舗を削除しました'
-    else
-      flash[:danger] = '店舗の削除に失敗しました'
-      render :show
-    end
+    redirect_to ramen_stores_path, success: '店舗を削除しました' if @ramen_store.destroy!
   end
 
   private

@@ -6,9 +6,10 @@ class User < ApplicationRecord
 
   ratyrate_rater
 
-  has_many :ramen_stores # rubocop:disable Rails/HasManyOrHasOneDependent
-  has_many :ramen_store_user_images # rubocop:disable Rails/HasManyOrHasOneDependent
-  has_many :ramen_store_reviews # rubocop:disable Rails/HasManyOrHasOneDependent
+  has_many :ramen_stores, dependent: :destroy
+  has_many :ramen_store_user_images, dependent: :destroy
+  has_many :ramen_store_reviews, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   mount_uploader :image, ImagesUploader
 
@@ -32,5 +33,9 @@ class User < ApplicationRecord
 
   def own?(object)
     object.user_id == id
+  end
+
+  def already_like?(ramen_store)
+    self.likes.exists?(ramen_store_id: ramen_store.id)
   end
 end
