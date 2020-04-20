@@ -1,68 +1,47 @@
 <header>
-  <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <div class="container">
-      <%= link_to "Ramen Tour", root_path, class: "navbar-brand" %>
-      <div id="Navber">
-        <ul class="navbar-nav">
-          <% if user_signed_in? %>
-            <li class="nav-item active">
-              <%= link_to  user_path(current_user), class: "nav-link" do %>
-              <i class="far fa-address-card nav-link fa-style active"></i>
-              <span>マイページ</span>
+  <nav class='navbar navbar-expand-lg navigation navbar-light bg-light'>
+    <div class='container'>
+      <%= link_to 'Ramen Tour', root_path, class: 'navbar-brand' %>
+
+      <button class='navbar-toggler' data-toggle='collapse' data-target='#navbarSupportedContent'
+        aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
+        <span class='navbar-toggler-icon'></span>
+      </button>
+
+      <div class='collapse navbar-collapse' id='navbarSupportedContent'>
+        <ul class='navbar-nav ml-auto main-nav align-items-center'>
+          <li class='nav-item'>
+            <%= link_to  new_ramen_store_path, class: 'nav-link' do %>
+              <i class='fas fa-store fa-style pr-2'></i>
+              <span>店舗登録</span>
+            <% end %>
+          </li>
+          <li class='nav-item'>
+            <%= link_to  '#', class: 'nav-link' do %>
+              <i class="far fa-thumbs-up fa-style pr-2"></i>
+              <span>お気に入り</span>
+            <% end %>
+          </li>
+
+          <li class='nav-item dropdown dropdown-slide'>
+            <a href='#' class='nav-link dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+              <i class='far fa-address-card fa-style pr-2'></i>
+              <span>自分の名前</span>
+            </a>
+
+            <div class='dropdown-menu dropdown-menu-right'>
+              <%= link_to  '#', class: 'nav-link dropdown-item' do %>
+                <i class='far fa-address-card nav-link fa-style active'></i>
+                <span>マイページ</span>
               <% end %>
-            </li>
-            <li class="nav-item active">
-              <%= link_to  destroy_user_session_path, method: :delete, class: "nav-link" do %>
-              <i class="fas fa-sign-out-alt nav-link fa-style active"></i>
-              <span>ログアウト</span>
+              <%= link_to  destroy_user_session_path, method: :delete, class: 'nav-link dropdown-item' do %>
+                <i class='fas fa-sign-out-alt nav-link fa-style active'></i>
+                <span>ログアウト</span>
               <% end %>
-            </li>
-        <% else %>
-            <li class="nav-item active">
-              <%= link_to  new_user_registration_path, class: "nav-link" do %>
-              <i class="fas fa-users nav-link fa-style active"></i>
-              <span>新規登録</span>
-              <% end %>
-            <li class="nav-item active">
-              <%= link_to  new_user_session_path, class: "nav-link" do %>
-              <i class="fas fa-sign-in-alt nav-link fa-style active"></i>
-              <span>ログイン</span>
-              <% end %>
-            </li>
-          <% end %>
+            </div>
+          </li>
         </ul>
       </div>
-    </div>
-  </nav>
-
-  <nav class="navbar navbar-expand navbar-light">
-    <div class="container">
-      <ul class="navbar-nav mx-auto">
-        <li class="nav-item active">
-          <%= link_to ramen_stores_path, class: "nav-link" do %>
-          <i class="fas fa-table nav-link fa-style active"></i>
-          <span>ラーメン一覧</span>
-          <% end %>
-        </li>
-        <li class="nav-item active">
-          <%= link_to root_path, class: "nav-link" do %>
-          <i class="fas fa-search nav-link fa-style active"></i>
-          <span>見つける</span>
-          <% end %>
-        </li>
-        <li class="nav-item active">
-          <%= link_to root_path, class: "nav-link" do %>
-          <i class="fas fa-crown nav-link fa-style active"></i>
-          <span>ランキング</span>
-          <% end %>
-        </li>
-        <li class="nav-item active">
-          <%= link_to root_path, class: "nav-link" do %>
-          <i class="fas fa-rss nav-link fa-style active"></i>
-          <span>配信</span>
-          <% end %>
-        </li>
-      </ul>
     </div>
   </nav>
 </header>

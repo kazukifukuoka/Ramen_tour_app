@@ -1,0 +1,30 @@
+<nav class='navbar navbar-expand navbar-light'>
+  <div class='container'>
+    <ul class='navbar-nav mx-auto'>
+      <li class='nav-item active'>
+        <%= link_to ramen_stores_path, class: 'nav-link' do %>
+        <i class='fas fa-table nav-link fa-style active'></i>
+        <span>ラーメン一覧</span>
+        <% end %>
+      </li>
+      <li class='nav-item active'>
+        <%= link_to root_path, class: 'nav-link' do %>
+        <i class='fas fa-search nav-link fa-style active'></i>
+        <span>見つける</span>
+        <% end %>
+      </li>
+      <li class='nav-item active'>
+        <%= link_to root_path, class: 'nav-link' do %>
+        <i class='fas fa-crown nav-link fa-style active'></i>
+        <span>ランキング</span>
+        <% end %>
+      </li>
+      <li class='nav-item active'>
+        <%= link_to root_path, class: 'nav-link' do %>
+        <i class='fas fa-rss nav-link fa-style active'></i>
+        <span>配信</span>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</nav>
