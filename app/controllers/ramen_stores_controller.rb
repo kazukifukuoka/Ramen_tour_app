@@ -20,7 +20,9 @@ class RamenStoresController < ApplicationController
     2.times { @ramen_store.registered_images.build }
   end
 
-  def show; end
+  def show
+    @like = Like.find_by(user_id: current_user.id, ramen_store_id: params[:id])
+  end
 
   def create
     @ramen_store = RamenStore.new(ramen_store_params)
