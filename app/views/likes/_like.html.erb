@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
-  <% if current_user.already_like?(ramen_store) %>
-    <%= link_to ramen_store_like_path(id: like.id, ramen_store_id: ramen_store.id), method: :delete, id: "like-button", remote: true do %>
+  <% if like = Like.find_by(user_id: current_user.id, ramen_store_id: ramen_store.id) %>
+    <%= link_to ramen_store_like_path(ramen_store, like), method: :delete, id: "like-button", remote: true do %>
       <i class="fas fa-star"></i>
     <% end %>
   <% else %>

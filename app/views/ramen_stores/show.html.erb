@@ -1,5 +1,4 @@
-
-<%= render partial: 'likes/like', locals: { ramen_store: @ramen_store, like: @like } %>
+<%= render partial: 'likes/like', locals: { ramen_store: @ramen_store } %>
 
 <%= link_to "戻る", ramen_stores_path, class: "btn btn-primary" %>
 <% if current_user.try(:own?, @ramen_store) %>

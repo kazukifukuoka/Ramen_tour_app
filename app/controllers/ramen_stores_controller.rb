@@ -21,7 +21,6 @@ class RamenStoresController < ApplicationController
   end
 
   def show
-    @like = Like.find_by(user_id: current_user.id, ramen_store_id: params[:id])
   end
 
   def create
