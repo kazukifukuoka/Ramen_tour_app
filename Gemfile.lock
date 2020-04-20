@@ -44,6 +44,10 @@ GEM
       globalid (>= 0.3.6)
     activemodel (6.0.2.2)
       activesupport (= 6.0.2.2)
+    activemodel-serializers-xml (1.0.2)
+      activemodel (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
     activerecord (6.0.2.2)
       activemodel (= 6.0.2.2)
       activesupport (= 6.0.2.2)
@@ -86,9 +90,17 @@ GEM
     devise-bootstrap-views (1.1.0)
     devise-i18n (1.9.1)
       devise (>= 4.7.1)
+    draper (4.0.1)
+      actionpack (>= 5.0)
+      activemodel (>= 5.0)
+      activemodel-serializers-xml (>= 1.0)
+      activesupport (>= 5.0)
+      request_store (>= 1.0)
     erubi (1.9.0)
     erubis (2.7.0)
     ffi (1.12.2)
+    font-awesome-sass (5.4.1)
+      sassc (>= 1.11)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.2)
@@ -197,6 +209,8 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    request_store (1.5.0)
+      rack (>= 1.4)
     require_all (3.0.0)
     responders (3.0.0)
       actionpack (>= 5.0)
@@ -278,6 +292,8 @@ DEPENDENCIES
   devise
   devise-bootstrap-views (~> 1.0)
   devise-i18n
+  draper
+  font-awesome-sass (~> 5.4.1)
   jbuilder (~> 2.7)
   jquery-rails
   kaminari
