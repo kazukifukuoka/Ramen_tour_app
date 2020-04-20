@@ -13,12 +13,14 @@
   </head>
 
   <body>
-    <%= render 'shared/header'%>
     <% if user_signed_in? %>
+      <%= render 'shared/header'%>
       <%= render 'shared/flash_messages' %>
+    <% else %>
+      <%= render 'shared/before_login_header' %>
     <% end %>
     <div class="container">
-    <%= yield %>
+      <%= yield %>
     </div>
   </body>
 </html>

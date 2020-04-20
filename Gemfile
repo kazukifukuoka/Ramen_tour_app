@@ -26,33 +26,22 @@ gem 'bcrypt', '~>3.1.13'
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
-# ログイン機能
-gem 'devise'
-# 日本語化
-gem 'devise-i18n'
-gem 'rails-i18n', '~> 6.0'
-# Bootstrap
-gem 'devise-bootstrap-views', '~> 1.0'
-# データのハッシュ化
 gem 'active_hash'
-# 画像の投稿
-gem 'carrierwave', '~> 1.0.0'
-# 画像の加工
-gem 'rmagick'
-# carrierwaveのi18n
-gem 'carrierwave-i18n'
-# タグ機能
 gem 'acts-as-taggable-on', '6.5.0'
+gem 'bootsnap', '>= 1.4.2', require: false
+gem 'carrierwave', '~> 1.0.0'
+gem 'carrierwave-i18n'
+gem 'devise'
+gem 'devise-bootstrap-views', '~> 1.0'
+gem 'devise-i18n'
 gem 'jquery-rails'
-# コードチェック
+gem 'kaminari'
 gem 'rails_best_practices'
+gem 'rails-i18n', '~> 6.0'
+gem 'ratyrate'
+gem 'rmagick'
 gem 'rubocop', require: false
 gem 'rubocop-rails'
-# ページネーション
-gem 'kaminari'
-# 星形評価
-gem 'ratyrate'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
