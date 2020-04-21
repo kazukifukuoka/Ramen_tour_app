@@ -12,30 +12,30 @@
         <ul class='navbar-nav ml-auto main-nav align-items-center'>
           <li class='nav-item'>
             <%= link_to  new_ramen_store_path, class: 'nav-link' do %>
-              <i class='fas fa-store fa-style pr-2'></i>
+              <i class='fas fa-store fa-fw'></i>
               <span>店舗登録</span>
             <% end %>
           </li>
           <li class='nav-item'>
             <%= link_to  '#', class: 'nav-link' do %>
-              <i class="far fa-thumbs-up fa-style pr-2"></i>
+              <i class="far fa-thumbs-up fa-fw"></i>
               <span>お気に入り</span>
             <% end %>
           </li>
 
           <li class='nav-item dropdown dropdown-slide'>
             <a href='#' class='nav-link dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-              <i class='far fa-address-card fa-style pr-2'></i>
+              <i class="fas fa-user-circle fa-fw"></i>
               <span>自分の名前</span>
             </a>
 
             <div class='dropdown-menu dropdown-menu-right'>
               <%= link_to  '#', class: 'nav-link dropdown-item' do %>
-                <i class='far fa-address-card nav-link fa-style active'></i>
+                <i class="fas fa-edit fa-fw"></i>
                 <span>マイページ</span>
               <% end %>
               <%= link_to  destroy_user_session_path, method: :delete, class: 'nav-link dropdown-item' do %>
-                <i class='fas fa-sign-out-alt nav-link fa-style active'></i>
+                <i class="fas fa-sign-out-alt fa-fw icon"></i>
                 <span>ログアウト</span>
               <% end %>
             </div>

@@ -14,3 +14,5 @@ require('jquery')
 require('raty/jquery.raty.js')
 require('raty/ratyrate.js.erb')
 
+import "../src/application.scss"
+import '@fortawesome/fontawesome-free/js/all';
