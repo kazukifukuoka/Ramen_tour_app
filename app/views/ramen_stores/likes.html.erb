@@ -1,0 +1,17 @@
+<% content_for(:title, 'お気に入り') %>
+<!-- 店舗一覧 -->
+<div class="pt-3">
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <% if @like_ramen_stores.present? %>
+          <%= render @like_ramen_stores %>
+        <% else %>
+          <%= 'お気に入りの店舗がまだありません' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= paginate @like_ramen_stores %>

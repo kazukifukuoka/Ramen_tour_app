@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :ramen_store_user_images, dependent: :destroy
   has_many :ramen_store_reviews, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :like_ramen_stores, through: :likes, source: :ramen_store
 
   mount_uploader :image, ImagesUploader
 

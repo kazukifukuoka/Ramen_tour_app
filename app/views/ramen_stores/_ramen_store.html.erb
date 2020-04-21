@@ -1,0 +1,30 @@
+<div class="col-sm-12 col-lg-4 mb-3">
+  <div id=<%= "ramen_store-id-#{ramen_store.id}" %>>
+    <div class="card">
+      <%= image_tag ramen_store.registered_images.first.image.url(:thumb), class: 'card-img-top img-fluid', size: '300x200' %>
+      <div class="card-body">
+        <h4 class="card-title">
+          <%= link_to ramen_store.name, ramen_store_path(ramen_store) %>
+        </h4>
+          <%= rating_for ramen_store, 'name', imdb_avg: true, readonly: true %>
+      <ul class="crud-menu-btn list-inline float-right">
+
+      </ul>
+        <ul class="list-inline">
+
+          <li class="list-inline-item">
+            <i class='far fa-clock fa-fw'></i>
+            <%= l ramen_store.created_at, format: :long %>
+          </li>
+        </ul>
+        <p><% ramen_store.tag_list.each do |tag| %>
+          <span class="badge badge-primary mr-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span>
+          <% end %>
+        </p>
+        <p class="card-text"><%= ramen_store.content %></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+

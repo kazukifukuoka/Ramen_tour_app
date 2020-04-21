@@ -17,7 +17,7 @@
             <% end %>
           </li>
           <li class='nav-item'>
-            <%= link_to  '#', class: 'nav-link' do %>
+            <%= link_to  likes_ramen_stores_path, class: 'nav-link' do %>
               <i class="far fa-thumbs-up fa-fw"></i>
               <span>お気に入り</span>
             <% end %>
@@ -26,11 +26,11 @@
           <li class='nav-item dropdown dropdown-slide'>
             <a href='#' class='nav-link dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
               <i class="fas fa-user-circle fa-fw"></i>
-              <span>自分の名前</span>
+              <span><%= current_user.decorate.full_name %></span>
             </a>
 
             <div class='dropdown-menu dropdown-menu-right'>
-              <%= link_to  '#', class: 'nav-link dropdown-item' do %>
+              <%= link_to  user_path(current_user), class: 'nav-link dropdown-item' do %>
                 <i class="fas fa-edit fa-fw"></i>
                 <span>マイページ</span>
               <% end %>
