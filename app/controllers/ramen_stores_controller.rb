@@ -2,16 +2,14 @@ class RamenStoresController < ApplicationController
   before_action :authenticate_user!, only: %i[new create edit update destroy]
   before_action :set_ramen_store, only: %i[show update destroy]
 
-  PER = 10
+  PER = 12
 
   def top; end
 
   def index
-    @ramen_stores = RamenStore.page(params[:page]).per(PER)
+    @ramen_stores = RamenStore.includes(:user).order(created_at: :desc).page(params[:page]).per(PER)
     return unless params[:tag_name]
-
     @ramen_stores = RamenStore.tagged_with(params[:tag_name].to_s)
-    @ramen_stores = @ramen_stores.page(params[:page]).per(PER)
   end
 
   def new
@@ -59,6 +57,10 @@ class RamenStoresController < ApplicationController
 
   def destroy
     redirect_to ramen_stores_path, success: '店舗を削除しました' if @ramen_store.destroy!
+  end
+
+  def likes
+    @like_ramen_stores = current_user.like_ramen_stores.includes(:user).order(created_at: :desc).page(params[:page]).per(PER)
   end
 
   private
