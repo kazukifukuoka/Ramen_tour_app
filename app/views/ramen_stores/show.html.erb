@@ -3,8 +3,12 @@
   <%= link_to "編集する", edit_ramen_store_path, class: "btn btn-primary" %>
   <%= link_to "削除する", ramen_store_path, method: :delete, class: "btn btn-primary", data: { confirm: "本当に削除しますか？" } %>
 <% else %>
+  いいね
   <%= render partial: 'likes/like', locals: { ramen_store: @ramen_store } %>
 <% end %>
+：いいね数
+<%= @ramen_store.likes.count %>
+
 <%= link_to "レビューする", new_ramen_store_review_path(@ramen_store), class: "btn btn-primary float-right" %>
 <%= rating_for @ramen_store, 'name', imdb_avg: true, readonly: true %>
 <% content_for(:title, @ramen_store.name) %>

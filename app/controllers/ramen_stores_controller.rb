@@ -9,7 +9,7 @@ class RamenStoresController < ApplicationController
   def index
     @ramen_stores = RamenStore.includes(:user).order(created_at: :desc).page(params[:page]).per(PER)
     return unless params[:tag_name]
-    @ramen_stores = RamenStore.tagged_with(params[:tag_name].to_s)
+    @ramen_stores = RamenStore.tagged_with(params[:tag_name].to_s).page(params[:page]).per(PER)
   end
 
   def new
@@ -61,6 +61,10 @@ class RamenStoresController < ApplicationController
 
   def likes
     @like_ramen_stores = current_user.like_ramen_stores.includes(:user).order(created_at: :desc).page(params[:page]).per(PER)
+  end
+
+  def rank
+    @likes_rank = RamenStore.find(Like.group(:ramen_store_id).order('count(ramen_store_id) desc').limit(10).pluck(:ramen_store_id))
   end
 
   private
