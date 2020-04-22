@@ -37,6 +37,6 @@ class User < ApplicationRecord
   end
 
   def already_like?(ramen_store)
-    self.likes.exists?(ramen_store_id: ramen_store.id)
+    likes.exists?(ramen_store_id: ramen_store.id)
   end
 end

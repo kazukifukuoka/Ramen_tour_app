@@ -7,8 +7,17 @@ class RamenStoresController < ApplicationController
   def top; end
 
   def index
-    @ramen_stores = RamenStore.includes(:user).order(created_at: :desc).page(params[:page]).per(PER)
+    @ramen_stores = RamenStore.includes(
+      :user
+    ).order(
+      created_at: :desc
+    ).page(
+      params[:page]
+    ).per(
+      PER
+    )
     return unless params[:tag_name]
+
     @ramen_stores = RamenStore.tagged_with(params[:tag_name].to_s).page(params[:page]).per(PER)
   end
 
@@ -18,8 +27,7 @@ class RamenStoresController < ApplicationController
     2.times { @ramen_store.registered_images.build }
   end
 
-  def show
-  end
+  def show; end
 
   def create
     @ramen_store = RamenStore.new(ramen_store_params)
@@ -64,7 +72,10 @@ class RamenStoresController < ApplicationController
   end
 
   def rank
-    @likes_rank = RamenStore.find(Like.group(:ramen_store_id).order('count(ramen_store_id) desc').limit(10).pluck(:ramen_store_id))
+    @likes_rank = Like.group(:ramen_store_id).order('count(ramen_store_id) desc').limit(10).pluck(:ramen_store_id)
+    @store_likes_rank = RamenStore.find(@likes_rank)
+    @score_rank = RatingCache.order(avg: :desc).pluck(:cacheable_id)
+    @store_score_rank = RamenStore.find(@score_rank)
   end
 
   private
