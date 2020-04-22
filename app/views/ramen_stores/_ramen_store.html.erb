@@ -7,6 +7,7 @@
           <%= link_to ramen_store.name, ramen_store_path(ramen_store) %>
         </h4>
           <%= rating_for ramen_store, 'name', imdb_avg: true, readonly: true %>
+          <p>いいね数：<%= ramen_store.likes.count %></p>
       <ul class="crud-menu-btn list-inline float-right">
 
       </ul>
