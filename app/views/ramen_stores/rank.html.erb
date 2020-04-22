@@ -5,9 +5,9 @@
   <input id="all" type="radio" name="tab_item" checked>
   <label class="tab_item" for="all">スコア</label>
   <input id="score" type="radio" name="tab_item">
-  <label class="tab_item" for="score">お気に入り</label>
+  <label class="tab_item" for="score">お気に入り数</label>
   <input id="design" type="radio" name="tab_item">
-  <label class="tab_item" for="design">デザイン</label>
+  <label class="tab_item" for="design">レビュー数</label>
   <!-- スコアランキング一覧 -->
   <div class="tab_content" id="all_content">
     <div class="tab_content_description">
@@ -46,7 +46,19 @@
   </div>
   <div class="tab_content" id="design_content">
     <div class="tab_content_description">
-      <p class="c-txtsp">デザインの内容がここに入ります</p>
+      <div class="pt-3">
+        <div class="row">
+          <div class="col-12">
+            <div class="row">
+              <% if @review_rank.present? %>
+                <%= render @review_rank %>
+              <% else %>
+                <%= 'レビュー数ランキングはまだありません' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

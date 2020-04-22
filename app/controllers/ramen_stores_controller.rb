@@ -72,10 +72,12 @@ class RamenStoresController < ApplicationController
   end
 
   def rank
-    @likes_rank = Like.group(:ramen_store_id).order('count(ramen_store_id) desc').limit(10).pluck(:ramen_store_id)
-    @store_likes_rank = RamenStore.find(@likes_rank)
-    @score_rank = RatingCache.order(avg: :desc).pluck(:cacheable_id)
-    @store_score_rank = RamenStore.find(@score_rank)
+    @like_ids = Like.group(:ramen_store_id).order('count(ramen_store_id) desc').limit(10).pluck(:ramen_store_id)
+    @store_likes_rank = RamenStore.find(@like_ids)
+    @score_ids = RatingCache.order(avg: :desc).limit(10).pluck(:cacheable_id)
+    @store_score_rank = RamenStore.find(@score_ids)
+    @review_ids = RamenStoreReview.group(:ramen_store_id).order('count(ramen_store_id) desc').limit(10).pluck(:ramen_store_id)
+    @review_rank = RamenStore.find(@review_ids)
   end
 
   private
