@@ -38,7 +38,9 @@ class RamenStoreReviewsController < ApplicationController
   end
 
   def destroy
-    redirect_to ramen_store_path(@ramen_store), success: 'レビューを削除しました' if @ramen_store_review.destroy!
+    if @ramen_store_review.destroy!
+      redirect_to ramen_store_path(@ramen_store), success: 'レビューを削除しました'
+    end
   end
 
   private
