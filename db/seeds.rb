@@ -27,7 +27,7 @@ ramen_stores = 10
 
 (users_number).times do |n|
   User.find_or_create_by!(email: "seed#{n + 1}@example.com") do |user|
-    user.nickname = "seed_user#{n + 1}"
+    user.nickname = Faker::Name.name
     user.sex = "male"
     user.password = "password"
     user.image = File.open("./app/assets/images/guest_sample.png")
@@ -101,7 +101,7 @@ puts "店舗画像投稿成功"
 likes_list = []
 User.all.ids.sort.each do |user_id|
   RamenStore.all.each do |ramen_store|
-    if ramen_store.user_id != user_id
+    if ramen_store.user_id != user_id && rand(2) == 0
       likes_list <<
       { user_id: user_id,
         ramen_store_id: ramen_store.id
@@ -161,18 +161,14 @@ puts "Rates投入成功"
 
 # 店舗のidとユーザーidが異なるならスコア付をする
 rating_cache_list = []
-User.all.ids.sort.each do |user_id|
-  RamenStore.all.each do |ramen_store|
-    if ramen_store.user_id != user_id
-      rating_cache_list <<
-      { cacheable_type: "RamenStore",    #ramen_storeテーブルにスコアをつける
-        cacheable_id: ramen_store.id,    #店舗のidを指定
-        avg: (ramen_score_hash[ramen_store.id] / (users_number.to_f- 1.0)).to_f,                          #０〜５の評価
-        qty: users_number - 1,           #評価者の数(店舗登録者以外)
-        dimension: "name"                #評価対象
-      }
-    end
-  end
+RamenStore.all.each do |ramen_store|
+  rating_cache_list <<
+  { cacheable_type: "RamenStore",    #ramen_storeテーブルにスコアをつける
+    cacheable_id: ramen_store.id,    #店舗のidを指定
+    avg: (ramen_score_hash[ramen_store.id] / (users_number.to_f- 1.0)).to_f,                          #０〜５の評価
+    qty: users_number - 1,           #評価者の数(店舗登録者以外)
+    dimension: "name"                #評価対象
+  }
 end
 
 RatingCache.create!(rating_cache_list)

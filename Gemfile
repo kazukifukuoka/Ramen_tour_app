@@ -35,6 +35,7 @@ gem 'devise'
 gem 'devise-bootstrap-views', '~> 1.0'
 gem 'devise-i18n'
 gem 'draper'
+gem 'faker'
 gem 'jquery-rails'
 gem 'kaminari'
 gem 'rails-i18n', '~> 6.0'
@@ -46,7 +47,11 @@ gem 'rubocop-rails'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'capybara'
+  gem 'factory_bot_rails', '~> 4.11'
   gem 'pry-byebug'
+  gem 'rspec-rails', '~> 4.0.0'
+  gem 'spring-commands-rspec'
 end
 
 group :development do
