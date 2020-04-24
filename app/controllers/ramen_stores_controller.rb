@@ -2,23 +2,13 @@ class RamenStoresController < ApplicationController
   before_action :authenticate_user!, only: %i[new create edit update destroy]
   before_action :set_ramen_store, only: %i[show update destroy]
 
-  PER = 12
-
   def top; end
 
   def index
-    @ramen_stores = RamenStore.includes(
-      :user
-    ).order(
-      created_at: :desc
-    ).page(
-      params[:page]
-    ).per(
-      PER
-    )
+    @ramen_stores = RamenStore.includes(:user).order(created_at: :desc).page(params[:page])
     return unless params[:tag_name]
 
-    @ramen_stores = RamenStore.tagged_with(params[:tag_name].to_s).page(params[:page]).per(PER)
+    @ramen_stores = RamenStore.tagged_with(params[:tag_name].to_s).page(params[:page])
   end
 
   def new
@@ -68,7 +58,7 @@ class RamenStoresController < ApplicationController
   end
 
   def likes
-    @like_ramen_stores = current_user.like_ramen_stores.includes(:user).order(created_at: :desc).page(params[:page]).per(PER)
+    @like_ramen_stores = current_user.like_ramen_stores.includes(:user).order(created_at: :desc).page(params[:page])
   end
 
   def rank
