@@ -17,4 +17,5 @@ FactoryBot.define do
   #     sign_in FactoryBot.create(:admin) # Using factory bot as an example
   #   end
   # end
+  end
 end
