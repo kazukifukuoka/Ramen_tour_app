@@ -17,8 +17,17 @@
 require 'capybara/rspec'
 
 RSpec.configure do |config|
-  config.before(:each, type: :system) do
-    driven_by :selenium_chrome_headless
+  Capybara.register_driver :selenium_chrome_headless do |app|
+    browser_options = ::Selenium::WebDriver::Chrome::Options.new()
+    browser_options.args << '--headless'
+    browser_options.args << '--no-sandbox'
+    browser_options.args << '--disable-gpu'
+    Capybara::Selenium::Driver.new(app, browser: :chrome, options: browser_options)
+    chrome_options = Options()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome('/usr/local/bin/chromedriver',chrome_options=chrome_options)
   end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
