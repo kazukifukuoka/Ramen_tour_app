@@ -9,6 +9,7 @@
           <%= rating_for ramen_store, 'name', imdb_avg: true, readonly: true %>
           <p>いいね数：<%= ramen_store.likes.count %></p>
           <p>レビュー数：<%= ramen_store.reviews.count %></p>
+          <p>投稿者：<%= ramen_store.user.nickname %></p>
       <ul class="crud-menu-btn list-inline float-right">
 
       </ul>

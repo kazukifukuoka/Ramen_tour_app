@@ -1,5 +1,5 @@
 class RamenStoreReviewsController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create edit update destroy]
+  before_action :authenticate_user!
   before_action :set_ramen_store, only: %i[create show update destroy]
   before_action :set_ramen_store_review, only: %i[show edit update destroy]
 

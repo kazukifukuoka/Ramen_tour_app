@@ -19,18 +19,18 @@ class RamenStore < ApplicationRecord
   VALID_POSTCODE = /\A\d{3}-{1}\d{4}\z/.freeze
   VALID_TAG = /\A[^ 　]+(?:,.[^ 　]+)*\Z/.freeze
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 255 }
   validates :postcode, presence: true, format: { with: VALID_POSTCODE }
   validates :prefecture_id, presence: true
-  validates :city, presence: true
-  validates :address, presence: true
-  validates :phone_number, presence: true, uniqueness: true, format: { with: VALID_PHONE }
-  validates :sale, presence: true
-  validates :holiday, presence: true
-  validates :seat, presence: true
-  validates :access, presence: true
-  validates :parking_space, presence: true
-  validates :sns, presence: true
-  validates :content, presence: true
+  validates :city, presence: true, length: { maximum: 255 }
+  validates :address, presence: true, length: { maximum: 255 }
+  validates :phone_number, presence: true, uniqueness: { case_sensitive: true }, format: { with: VALID_PHONE }
+  validates :sale, presence: true, length: { maximum: 255 }
+  validates :holiday, presence: true, length: { maximum: 255 }
+  validates :seat, presence: true, length: { maximum: 255 }
+  validates :access, presence: true, length: { maximum: 255 }
+  validates :parking_space, presence: true, length: { maximum: 255 }
+  validates :sns, presence: true, length: { maximum: 255 }
+  validates :content, presence: true, length: { maximum: 65_535 }
   validates :tag_list, presence: true, format: { with: VALID_TAG }
 end

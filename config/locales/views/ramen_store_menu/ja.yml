@@ -3,6 +3,6 @@ ja:
     models:
       ramen_store_menu: 店舗メニュー
     attributes:
-      ramen_store/ramen_store_menus:
+      ramen_store/menus:
         name: メニュー名
         price: メニュー金額

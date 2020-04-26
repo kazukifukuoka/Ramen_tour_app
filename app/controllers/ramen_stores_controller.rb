@@ -1,5 +1,5 @@
 class RamenStoresController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create edit update destroy]
+  before_action :authenticate_user!
   before_action :set_ramen_store, only: %i[show update destroy]
 
   def top; end
@@ -35,16 +35,15 @@ class RamenStoresController < ApplicationController
   end
 
   def edit
-    @ramen_store = current_user.ramen_stores.find_by(params[:id])
-    if @ramen_store
-      RamenStore.find(params[:id])
-    else
+    @ramen_store = RamenStore.find_by(id: params[:id], user_id: current_user.id)
+    unless @ramen_store
       flash[:danger] = '投稿者のみ編集できます'
       redirect_to ramen_store_path(params[:id])
     end
   end
 
   def update
+    @ramen_store = RamenStore.find_by(id: params[:id], user_id: current_user.id)
     if @ramen_store.update(ramen_store_params)
       redirect_to ramen_store_path(@ramen_store), success: '店舗を更新しました'
     else
@@ -63,9 +62,10 @@ class RamenStoresController < ApplicationController
 
   def rank
     # @like_ids = Like.group(:ramen_store_id).order('count(ramen_store_id) desc').limit(10).pluck(:ramen_store_id)
-    @store_likes_rank = RamenStore.joins(:likes).select('ramen_stores.*, count(ramen_stores.id) as likes_count').group(:id).order('likes_count desc').limit(10)
-    @score_ids = RatingCache.order(avg: :desc).limit(20).pluck(:cacheable_id)
+    @store_likes_rank = RamenStore.joins(:likes).select('ramen_stores.*, count(ramen_stores.id) as likes_count').group(:id).order('likes_count desc').limit(20)
+    @score_ids = RatingCache.order(avg: :desc).limit(10).pluck(:cacheable_id)
     @store_score_rank = RamenStore.find(@score_ids)
+
     # @review_ids = RamenStoreReview.group(:ramen_store_id).order('count(ramen_store_id) desc').limit(10).pluck(:ramen_store_id)
     # @review_rank = RamenStore.find(@review_ids)
     @review_rank = RamenStore.joins(:reviews).select('ramen_stores.*, count(ramen_stores.id) as reviews_count').group(:id).order('reviews_count desc').limit(10)
