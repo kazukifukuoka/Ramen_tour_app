@@ -35,16 +35,15 @@ class RamenStoresController < ApplicationController
   end
 
   def edit
-    @ramen_store = current_user.ramen_stores.find_by(params[:id])
-    if @ramen_store
-      RamenStore.find(params[:id])
-    else
+    @ramen_store = RamenStore.find_by(id: params[:id], user_id: current_user.id)
+    unless @ramen_store
       flash[:danger] = '投稿者のみ編集できます'
       redirect_to ramen_store_path(params[:id])
     end
   end
 
   def update
+    @ramen_store = RamenStore.find_by(id: params[:id], user_id: current_user.id)
     if @ramen_store.update(ramen_store_params)
       redirect_to ramen_store_path(@ramen_store), success: '店舗を更新しました'
     else

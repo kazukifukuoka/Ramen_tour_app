@@ -14,8 +14,14 @@ FactoryBot.define do
     parking_space { '近くにパーキングエリア' }
     sns { 'Twitter: @テスト' }
     content{ 'テストです' }
-    tag_list {'テスト'}
+    tag_list {'テストタグ'}
     created_at { Faker::Time.between(from: DateTime.now - 1, to: DateTime.now) }
     association :user
+    # ramen_store_user_images {[
+    #   build(:ramen_store_user_image, ramen_store: nil)
+    # ]}
+    after(:build) do |store|
+      store.registered_images << build(:ramen_store_user_image)
+    end
   end
 end
