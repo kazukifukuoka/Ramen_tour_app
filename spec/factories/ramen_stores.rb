@@ -9,9 +9,9 @@ FactoryBot.define do
     sequence(:phone_number) { |n| "0123-45-678#{n}" }
     sale { '18時から20時まで' }
     holiday { '毎週月曜日' }
-    seat { 'カウンター10席' }
-    access { '駅から5分' }
-    parking_space { '近くにパーキングエリア有り' }
+    seat { 'カウンター20席' }
+    access { '駅から6分' }
+    parking_space { '近くにパーキングエリア' }
     sns { 'Twitter: @テスト' }
     content{ 'テストです' }
     tag_list {'テスト'}
