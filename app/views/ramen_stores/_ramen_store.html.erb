@@ -21,7 +21,11 @@
           </li>
         </ul>
         <p><% ramen_store.tag_list.each do |tag| %>
+        <% if @path.is('ramen_stores#index') %>
           <span class="badge badge-primary mr-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span>
+          <% else @path.is('ramen_stores#likes') %>
+            <span class="badge badge-primary mr-1 p-2"><%= link_to tag, likes_ramen_stores_path(tag_name: tag), class: "text-white" %></span>
+          <% end %>
           <% end %>
         </p>
         <p class="card-text"><%= ramen_store.content %></p>
