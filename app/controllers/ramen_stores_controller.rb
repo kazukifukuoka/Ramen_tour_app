@@ -43,7 +43,8 @@ class RamenStoresController < ApplicationController
   end
 
   def update
-    @ramen_store = RamenStore.find_by(id: params[:id], user_id: current_user.id)
+    # @ramen_store = RamenStore.find(id: params[:id], user_id: current_user.id)
+    @ramen_store = current_user.ramen_stores.find(params[:id])
     if @ramen_store.update(ramen_store_params)
       redirect_to ramen_store_path(@ramen_store), success: '店舗を更新しました'
     else

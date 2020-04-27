@@ -1,6 +1,6 @@
 module AuthenticationMacros
   def login
-    let(:user) { build(:user) }
+    let(:user) { create(:user) }
     before do
     user.confirm
     sign_in user
