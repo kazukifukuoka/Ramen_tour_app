@@ -1,6 +1,7 @@
 class RamenStoresController < ApplicationController
   before_action :authenticate_user!
   before_action :set_ramen_store, only: %i[show update destroy]
+  before_action :request_path
 
   def top; end
 
@@ -43,7 +44,6 @@ class RamenStoresController < ApplicationController
   end
 
   def update
-    # @ramen_store = RamenStore.find(id: params[:id], user_id: current_user.id)
     @ramen_store = current_user.ramen_stores.find(params[:id])
     if @ramen_store.update(ramen_store_params)
       redirect_to ramen_store_path(@ramen_store), success: '店舗を更新しました'
@@ -59,6 +59,9 @@ class RamenStoresController < ApplicationController
 
   def likes
     @like_ramen_stores = current_user.like_ramen_stores.includes(:user).order(created_at: :desc).page(params[:page])
+    return unless params[:tag_name]
+
+    @like_ramen_stores = current_user.like_ramen_stores.tagged_with(params[:tag_name].to_s).page(params[:page])
   end
 
   def rank
@@ -88,5 +91,12 @@ class RamenStoresController < ApplicationController
       menus_attributes: %i[name price],
       registered_images_attributes: %i[id name image]
     )
+  end
+
+  def request_path
+    @path = controller_path + '#' + action_name
+    def @path.is(*str)
+        str.map{|s| self.include?(s)}.include?(true)
+    end
   end
 end

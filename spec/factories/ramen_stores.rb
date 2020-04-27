@@ -13,8 +13,8 @@ FactoryBot.define do
     access { '駅から6分' }
     parking_space { '近くにパーキングエリア' }
     sns { 'Twitter: @テスト' }
-    content{ 'テストです' }
-    tag_list {'テストタグ'}
+    content { 'テストです' }
+    tag_list { 'テストタグ' }
     created_at { Faker::Time.between(from: DateTime.now - 1, to: DateTime.now) }
     association :user
     after(:build) do |store|
@@ -35,8 +35,8 @@ FactoryBot.define do
       access { '駅から6分' }
       parking_space { '近くにパーキングエリア' }
       sns { 'Twitter: @テスト' }
-      content{ 'テストです' }
-      tag_list {'テストタグ'}
+      content { 'テストです' }
+      tag_list { 'テストタグ' }
       created_at { Faker::Time.between(from: DateTime.now - 1, to: DateTime.now) }
       association :user
       after(:build) do |store|

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe RamenStoresController, type: :request do
-
   describe 'GET #index' do
     context '未ログインの場合' do
       example 'リクエスト失敗' do
@@ -18,11 +17,10 @@ describe RamenStoresController, type: :request do
       end
 
       context '店舗が投稿されていない場合'
-        example '店舗投稿がまだありませんと表示' do
-          get ramen_stores_url
-          expect(response.body).to include '店舗投稿がまだありません'
-        end
-
+      example '店舗投稿がまだありませんと表示' do
+        get ramen_stores_url
+        expect(response.body).to include '店舗投稿がまだありません'
+      end
 
       context '店舗投稿がされている場合' do
         example '店舗の情報が表示されている' do
@@ -54,7 +52,7 @@ describe RamenStoresController, type: :request do
           get ramen_store_url @ramen_store
         end
         example 'リクエストが成功すること' do
-        expect(response.status).to eq(200)
+          expect(response.status).to eq(200)
         end
 
         example '店舗の情報が表示されていること' do
@@ -71,8 +69,8 @@ describe RamenStoresController, type: :request do
           expect(response.body).to include 'Twitter: @テスト'
           expect(response.body).to include 'テストです'
           expect(response.body).to include 'テストタグ'
+        end
       end
-    end
 
       context '店舗が存在しない場合' do
         subject { -> { get ramen_store_url 100 } }

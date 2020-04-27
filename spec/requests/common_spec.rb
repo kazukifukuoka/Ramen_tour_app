@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe '共通系', type: :request do
-
   describe 'ヘッダー' do
     context 'ログイン前' do
       example 'ヘッダーが正しく表示されていること' do
