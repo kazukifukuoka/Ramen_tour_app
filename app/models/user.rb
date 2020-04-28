@@ -14,7 +14,7 @@ class User < ApplicationRecord
 
   mount_uploader :image, ImagesUploader
 
-  validates :nickname, presence: true, length: { maximum: 10 }
+  validates :nickname, presence: true, length: { maximum: 15 }
   validates :sex, presence: true
 
   def is_confirmation_period_expired? # rubocop:disable Naming/PredicateName

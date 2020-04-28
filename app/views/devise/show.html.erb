@@ -2,7 +2,7 @@
 <div class="container-login">
   <h1>マイページ</h1>
   <div class="my-3">
-    <%= image_tag @user.image.url(:thumb) %>
+    <%= image_tag @user.image.url(:thumb), class: 'rounded-circle', size: '300x300' %>
   </div>
   <div class="my-3">
     <h2>名前 : <%= @user.nickname %></h2>

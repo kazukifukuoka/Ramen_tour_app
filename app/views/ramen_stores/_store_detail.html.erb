@@ -1,0 +1,25 @@
+<table class="table table-bordered mt-3", style="table-layout:fixed;width:100%;">
+  <tr><td>電話番号</td><td><%= @ramen_store.phone_number %></td></tr>
+  <tr><td>営業時間</td><td><%= @ramen_store.sale %></td></tr>
+  <tr><td>定休日</td><td><%= @ramen_store.holiday %></td></tr>
+  <tr><td>席数</td><td><%= @ramen_store.seat %></td></tr>
+  <tr><td>アクセス</td><td><%= @ramen_store.access %></td></tr>
+  <tr><td>駐車場</td><td><%= @ramen_store.parking_space %></td></tr>
+  <tr><td>SNS</td><td><%= @ramen_store.sns %></td></tr>
+  <tr><td>説明</td><td><%= simple_format(@ramen_store.content) %></td></tr>
+
+  <tr><th colspan="2">写真</th></tr>
+  <% @ramen_store.registered_images.each do |image|%>
+    <% if image.image? %>
+      <tr><td><%= image.name %></td>
+      <td><%= image_tag image.image.url(:thumb100) %></td></tr>
+    <% else %>
+      <tr><td colspan="2", class="text-center">写真はまだ投稿されていません</td></tr>
+      <% break %>
+    <% end %>
+  <% end %>
+  <tr><td>タグ</td>
+  <td><% @ramen_store.tag_list.each do |tag| %>
+    <span class="badge badge-primary mr-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span>
+  <% end %></td></tr>
+</table>

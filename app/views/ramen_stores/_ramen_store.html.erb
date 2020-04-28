@@ -1,12 +1,13 @@
 <div class="col-sm-12 col-lg-4 mb-3">
   <div id=<%= "ramen_store-id-#{ramen_store.id}" %>>
     <div class="card">
-      <%= image_tag ramen_store.registered_images.first.image.url(:thumb), class: 'card-img-top img-fluid', size: '300x200' %>
+      <%= link_to ramen_store_path(ramen_store) do %>
+      <%= image_tag ramen_store.registered_images.first.image.url, class: 'card-img-top thumb' %><% end %>
       <div class="card-body">
-        <h4 class="card-title">
-          <%= link_to ramen_store.name, ramen_store_path(ramen_store) %>
-        </h4>
-          <%= rating_for ramen_store, 'name', imdb_avg: true, readonly: true %>
+      <div class="clearfix mb-2">
+        <div class="float-left"><%= rating_for ramen_store, 'name', imdb_avg: true, readonly: true %></div>
+        <h4 class="card-title pt-4"><%= link_to ramen_store.name, ramen_store_path(ramen_store) %></h4 >
+      </div>
           <p>いいね数：<%= ramen_store.likes.count %></p>
           <p>レビュー数：<%= ramen_store.reviews.count %></p>
           <p>投稿者：<%= ramen_store.user.nickname %></p>
@@ -28,7 +29,7 @@
           <% end %>
           <% end %>
         </p>
-        <p class="card-text"><%= ramen_store.content %></p>
+        <p class="card-text">見出し説明文</p>
       </div>
     </div>
   </div>
