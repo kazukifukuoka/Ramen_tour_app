@@ -2,7 +2,7 @@
 <div class="container-login">
   <h1>マイページ</h1>
   <div class="my-3">
-    <%= image_tag @user.image.url(:thumb) %>
+    <%= image_tag @user.image.url(:thumb), class: 'rounded-circle', size: '300x300' %>
   </div>
   <div class="my-3">
     <h2>名前 : <%= @user.nickname %></h2>
@@ -10,5 +10,7 @@
   <div class="my-5">
     <p>プロフィール : <%= @user.profile %></p>
   </div>
-  <%= link_to "アカウントの情報を変更", edit_user_registration_path, class: "btn btn-primary btn-block" %>
+  <% if current_user.id == @user.id %>
+    <%= link_to "アカウントの情報を変更", edit_user_registration_path, class: "btn btn-primary btn-block" %>
+  <% end%>
 </div>

@@ -11,6 +11,8 @@ User.destroy_all
 RatingCache.destroy_all
 Rate.destroy_all
 
+SEX = ["男性", "女性"]
+
 HOLIDAY = ["毎週月曜日","毎週火曜日","毎週水曜日","毎週木曜日","毎週金曜日"]
 PARKING_SPACE = ["有り", "無し", "近くにパーキングエリア多数", "徒歩圏内にパーキングエリア有り"]
 SNS = ["無し", "有り"]
@@ -28,10 +30,10 @@ ramen_stores = 10
 (users_number).times do |n|
   User.find_or_create_by!(email: "seed#{n + 1}@example.com") do |user|
     user.nickname = Faker::Name.name
-    user.sex = "male"
+    user.sex = SEX[rand(0..1)]
     user.password = "password"
-    user.image = File.open("./app/assets/images/guest_sample.png")
-    user.confirmed_at = Time.now
+    user.image = File.open(REGISTERED_IMAGE[rand(0..6)])
+    user.confirmed_at = Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
   end
 end
 puts "ユーザー投入成功"
@@ -55,7 +57,8 @@ ramen_stores.times do |n|
         sns: "#{SNS[rand(0..1)]}",
         content: "テスト",
         user_id: user_id,
-        tag_list: "#{TAG_LIST[rand(0..12)]},#{TAG_LIST[rand(0..12)]}"
+        tag_list: "#{TAG_LIST[rand(0..12)]},#{TAG_LIST[rand(0..12)]}",
+        created_at: Faker::Time.between(from: DateTime.now - 5, to: DateTime.now)
       }
   end
 end
@@ -112,20 +115,19 @@ end
 Like.create!(likes_list)
 puts "いいね投入成功"
 
-# 店舗のidとユーザーidが異なるなら1/5の確率でレビューをする
+# 店舗のidとユーザーidが異なるならレビューをする
 reviews_list = []
 User.all.ids.sort.each do |user_id|
   RamenStore.all.each do |ramen_store|
     if ramen_store.user_id != user_id
-      rand(1..5).times do |n|
         reviews_list <<
         { title: "#{TITLE[rand(0..6)]}",
           content: "テストテストテストテストテストテストテストテストテストテストテストテストテストテストテスト",
           ramen_store_id: ramen_store.id,
           user_id: user_id,
-          tag_list: "#{TAG_LIST[rand(0..12)]},#{TAG_LIST[rand(0..12)]}"
+          tag_list: "#{TAG_LIST[rand(0..12)]},#{TAG_LIST[rand(0..12)]}",
+          created_at: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
         }
-      end
     end
   end
 end

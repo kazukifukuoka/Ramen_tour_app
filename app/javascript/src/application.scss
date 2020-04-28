@@ -73,3 +73,17 @@ input[name="tab_item"] {
   color: #fff;
 }
 
+// 店舗、ユーザー画像サムネイル
+.thumb{
+  height: 300px;
+  object-fit: cover;
+  padding: 0.25rem;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  max-width: 100%;
+}
+
+.page-title{
+  text-align: center;
+}

@@ -13,7 +13,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
 
       ## Rememberable
       t.datetime :remember_created_at
-      t.string :nickname, null: false, unique: true, limit: 10
+      t.string :nickname, null: false, unique: true, limit: 15
       t.string :sex, null: false
       t.string :image
       t.text :profile

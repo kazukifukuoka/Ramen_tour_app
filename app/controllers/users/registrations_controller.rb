@@ -3,6 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  before_action :correct_user,   only: [:edit, :update]
 
   # GET /resource/sign_up
   # def new
@@ -25,9 +26,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def destroy
+    resource.destroy
+    Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+    set_flash_message! :notice, :destroyed
+    yield resource if block_given?
+    respond_with_navigational(resource){ redirect_to new_user_session_path }
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
@@ -46,6 +51,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def after_update_path_for(_resource)
     user_path(@user)
+  end
+
+  def correct_user
+    @user = User.find(current_user.id)
+    redirect_to root_path, danger: 'アクセス権限がありません' if @user
   end
 
   # If you have extra params to permit, append them to the sanitizer.
