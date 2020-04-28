@@ -2,7 +2,7 @@
   <div id=<%= "ramen_store-id-#{ramen_store.id}" %>>
     <div class="card">
       <%= link_to ramen_store_path(ramen_store) do %>
-      <%= image_tag ramen_store.registered_images.first.image.url, class: 'card-img-top thumb' %><% end %>
+        <%= image_tag ramen_store.registered_images.first.image.url, class: 'card-img-top thumb' %><% end %>
       <div class="card-body">
       <div class="clearfix mb-2">
         <div class="float-left"><%= rating_for ramen_store, 'name', imdb_avg: true, readonly: true %></div>

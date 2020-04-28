@@ -43,8 +43,10 @@
     </table>
 
     <h4>いいね数 : <%= @ramen_store.likes.count %></h4>
+    <% if RatingCache.find_by(cacheable_id: @ramen_store.id) %>
     <h4>点数<%= RatingCache.find_by(cacheable_id: @ramen_store.id).avg %></h4>
     <h4>点数順位<%= RatingCache.select('avg, cacheable_id').order(avg: :desc).distinct %></h4>
+    <% end %>
   </div>
 </div>
 
@@ -103,8 +105,20 @@
   </div>
 </div>
 
-<% @ramen_store.reviews.each do |review| %>
-<table class="table table-bordered mt-3", style="table-layout:fixed;width:100%;">
-  <tr><th><%= link_to "#{review.title}", ramen_store_review_path(@ramen_store,review) %></th><td><%= "作成: #{review.created_at.to_s(:datetime_jp)} / 更新:  #{review.updated_at.to_s(:datetime_jp)}" %></td></tr>
-</table>
+<% @ramen_store.reviews.order(created_at: :desc).each do |review| %>
+<div class="row">
+  <div class="col-md-3">
+      <%= link_to user_path(review.user) do %>
+        <%= image_tag review.user.image.url, size: '80x80', class: 'rounded-circle' %>
+        <p><%= review.user.nickname %><%= review.user.sex %></p>
+      <% end %>
+
+  </div>
+  <div class="col-md-6 mb-9">
+    <div>
+      <p><%= review.created_at.to_s(:datetime_jp) %></p>
+      <h4 class="mb-3">評価 : <%= Rate.find_by(rater_id: review.user_id, rateable_id: review.ramen_store_id).stars %>点 | <%= review.title %></h4>
+    </div>
+  </div>
+</div>
 <% end %>

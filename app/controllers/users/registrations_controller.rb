@@ -3,6 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  before_action :correct_user,   only: [:edit, :update]
 
   # GET /resource/sign_up
   # def new
@@ -50,6 +51,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def after_update_path_for(_resource)
     user_path(@user)
+  end
+
+  def correct_user
+    @user = User.find(current_user.id)
+    redirect_to root_path, danger: 'アクセス権限がありません' if @user
   end
 
   # If you have extra params to permit, append them to the sanitizer.

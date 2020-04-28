@@ -25,7 +25,7 @@ class User < ApplicationRecord
   def self.new_guest
     find_or_create_by!(email: 'guest@example.com') do |user|
       user.nickname = 'guest_user'
-      user.sex = 'male'
+      user.sex = '男性'
       user.password = 'password'
       user.image = File.open('./app/assets/images/guest_sample.png')
       user.confirmed_at = Time.zone.now
