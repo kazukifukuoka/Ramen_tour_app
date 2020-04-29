@@ -84,6 +84,31 @@ input[name="tab_item"] {
   max-width: 100%;
 }
 
+// 詳細画面のタイトル
 .page-title{
   text-align: center;
 }
+
+
+.example {/*親div*/
+  position: relative;
+  padding-left: 35px;
+}
+
+.example p {
+  position: absolute;
+  color: black;/*文字は白に*/
+  font-weight: normal; /*太字に*/
+  font-size: 2em;/*サイズ2倍*/
+  font-family :Quicksand, sans-serif;/*Google Font*/
+  top: 53%;
+  left: 12.2%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  margin:0;
+  padding:0;
+  font-size: .8rem;
+}
+
+
