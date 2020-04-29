@@ -1,4 +1,5 @@
 <% content_for(:title, '店舗投稿') %>
+<!--店舗登録フォーム-->
 <%= form_with model:@ramen_store, local: true do |f| %>
   <div class="form-group">
     <%= f.label :name, "店名 ※必須" %>
@@ -58,7 +59,9 @@
     <%= f.label :content, "説明 ※必須"%>
     <%= f.text_area :content, class: "form-control", rows: 3, placeholder: "自由に入力してください", required: true, autofocus: true %>
   </div>
-  <%= f.fields_for :menus do |m| %>
+
+<!--メニューフォーム-->
+  <%= f.nested_fields_for :menus, wrapper_tag: :div do |m| %>
   <div class="form-inline pb-3">
     <div class="form-group col-6">
       <%= m.label :name, "メニュー ※必須" %>
@@ -69,7 +72,27 @@
       <%= m.text_field :price, class: "form-control" ,required: true, autofocus: true %>
     </div>
   </div>
+  <%= m.remove_nested_fields_link 'Delete', class: 'btn btn-danger', role: 'button' %>
   <% end %>
+  <%= f.add_nested_fields_link :menus, 'Add new', class: 'btn btn-primary', role: 'button' %>
+
+  <table class="table table-striped table-bordered table-hover">
+    <tbody>
+      <tr>
+          <th>メニュー</th>
+          <th>金額</th>
+      </tr>
+      <%= f.nested_fields_for :menus, wrapper_tag: :tr do |q| %>
+          <td><%= q.text_field   :name,     class: 'form-control' %></td>
+          <td><%= q.text_field   :price,     class: 'form-control' %></td>
+          <td><%= q.remove_nested_fields_link 'Delete', class: 'btn btn-danger', role: 'button' %></td>
+      <% end %>
+    </tbody>
+  </table>
+<%= f.add_nested_fields_link :roomtypes, 'Add new', class: 'btn btn-primary', role: 'button' %>
+
+
+<!--店舗画像入力フォーム-->
   <%= f.fields_for :registered_images do |i| %>
   <div class="form-inline form-group">
     <div class="form-group col-6">
@@ -83,6 +106,7 @@
   </div>
   <% end %>
 
+<!--店舗画像プレビュー-->
   <% if defined?(:edit_local) %>
     <div class="form-inline">
       <% @ramen_store.registered_images.each do |registered| %>
@@ -96,6 +120,7 @@
     </div>
   <% end %>
 
+<!--タグ入力フォーム-->
   <div class="form-group">
     <%= f.label :tag_list, "タグ(「,」で区切って入力)  ※必須" %>
     <%= f.text_field :tag_list, value: @ramen_store.tag_list.join(','), class: "form-control", placeholder: "人気店,こってり,駅近、など" ,required: true, autofocus: true %>

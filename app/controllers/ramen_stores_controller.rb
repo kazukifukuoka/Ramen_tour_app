@@ -88,7 +88,7 @@ class RamenStoresController < ApplicationController
       :sale, :holiday, :seat, :access,
       :parking_space, :sns, :content,
       :tag_list,
-      menus_attributes: %i[name price],
+      menus_attributes: %i[id name price _destroy],
       registered_images_attributes: %i[id name image]
     )
   end
