@@ -141,7 +141,7 @@ random = Random.new
 User.all.ids.sort.each do |user_id|
   RamenStore.all.each do |ramen_store|
     if ramen_store.user_id != user_id
-      random_star = rand(0..5)
+      random_star = rand(0..10)
       if ramen_score_hash.has_key?(ramen_store.id)
         ramen_score_hash[ramen_store.id] += random_star
       else

@@ -110,7 +110,7 @@
   <div class="col-md-3">
       <%= link_to user_path(review.user) do %>
         <%= image_tag review.user.image.url, size: '80x80', class: 'rounded-circle' %>
-        <p><%= review.user.nickname %><%= review.user.sex %></p>
+        <p><%= review.user.nickname %>（<%= review.user.sex %>）</p>
       <% end %>
 
   </div>
@@ -118,6 +118,10 @@
     <div>
       <p><%= review.created_at.to_s(:datetime_jp) %></p>
       <h4 class="mb-3">評価 : <%= Rate.find_by(rater_id: review.user_id, rateable_id: review.ramen_store_id).stars %>点 | <%= review.title %></h4>
+<div class="example">
+  <%= image_tag 'mid-star.png'%>
+  <p><%= Rate.find_by(rater_id: review.user_id, rateable_id: review.ramen_store_id).stars %></p>
+</div>
     </div>
   </div>
 </div>
