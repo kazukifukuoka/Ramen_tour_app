@@ -41,6 +41,7 @@ gem 'jquery-rails'
 gem 'kaminari'
 gem 'rails-i18n', '~> 6.0'
 gem 'rails_best_practices'
+gem 'ransack'
 gem 'ratyrate'
 gem 'rmagick'
 gem 'rubocop', require: false
