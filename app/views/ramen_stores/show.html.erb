@@ -24,7 +24,7 @@
     </div>
   </div>
   <div class="col-md-8">
-    <div class="float-left"><%= rating_for @ramen_store, 'name', imdb_avg: true, readonly: true %></div><h4 class="page-title"><%= @ramen_store.name %></h4><p class="float-right">投稿者：<%= @ramen_store.user.nickname %><%= "作成: #{@ramen_store.created_at.to_s(:datetime_jp)} / 更新:  #{@ramen_store.updated_at.to_s(:datetime_jp)}" %></p>
+    <div class="float-left"><%= rating_for @ramen_store, 'name', imdb_avg: true, readonly: true %></div><h4 class="page-title"><%= @ramen_store.name %><%= @ramen_store.prefecture.name %></h4><p class="float-right">投稿者：<%= @ramen_store.user.nickname %><%= "作成: #{@ramen_store.created_at.to_s(:datetime_jp)} / 更新:  #{@ramen_store.updated_at.to_s(:datetime_jp)}" %></p>
     <table class="table">
       <tbody>
         <tr>
