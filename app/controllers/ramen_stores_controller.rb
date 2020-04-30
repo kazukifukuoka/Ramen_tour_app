@@ -6,7 +6,8 @@ class RamenStoresController < ApplicationController
   def top; end
 
   def index
-    @ramen_stores = RamenStore.includes(:user).order(created_at: :desc).page(params[:page])
+    @q = RamenStore.ransack(params[:q])
+    @ramen_stores = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
     return unless params[:tag_name]
 
     @ramen_stores = RamenStore.tagged_with(params[:tag_name].to_s).page(params[:page])
@@ -59,7 +60,8 @@ class RamenStoresController < ApplicationController
   end
 
   def likes
-    @like_ramen_stores = current_user.like_ramen_stores.includes(:user).order(created_at: :desc).page(params[:page])
+    @q = current_user.like_ramen_stores.ransack(params[:q])
+    @like_ramen_stores = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
     return unless params[:tag_name]
 
     @like_ramen_stores = current_user.like_ramen_stores.tagged_with(params[:tag_name].to_s).page(params[:page])
