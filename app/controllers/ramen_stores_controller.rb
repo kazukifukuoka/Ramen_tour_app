@@ -15,17 +15,17 @@ class RamenStoresController < ApplicationController
   def new
     @ramen_store = RamenStore.new
     @ramen_store.menus.build
-    2.times { @ramen_store.registered_images.build }
+    # 2.times { @ramen_store.registered_images.build }
+    @ramen_store.registered_images.build
   end
 
   def create
     @ramen_store = RamenStore.new(ramen_store_params)
-    binding.pry
     @ramen_store.user = current_user
     @ramen_store.registered_images.each do |registered_image|
       registered_image.user = current_user
     end
-    binding.pry
+
     if @ramen_store.save
       redirect_to ramen_stores_path, success: '店舗を登録しました'
     else
@@ -66,13 +66,9 @@ class RamenStoresController < ApplicationController
   end
 
   def rank
-    # @like_ids = Like.group(:ramen_store_id).order('count(ramen_store_id) desc').limit(10).pluck(:ramen_store_id)
     @store_likes_rank = RamenStore.joins(:likes).select('ramen_stores.*, count(ramen_stores.id) as likes_count').group(:id).order('likes_count desc').limit(20)
     @score_ids = RatingCache.order(avg: :desc).limit(10).pluck(:cacheable_id)
     @store_score_rank = RamenStore.find(@score_ids)
-
-    # @review_ids = RamenStoreReview.group(:ramen_store_id).order('count(ramen_store_id) desc').limit(10).pluck(:ramen_store_id)
-    # @review_rank = RamenStore.find(@review_ids)
     @review_rank = RamenStore.joins(:reviews).select('ramen_stores.*, count(ramen_stores.id) as reviews_count').group(:id).order('reviews_count desc').limit(10)
   end
 
@@ -90,7 +86,7 @@ class RamenStoresController < ApplicationController
       :parking_space, :sns, :content,
       :tag_list,
       menus_attributes: %i[id name price _destroy],
-      registered_images_attributes: %i[id name image]
+      registered_images_attributes: %i[id name image _destroy]
     )
   end
 
