@@ -18,15 +18,14 @@ class RamenStoresController < ApplicationController
     2.times { @ramen_store.registered_images.build }
   end
 
-  def show; end
-
   def create
     @ramen_store = RamenStore.new(ramen_store_params)
-    @ramen_store.user_id = current_user.id
+    binding.pry
+    @ramen_store.user = current_user
     @ramen_store.registered_images.each do |registered_image|
-      registered_image.user_id = current_user.id
+      registered_image.user = current_user
     end
-
+    binding.pry
     if @ramen_store.save
       redirect_to ramen_stores_path, success: '店舗を登録しました'
     else
@@ -34,6 +33,8 @@ class RamenStoresController < ApplicationController
       render :new
     end
   end
+
+  def show; end
 
   def edit
     @ramen_store = RamenStore.find_by(id: params[:id], user_id: current_user.id)
@@ -88,7 +89,7 @@ class RamenStoresController < ApplicationController
       :sale, :holiday, :seat, :access,
       :parking_space, :sns, :content,
       :tag_list,
-      menus_attributes: %i[name price],
+      menus_attributes: %i[id name price _destroy],
       registered_images_attributes: %i[id name image]
     )
   end
