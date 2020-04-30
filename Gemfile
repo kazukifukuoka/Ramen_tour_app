@@ -31,6 +31,7 @@ gem 'acts-as-taggable-on', '6.5.0'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'carrierwave', '~> 1.0.0'
 gem 'carrierwave-i18n'
+gem 'cocoon'
 gem 'devise'
 gem 'devise-bootstrap-views', '~> 1.0'
 gem 'devise-i18n'

@@ -58,30 +58,22 @@
     <%= f.label :content, "説明 ※必須"%>
     <%= f.text_area :content, class: "form-control", rows: 3, placeholder: "自由に入力してください", required: true, autofocus: true %>
   </div>
-  <%= f.fields_for :menus do |m| %>
-  <div class="form-inline pb-3">
-    <div class="form-group col-6">
-      <%= m.label :name, "メニュー ※必須" %>
-      <%= m.text_field :name, class: "form-control", required: true, autofocus: true %>
-    </div>
-    <div class="form-group col-6">
-      <%= m.label :price, "金額 ※必須" %>
-      <%= m.text_field :price, class: "form-control" ,required: true, autofocus: true %>
-    </div>
-  </div>
+
+  <%= f.fields_for :menus do |f| %>
+    <%= render 'menu_fields', f: f %>
   <% end %>
-  <%= f.fields_for :registered_images do |i| %>
-  <div class="form-inline form-group">
-    <div class="form-group col-6">
-      <%= i.label :name, "写真の名前" %>
-      <%= i.text_field :name, class: "form-control" %>
-    </div>
-    <div class="form-group col-6">
-      <%= i.label :image, "写真" %>
-      <%= i.file_field :image, class: "form-control", accept: "image/jpg,image/gif,image/jpeg,image/png" %>
-    </div>
+
+  <div class="links">
+    <%= link_to_add_association f, :menus, class: 'btn btn-primary' %>
   </div>
+
+  <%= f.fields_for :registered_images do |f| %>
+    <%= render 'registered_image_fields', f: f %>
   <% end %>
+
+  <div class="links">
+    <%= link_to_add_association f, :registered_images, class: 'btn btn-primary' %>
+  </div>
 
   <% if defined?(:edit_local) %>
     <div class="form-inline">
