@@ -11,6 +11,9 @@ class RamenStoresController < ApplicationController
     return unless params[:tag_name]
 
     @ramen_stores = RamenStore.tagged_with(params[:tag_name].to_s).page(params[:page])
+
+    submit_name_ids = RamenStore.where("submit_name = ?", params[:pref]) .pluck(:id)
+    @submit_searched = RamenStore.where("submit_id IN (?) or submit_id IN (?)", submit_name_ids)
   end
 
   def new
@@ -80,6 +83,7 @@ class RamenStoresController < ApplicationController
     return unless params[:tag_name]
 
     @ramen_stores = RamenStore.tagged_with(params[:tag_name].to_s).page(params[:page])
+
   end
 
   private
@@ -105,5 +109,10 @@ class RamenStoresController < ApplicationController
     def @path.is(*str)
       str.map { |s| include?(s) }.include?(true)
     end
+  end
+
+  def self.search(search)
+    return RamenStore.all unless search
+    RamenStore.where(['content LIKE ?', "%#{search}%"])
   end
 end
