@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :likes, only: %i[create destroy]
     get 'likes', on: :collection
     get 'rank', on: :collection
+    get 'search', on: :collection
   end
 
 end

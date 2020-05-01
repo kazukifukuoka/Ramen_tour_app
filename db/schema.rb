@@ -132,16 +132,6 @@ ActiveRecord::Schema.define(version: 2020_04_19_092016) do
     t.index ["cacheable_type", "cacheable_id"], name: "index_rating_caches_on_cacheable_type_and_cacheable_id"
   end
 
-  create_table "scores", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.float "score"
-    t.bigint "ramen_store_id", null: false
-    t.bigint "ramen_store_review_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["ramen_store_id"], name: "index_scores_on_ramen_store_id"
-    t.index ["ramen_store_review_id"], name: "index_scores_on_ramen_store_review_id"
-  end
-
   create_table "taggings", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "tag_id"
     t.string "taggable_type"
@@ -198,6 +188,4 @@ ActiveRecord::Schema.define(version: 2020_04_19_092016) do
   add_foreign_key "ramen_store_user_images", "ramen_stores"
   add_foreign_key "ramen_store_user_images", "users"
   add_foreign_key "ramen_stores", "users"
-  add_foreign_key "scores", "ramen_store_reviews"
-  add_foreign_key "scores", "ramen_stores"
 end

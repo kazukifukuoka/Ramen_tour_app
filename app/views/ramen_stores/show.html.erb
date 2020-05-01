@@ -3,9 +3,6 @@
 <% if current_user.try(:own?, @ramen_store) %>
   <%= link_to "編集する", edit_ramen_store_path, class: "btn btn-primary" %>
   <%= link_to "削除する", ramen_store_path, method: :delete, class: "btn btn-primary", data: { confirm: "本当に削除しますか？" } %>
-<% else %>
-  いいね
-  <%= render partial: 'likes/like', locals: { ramen_store: @ramen_store } %>
 <% end %>
 
 
@@ -24,7 +21,7 @@
     </div>
   </div>
   <div class="col-md-8">
-    <div class="float-left"><%= rating_for @ramen_store, 'name', imdb_avg: true, readonly: true %></div><h4 class="page-title"><%= @ramen_store.name %></h4><p class="float-right">投稿者：<%= @ramen_store.user.nickname %><%= "作成: #{@ramen_store.created_at.to_s(:datetime_jp)} / 更新:  #{@ramen_store.updated_at.to_s(:datetime_jp)}" %></p>
+    <div class="float-left"><%= rating_for @ramen_store, 'name', imdb_avg: true, readonly: true %></div><h4 class="page-title"><%= @ramen_store.name %><%= @ramen_store.prefecture.name %></h4><p class="float-right">投稿者：<%= @ramen_store.user.nickname %><%= "作成: #{@ramen_store.created_at.to_s(:datetime_jp)} / 更新:  #{@ramen_store.updated_at.to_s(:datetime_jp)}" %></p>
     <table class="table">
       <tbody>
         <tr>
@@ -44,6 +41,9 @@
 
     <h4>いいね数 : <%= @ramen_store.likes.count %></h4>
     <% if RatingCache.find_by(cacheable_id: @ramen_store.id) %>
+    <% unless current_user.try(:own?, @ramen_store) %>
+    <h4>いいねする<%= render partial: 'likes/like', locals: { ramen_store: @ramen_store } %></h4>
+    <% end %>
     <h4>点数<%= RatingCache.find_by(cacheable_id: @ramen_store.id).avg %></h4>
     <h4>点数順位<%= RatingCache.select('avg, cacheable_id').order(avg: :desc).distinct %></h4>
     <% end %>
@@ -57,7 +57,7 @@
   <label class="tab_item" for="score">メニュー</label>
   <input id="design" type="radio" name="tab_item">
   <label class="tab_item" for="design">写真</label>
-  <!-- スコアランキング一覧 -->
+  <!-- 店舗詳細 -->
   <div class="tab_content" id="all_content">
     <div class="tab_content_description">
       <div class="pt-3">
@@ -71,7 +71,7 @@
       </div>
     </div>
   </div>
-  <!-- いいねランキング一覧 -->
+  <!-- メニュー一覧 -->
   <div class="tab_content" id="score_content">
     <div class="tab_content_description">
       <div class="pt-3">
@@ -85,7 +85,7 @@
       </div>
     </div>
   </div>
-  <!-- レビュー数ランキング一覧 -->
+  <!-- 店舗画像一覧 -->
   <div class="tab_content" id="design_content">
     <div class="tab_content_description">
       <div class="pt-3">
@@ -105,23 +105,35 @@
   </div>
 </div>
 
+  <!-- レビュー -->
 <% @ramen_store.reviews.order(created_at: :desc).each do |review| %>
-<div class="row">
-  <div class="col-md-3">
+<div class="row review">
+  <div class="col-md-2">
       <%= link_to user_path(review.user) do %>
         <%= image_tag review.user.image.url, size: '80x80', class: 'rounded-circle' %>
         <p><%= review.user.nickname %>（<%= review.user.sex %>）</p>
       <% end %>
-
   </div>
+
   <div class="col-md-6 mb-9">
-    <div>
+    <div class="review-content">
       <p><%= review.created_at.to_s(:datetime_jp) %></p>
       <h4 class="mb-3">評価 : <%= Rate.find_by(rater_id: review.user_id, rateable_id: review.ramen_store_id).stars %>点 | <%= review.title %></h4>
-<div class="example">
-  <%= image_tag 'mid-star.png'%>
-  <p><%= Rate.find_by(rater_id: review.user_id, rateable_id: review.ramen_store_id).stars %></p>
-</div>
+      <div class="example">
+        <%= image_tag 'mid-star.png'%>
+        <p><%= Rate.find_by(rater_id: review.user_id, rateable_id: review.ramen_store_id).stars %></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="review-img">
+      <% if review.images %>
+        <%=  image_tag review.images.first.image.url, size: '100x100'  %>
+        <p><%=  review.images.first.name %></p>
+      <% else %>
+        <p>画像は投稿していません</p>
+      <% end %>
     </div>
   </div>
 </div>
