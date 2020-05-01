@@ -15,6 +15,8 @@ class RamenStore < ApplicationRecord
   accepts_nested_attributes_for :menus, allow_destroy: true
   accepts_nested_attributes_for :registered_images, allow_destroy: true
 
+  ransack_alias :ramen_store, :name_or_city_or_address_or_phone_number_or_sale_or_holiday_or_seat_or_access_or_parking_space_or_sns_or_content
+
   VALID_PHONE = /\A(((0(\d{1}[-]{1}\d{4}|\d{2}[-]{1}\d{3}|\d{3}[-]{1}\d{2}|\d{4}[-]{1}\d{1}|[5789]0[-]{1}\d{4})[-]{1})|\d{1,4}\-{1})\d{4}|0120[-]{1}\d{3}[-]{1}\d{3})\z/.freeze # rubocop:disable Layout/LineLength
   VALID_POSTCODE = /\A\d{3}-{1}\d{4}\z/.freeze
   VALID_TAG = /\A[^ 　]+(?:,.[^ 　]+)*\Z/.freeze

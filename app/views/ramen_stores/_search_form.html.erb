@@ -1,7 +1,15 @@
 <%= search_form_for @q do |f| %>
   <div class="input-group mb-3">
-    <%= f.search_field :name_or_city_or_address_or_phone_number_or_sale_or_holiday_or_seat_or_access_or_parking_space_or_sns_or_content_cont, class: 'form-control', placeholder: '検索ワード' %>
+    <%= f.search_field :ramen_store_cont, class: 'form-control', placeholder: '検索ワード' %>
     <%= f.search_field :menus_name_cont, class: 'form-control', placeholder: '検索ワード' %>
+    <div class="input-group-append">
+      <%= f.submit '検索', class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>
+<%= search_form_for @q do |f| %>
+  <div class="input-group mb-3">
+    <%= f.select :prefecture_id_eq, Prefecture.all.map{|st| [st.name, st.id]} %>
     <div class="input-group-append">
       <%= f.submit '検索', class: 'btn btn-primary' %>
     </div>

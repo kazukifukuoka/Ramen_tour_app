@@ -68,10 +68,18 @@ class RamenStoresController < ApplicationController
   end
 
   def rank
-    @store_likes_rank = RamenStore.joins(:likes).select('ramen_stores.*, count(ramen_stores.id) as likes_count').group(:id).order('likes_count desc').limit(20)
-    @score_ids = RatingCache.order(avg: :desc).limit(10).pluck(:cacheable_id)
+    @store_likes_rank = RamenStore.joins(:likes).select('ramen_stores.*, count(ramen_stores.id) as likes_count').group(:id).order('likes_count desc').limit(15)
+    @score_ids = RatingCache.order(avg: :desc).limit(15).pluck(:cacheable_id)
     @store_score_rank = RamenStore.find(@score_ids)
-    @review_rank = RamenStore.joins(:reviews).select('ramen_stores.*, count(ramen_stores.id) as reviews_count').group(:id).order('reviews_count desc').limit(10)
+    @review_rank = RamenStore.joins(:reviews).select('ramen_stores.*, count(ramen_stores.id) as reviews_count').group(:id).order('reviews_count desc').limit(15)
+  end
+
+  def search
+    @q = RamenStore.ransack(params[:q])
+    @ramen_stores = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
+    return unless params[:tag_name]
+
+    @ramen_stores = RamenStore.tagged_with(params[:tag_name].to_s).page(params[:page])
   end
 
   private
