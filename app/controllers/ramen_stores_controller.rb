@@ -6,8 +6,7 @@ class RamenStoresController < ApplicationController
   def top; end
 
   def index
-    @q = RamenStore.ransack(params[:q])
-    @ramen_stores = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
+    @ramen_stores = RamenStore.includes(:user).order(created_at: :desc).page(params[:page])
     return unless params[:tag_name]
 
     @ramen_stores = RamenStore.tagged_with(params[:tag_name].to_s).page(params[:page])
@@ -76,7 +75,12 @@ class RamenStoresController < ApplicationController
 
   def search
     @q = RamenStore.ransack(params[:q])
-    @ramen_stores = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
+    # @ramen_stores = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
+    if params[:q] != nil
+      @ramen_stores = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
+    else
+      @ramen_store = RamenStore.new
+    end
     return unless params[:tag_name]
 
     @ramen_stores = RamenStore.tagged_with(params[:tag_name].to_s).page(params[:page])
@@ -105,5 +109,10 @@ class RamenStoresController < ApplicationController
     def @path.is(*str)
       str.map { |s| include?(s) }.include?(true)
     end
+  end
+
+  def self.search(search)
+    return RamenStore.all unless search
+    RamenStore.where(['content LIKE ?', "%#{search}%"])
   end
 end
