@@ -11,13 +11,13 @@
     <div class="col-12">
       <div class="row">
         <% if @ramen_stores.present? %>
-          <%= render @ramen_stores %>
+        <%= render @ramen_stores %>
+      </div>
+        <%= paginate @ramen_stores %>
         <% else %>
-          <%= '店舗がまだありません' %>
+          店舗がまだありません
         <% end %>
       </div>
     </div>
   </div>
 </div>
-
-<%= paginate @ramen_stores %>

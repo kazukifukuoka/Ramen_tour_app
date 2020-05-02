@@ -6,14 +6,10 @@ class RamenStoresController < ApplicationController
   def top; end
 
   def index
-    @q = RamenStore.ransack(params[:q])
-    @ramen_stores = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
+    @ramen_stores = RamenStore.includes(:user).order(created_at: :desc).page(params[:page])
     return unless params[:tag_name]
 
     @ramen_stores = RamenStore.tagged_with(params[:tag_name].to_s).page(params[:page])
-
-    submit_name_ids = RamenStore.where("submit_name = ?", params[:pref]) .pluck(:id)
-    @submit_searched = RamenStore.where("submit_id IN (?) or submit_id IN (?)", submit_name_ids)
   end
 
   def new
@@ -79,11 +75,15 @@ class RamenStoresController < ApplicationController
 
   def search
     @q = RamenStore.ransack(params[:q])
-    @ramen_stores = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
+    # @ramen_stores = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
+    if params[:q] != nil
+      @ramen_stores = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
+    else
+      @ramen_store = RamenStore.new
+    end
     return unless params[:tag_name]
 
     @ramen_stores = RamenStore.tagged_with(params[:tag_name].to_s).page(params[:page])
-
   end
 
   private

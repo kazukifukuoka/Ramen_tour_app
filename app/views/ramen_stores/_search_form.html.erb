@@ -1,27 +1,22 @@
-<%= search_form_for @q do |f| %>
+<%= search_form_for @q, url: search_ramen_stores_path do |f| %>
   <div class="input-group mb-3">
     <%= f.search_field :ramen_store_cont, class: 'form-control', placeholder: '検索ワード' %>
     <%= f.search_field :menus_name_cont, class: 'form-control', placeholder: '検索ワード' %>
+    <%= form_tag(ramen_stores_path, method: "get") do %>
+
+      <select id="pref", name="q[store_pref_cont]"><option value="">都道府県を選択してください</option></select>
+      <select id="select-city", name="q[store_address_cont]"><option value="">市区町村を選択してください</option></select>
+    <% end %>
     <div class="input-group-append">
       <%= f.submit '検索', class: 'btn btn-primary' %>
     </div>
   </div>
 <% end %>
 
-
-
-<p>検索</p>
-<%= form_tag(ramen_stores_path, method: "get") do %>
-  <%= select_tag :pref %>
-  <select id="select-city"><option value="">市区町村を選択してください</option></select>
-<% end %>
-
-<%= @submit_searched %>
-
 <script>
 // 都道府県フォーム生成
 $(function() {
-  $.getJSON('pref_city.json', function(data) {
+  $.getJSON('/pref_city.json', function(data) {
     for(var i=0; i<47; i++) {
       var code = i+1;
       code = ('00'+code).slice(-2); // ゼロパディング
@@ -29,16 +24,14 @@ $(function() {
     }
   });
 });
-
-
 // 都道府県メニューに連動した市区町村フォーム生成
 $('#pref').on('change', function() {
   $('#select-city option:nth-child(n+2)').remove(); // ※1 市区町村フォームクリア
     var select_pref = ('00'+$('#pref option:selected').val()).slice(-2);
     var key = Number(select_pref)-1;
-    $.getJSON('pref_city.json', function(data) {
+    $.getJSON('/pref_city.json', function(data) {
       for(var i=0; i<data[key][select_pref].city.length; i++){
-        $('#select-city').append('<option value="'+data[key][select_pref].city[i].id+'">'+data[key][select_pref].city[i].name+'</option>');
+        $('#select-city').append('<option value="'+data[key][select_pref].city[i].name+'">'+data[key][select_pref].city[i].name+'</option>');
       }
   });
 });

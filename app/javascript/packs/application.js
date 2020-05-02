@@ -14,8 +14,6 @@ require('jquery')
 require('raty/jquery.raty.js')
 require('raty/ratyrate.js.erb')
 
-require('pref_city/pref_city.js')
-
 import "../src/application.scss";
 import '@fortawesome/fontawesome-free/js/all';
 import "cocoon";
