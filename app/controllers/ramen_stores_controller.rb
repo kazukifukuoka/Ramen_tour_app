@@ -75,7 +75,6 @@ class RamenStoresController < ApplicationController
 
   def search
     @q = RamenStore.ransack(params[:q])
-    # @ramen_stores = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
     if params[:q] != nil
       @ramen_stores = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
     else
