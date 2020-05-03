@@ -48,7 +48,7 @@
 
     <div class="form-group">
       <%= f.label :image, "プロフィール写真" %>
-            <div class="mb-4">
+      <div class="mb-4">
         <% if @user.image.present? %>
           <%= image_tag @user.image.url(:thumb), id: :img_prev, class: 'rounded-circle', size: '300x300' %>
         <% else %>
