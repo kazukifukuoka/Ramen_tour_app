@@ -59,18 +59,28 @@
     <%= f.text_area :content, class: "form-control", rows: 3, placeholder: "自由に入力してください", required: true, autofocus: true %>
   </div>
 
+<div class="form-inline">
   <%= f.fields_for :menus do |f| %>
     <%= render 'menu_fields', f: f %>
   <% end %>
-
   <div class="links">
     <%= link_to_add_association f, :menus, class: 'btn btn-primary' %>
   </div>
+</div>
+
 
   <%= f.fields_for :registered_images do |f| %>
     <%= render 'registered_image_fields', f: f %>
   <% end %>
+<div class="col-sm-12 col-lg-4 mb-3">
 
+  <% if @ramen_store.registered_images.first.image.present? %>
+    <%= image_tag @ramen_store.registered_images.first.image.url, id: :img_prev, class: 'thumb card-img-top' %>
+  <% else %>
+    <%= image_tag "no_image.png", id: :img_prev %>
+  <% end %>
+
+</div>
   <div class="links">
     <%= link_to_add_association f, :registered_images, class: 'btn btn-primary' %>
   </div>
