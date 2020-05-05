@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     get 'users/:id', to: 'users/sessions#show', as: :user
     post 'users/guest_sign_in', to: 'users/sessions#new_guest'
   end
-  root to: 'homes#top'
+  root to: 'static_pages#top'
 
   resources :ramen_stores do
     resources :ramen_store_reviews, as: :reviews, path: '/reviews', except: [:index]
