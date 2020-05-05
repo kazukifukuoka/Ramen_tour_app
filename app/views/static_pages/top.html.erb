@@ -14,11 +14,32 @@
             </div>
           </div>
         </div>
+        <% if current_user %>
+        <div class='col-sm/6 d-flex align-items-center'>
+          <div class='lp-item'>
+            <div class='text-center font-weight-bold'>
+              <%= link_to ramen_stores_path, class: 'btn btn-success mr-2' do %>
+              <i class='fas fa-table fa-fw'></i>
+              <span>店舗一覧</span>
+              <% end %>
+            <hr>
+              <%= link_to search_ramen_stores_path, class: 'btn btn-success mr-2' do %>
+              <i class='fas fa-search fa-fw'></i>
+              <span>見つける</span>
+              <% end %>
+              <%= link_to rank_ramen_stores_path, class: 'btn btn-success' do %>
+              <i class='fas fa-crown fa-fw'></i>
+              <span>ランキング</span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <% else %>
         <div class='col-sm-6 d-flex align-items-center'>
           <div class='lp-item'>
             <div class='text-center font-weight-bold'>
               <%= link_to 'かんたんログイン', users_guest_sign_in_path, class: 'btn btn-success', method: :post %>
-              <hr>
+            <hr>
               <%= link_to  new_user_session_path, class: 'btn btn-success mr-2' do %>
                 <i class='fas fa-sign-in-alt fa-fw'></i>
                 <span>ログイン</span>
@@ -30,6 +51,7 @@
             </div>
           </div>
         </div>
+        <% end %>
       </div>
     </div>
   </div>
