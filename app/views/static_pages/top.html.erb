@@ -1,0 +1,81 @@
+<% content_for(:title) %>
+
+<div class='static-pages-lp'>
+  <div class='static-pages-cover'>
+    <%= image_tag 'top_img.jpg', class: "lp-photo" %>
+    <div class='lp-container'>
+      <div class='row'>
+        <div class='col-sm-6'>
+          <div class='lp-item'>
+            <div class='text-center font-weight-bold'>
+              <p>テキストテキストテキストテキストテキスト</p>
+              <p>テキストテキストテキストテキストテキスト</p>
+              <h2>Ramen Tour</h2>
+            </div>
+          </div>
+        </div>
+        <div class='col-sm-6 d-flex align-items-center'>
+          <div class='lp-item'>
+            <div class='text-center font-weight-bold'>
+              <%= link_to 'かんたんログイン', users_guest_sign_in_path, class: 'btn btn-success', method: :post %>
+              <hr>
+              <%= link_to  new_user_session_path, class: 'btn btn-success mr-2' do %>
+                <i class='fas fa-sign-in-alt fa-fw'></i>
+                <span>ログイン</span>
+              <% end %>
+              <%= link_to  new_user_registration_path, class: 'btn btn-success' do %>
+                <i class='fas fa-user-plus fa-fw'></i>
+                <span>新規登録</span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--サービス紹介-->
+  <div class='container'>
+    <div class='text-center'>
+      <h1 class='title my-5'>Rame Tourとは</h1>
+      <h4 class='title mb-5'>テキストテキストテキストテキストテキストテキストテキストテキスト</h4>
+    </div>
+    <div class='row'>
+      <div class='col-md-4 text-center'>
+        <i class='fas fa-user-plus fa-fw fa-3x mb-3'></i>
+        <h3>テキストテキストテキストテキスト</h3>
+        <p>テキストテキストテキストテキスト</p>
+      </div>
+      <div class='col-md-4 text-center'>
+        <i class='fas fa-user-plus fa-fw fa-3x mb-3'></i>
+        <h3>テキストテキストテキストテキスト</h3>
+        <p>テキストテキストテキストテキスト</p>
+      </div>
+      <div class='col-md-4 text-center'>
+        <i class='fas fa-user-plus fa-fw fa-3x mb-3'></i>
+        <h3>テキストテキストテキストテキスト</h3>
+        <p>テキストテキストテキストテキスト</p>
+      </div>
+    </div>
+    <!--最新の登録店舗-->
+    <h2 class='text-center my-5'>新しく登録されたお店</h2>
+    <div class="pt-3">
+      <div class="row">
+        <div class="col-12">
+          <div class="row">
+            <% if @recent_ramen_stores.present? %>
+              <%= render @recent_ramen_stores %>
+            <% else %>
+              店舗がまだありません
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class='text-center mt-3'>
+        <%= link_to  ramen_stores_path, class: 'btn btn-success' do %>
+          <i class='fas fa-user-plus fa-fw'></i>
+          <span>お店をもっとみたい!!</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
