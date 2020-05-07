@@ -1,5 +1,11 @@
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "bootstrap/scss/bootstrap";
+
+// 背景
+body {
+  background-color: #f6f6f0;
+}
+
 // ログイン画面
 .container-login {
   @extend .container-fluid;
@@ -213,3 +219,7 @@ footer a:hover {
   display: block;
 }
 
+// 一覧画面
+.like {
+  color: #ff3333;
+}
