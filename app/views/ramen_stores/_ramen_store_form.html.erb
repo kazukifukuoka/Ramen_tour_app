@@ -101,6 +101,7 @@
   <div class="form-group">
     <%= f.label :tag_list, "タグ(「,」で区切って入力)  ※必須" %>
     <%= f.text_field :tag_list, value: @ramen_store.tag_list.join(','), class: "form-control", placeholder: "人気店,こってり,駅近、など" ,required: true, autofocus: true %>
+    <small>初めから5つまでのタグが一覧画面に表示されます</small>
   </div>
   <%= f.submit submit_message, class: "btn btn-primary btn-block mt-5" %>
 <% end %>

@@ -1,9 +1,9 @@
 <% if like = Like.find_by(user_id: current_user.id, ramen_store_id: ramen_store.id) %>
   <span class="pr-1"><%= link_to ramen_store_like_path(ramen_store, like), method: :delete, id: "like-button", remote: true do %>
-    <i class="fas fa-heart like"></i>
+    <i class="fas fa-heart fa-lg like"></i>
   <% end %></span>
 <% else %>
   <span class="pr-1"><%= link_to ramen_store_likes_path(ramen_store), method: :post, id: "like-button", remote: true do %>
-    <i class="far fa-heart like"></i>
+    <i class="far fa-heart fa-lg like"></i>
   <% end %></span>
 <% end %>

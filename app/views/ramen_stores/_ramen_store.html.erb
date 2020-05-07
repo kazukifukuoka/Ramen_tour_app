@@ -7,19 +7,21 @@
       <div class="clearfix mb-2">
         <div class="float-left"><%= rating_for ramen_store, 'name', imdb_avg: true, readonly: true %></div>
         <h4 class="card-title pt-4"><%= link_to ramen_store.name, ramen_store_path(ramen_store) %></h4 >
+        <div class="text-right"><span class="pr-2"><i class="fas fa-store-alt fa-fw"></i></span><%= ramen_store.prefecture.name %><%= ramen_store.city %></div>
       </div>
       <!--店舗情報-->
       <div class="crud-menu-btn">
         <span class="pr-3"><%= render partial: 'likes/like', locals: { ramen_store: ramen_store } %><%= ramen_store.likes.count %></span>
-        <span class="pr-2"><i class="far fa-comment-dots fa-fw fa-flip-horizontal"></i></span><%= ramen_store.reviews.count %>
-        <span class="float-right">投稿者：<%= ramen_store.user.nickname %></span>
+        <span class="pr-2"><i class="far fa-comment-dots fa-fw fa-lg fa-flip-horizontal"></i></span><%= ramen_store.reviews.count %>
+        <div class="float-right">
+        <span class="pr-2"><i class="fas fa-pen fa-fw"></i></span><%= link_to ramen_store.user.nickname, user_path(ramen_store.user_id) %></div>
         <p class="text-right">
           <i class='far fa-clock fa-fw'></i>
           <%= l ramen_store.updated_at, format: :long %>
         </p>
       </div>
       <!--タグ-->
-        <p><% ramen_store.tag_list.each_with_index do |tag, index| %>
+        <div class="tag_list pb-2"><% ramen_store.tag_list.each_with_index do |tag, index| %>
         <% if @path.is('ramen_stores#index') %>
           <span class="badge badge-primary mr-1 mb-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span>
           <% elsif @path.is('ramen_stores#likes') %>
@@ -28,8 +30,9 @@
             <span class="badge badge-primary mr-1 mb-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span>
           <% end %>
             <% break if index == 4 %>
-          <% end %>
-        </p>
+        <% end %>
+        </div>
+        <!--店舗紹介文-->
         <p class="card-text"><%= ramen_store.content.truncate(40) %></p>
       </div>
     </div>
