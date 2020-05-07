@@ -19,14 +19,15 @@
         </p>
       </div>
       <!--タグ-->
-        <p><% ramen_store.tag_list.each do |tag| %>
+        <p><% ramen_store.tag_list.each_with_index do |tag, index| %>
         <% if @path.is('ramen_stores#index') %>
-          <span class="badge badge-primary mr-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span>
+          <span class="badge badge-primary mr-1 mb-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span>
           <% elsif @path.is('ramen_stores#likes') %>
-            <span class="badge badge-primary mr-1 p-2"><%= link_to tag, likes_ramen_stores_path(tag_name: tag), class: "text-white" %></span>
+            <span class="badge badge-primary mr-1 mb-1 p-2"><%= link_to tag, likes_ramen_stores_path(tag_name: tag), class: "text-white" %></span>
           <% else %>
-            <span class="badge badge-primary mr-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span>
+            <span class="badge badge-primary mr-1 mb-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span>
           <% end %>
+            <% break if index == 4 %>
           <% end %>
         </p>
         <p class="card-text"><%= ramen_store.content.truncate(40) %></p>
