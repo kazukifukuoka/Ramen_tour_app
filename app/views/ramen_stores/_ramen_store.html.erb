@@ -8,30 +8,35 @@
         <div class="float-left"><%= rating_for ramen_store, 'name', imdb_avg: true, readonly: true %></div>
         <h4 class="card-title pt-4"><%= link_to ramen_store.name, ramen_store_path(ramen_store) %></h4 >
       </div>
-          <p>いいね数：<%= ramen_store.likes.count %></p>
-          <p>レビュー数：<%= ramen_store.reviews.count %></p>
-          <p>投稿者：<%= ramen_store.user.nickname %></p>
-      <ul class="crud-menu-btn list-inline float-right">
+      <!--店舗情報-->
+      <div class="crud-menu-btn">
+        <span class="pr-3"><%= render partial: 'likes/like', locals: { ramen_store: ramen_store } %></span>
+        <span class="pr-2"><i class="far fa-comment-dots fa-fw fa-lg fa-flip-horizontal"></i></span><%= ramen_store.reviews.count %>
+        <div class="float-right">
+        <span class="pr-2"><i class="fas fa-store-alt fa-fw"></i></span><%= ramen_store.prefecture.name %><%= ramen_store.city %></div>
 
-      </ul>
-        <ul class="list-inline">
-
-          <li class="list-inline-item">
-            <i class='far fa-clock fa-fw'></i>
-            <%= l ramen_store.created_at, format: :long %>
-          </li>
-        </ul>
-        <p><% ramen_store.tag_list.each do |tag| %>
+        <div class="inline-block py-2">
+          <span class="pr-2"><i class='far fa-clock fa-fw'></i>
+            <%= l ramen_store.updated_at, format: :day %></span>
+          <div class="float-right text-right">
+            <span class="pr-1"><i class="fas fa-pen fa-fw"></i></span><%= link_to ramen_store.user.nickname, user_path(ramen_store.user_id) %>
+          </div>
+        </div>
+      </div>
+      <!--タグ-->
+        <div class="tag_list pb-2"><% ramen_store.tag_list.each_with_index do |tag, index| %>
         <% if @path.is('ramen_stores#index') %>
-          <span class="badge badge-primary mr-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span>
+          <span class="badge badge-primary mr-1 mb-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span>
           <% elsif @path.is('ramen_stores#likes') %>
-            <span class="badge badge-primary mr-1 p-2"><%= link_to tag, likes_ramen_stores_path(tag_name: tag), class: "text-white" %></span>
+            <span class="badge badge-primary mr-1 mb-1 p-2"><%= link_to tag, likes_ramen_stores_path(tag_name: tag), class: "text-white" %></span>
           <% else %>
-            <span class="badge badge-primary mr-1 p-2"><%= link_to tag, likes_ramen_stores_path(tag_name: tag), class: "text-white" %></span>
+            <span class="badge badge-primary mr-1 mb-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span>
           <% end %>
-          <% end %>
-        </p>
-        <p class="card-text">見出し説明文</p>
+            <% break if index == 4 %>
+        <% end %>
+        </div>
+        <!--店舗紹介文-->
+        <p class="card-text"><%= ramen_store.content.truncate(40) %></p>
       </div>
     </div>
   </div>
