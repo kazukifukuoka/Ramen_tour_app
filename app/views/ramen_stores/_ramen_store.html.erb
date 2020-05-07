@@ -8,18 +8,17 @@
         <div class="float-left"><%= rating_for ramen_store, 'name', imdb_avg: true, readonly: true %></div>
         <h4 class="card-title pt-4"><%= link_to ramen_store.name, ramen_store_path(ramen_store) %></h4 >
       </div>
+      <!--店舗情報-->
       <div class="crud-menu-btn">
         <span class="pr-3"><%= render partial: 'likes/like', locals: { ramen_store: ramen_store } %><%= ramen_store.likes.count %></span>
         <span class="pr-2"><i class="far fa-comment-dots fa-fw fa-flip-horizontal"></i></span><%= ramen_store.reviews.count %>
         <span class="float-right">投稿者：<%= ramen_store.user.nickname %></span>
+        <p class="text-right">
+          <i class='far fa-clock fa-fw'></i>
+          <%= l ramen_store.updated_at, format: :long %>
+        </p>
       </div>
-        <ul class="list-inline">
-
-          <li class="list-inline-item">
-            <i class='far fa-clock fa-fw'></i>
-            <%= l ramen_store.created_at, format: :long %>
-          </li>
-        </ul>
+      <!--タグ-->
         <p><% ramen_store.tag_list.each do |tag| %>
         <% if @path.is('ramen_stores#index') %>
           <span class="badge badge-primary mr-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span>
@@ -30,7 +29,7 @@
           <% end %>
           <% end %>
         </p>
-        <p class="card-text">見出し説明文</p>
+        <p class="card-text"><%= ramen_store.content.truncate(40) %></p>
       </div>
     </div>
   </div>
