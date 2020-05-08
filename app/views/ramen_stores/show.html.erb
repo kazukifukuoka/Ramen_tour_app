@@ -1,9 +1,6 @@
 <% content_for(:title, @ramen_store.name) %>
 <div class='container'>
   <div class="pt-4 pb-4">
-    <% unless current_user.try(:own?, @ramen_store) %>
-      <%= render partial: 'likes/like', locals: { ramen_store: @ramen_store } %>
-    <% end %>
     <% if current_user.try(:own?, @ramen_store) %>
     <div class="float-right">
       <%= link_to "編集", edit_ramen_store_path, class: "btn btn-success mr-2" %>
@@ -13,26 +10,36 @@
       <%= link_to "レビューする", new_ramen_store_review_path(@ramen_store), class: "btn btn-primary float-right", data: {"turbolinks" => false} %>
     <% end %>
   </div>
-  <div class="clearfix pb-2">
-    <div class="float-left" ><%= rating_for @ramen_store, 'name', imdb_avg: true, readonly: true %></div>
-    <div class="pt-4">
-      <h4 class="d-inline"><%= @ramen_store.name %></h4>
-
-    </div>
-  </div>
   <!-- 画面左 -->
   <div class="row mt-4">
-    <div class="col-md-5">
+    <div class="col-md-4">
       <div class="card">
         <%= image_tag @ramen_store.registered_images.first.image.url, class: 'card-img-top thumb' %>
         <div class="card-body">
-          <h5 class="card-title"><%= @ramen_store.registered_images.first.name %></h5>
+          <div class="clearfix mb-2">
+            <div class="float-left"><%= rating_for @ramen_store, 'name', imdb_avg: true, readonly: true %></div>
+            <h4 class="card-title pt-4"><%= link_to @ramen_store.name, ramen_store_path(@ramen_store) %></h4 >
+          </div>
+          <!--店舗情報-->
+          <div class="crud-menu-btn">
+            <span class="pr-3"><%= render partial: 'likes/like', locals: { ramen_store: @ramen_store } %></span>
+            <span class="pr-2"><i class="far fa-comment-dots fa-fw fa-lg fa-flip-horizontal"></i></span><%= @ramen_store.reviews.count %>
+            <div class="float-right">
+            <span class="pr-2"><i class="fas fa-store-alt fa-fw"></i></span><%= @ramen_store.prefecture.name %><%= @ramen_store.city %></div>
+
+            <div class="inline-block py-2">
+              <span class="pr-2"><i class='far fa-clock fa-fw'></i>
+                <%= l @ramen_store.updated_at, format: :day %></span>
+              <div class="float-right text-right">
+                <span class="pr-1"><i class="fas fa-pen fa-fw"></i></span><%= link_to @ramen_store.user.nickname, user_path(@ramen_store.user_id) %>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <p><%= simple_format(@ramen_store.content) %></p>
     </div>
     <!-- 画面右 -->
-    <div class="col-md-7">
+    <div class="col-md-8">
       <!--タブ名-->
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
@@ -43,6 +50,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#tab3" role="tab" aria-controls="profile">写真</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#tab4" role="tab" aria-controls="profile">説明</a>
         </li>
       </ul>
       <!--タブコンテンツ-->
@@ -102,6 +112,9 @@
           <% else %>
             <%= '店舗の画像はまだありません' %>
           <% end %>
+        </div>
+        <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="4-tab">
+          <p><%= simple_format(@ramen_store.content) %></p>
         </div>
       </div>
     </div>
