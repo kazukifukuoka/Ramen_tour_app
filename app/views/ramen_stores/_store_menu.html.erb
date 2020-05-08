@@ -1,6 +1,11 @@
-<table class="table table-bordered mt-3", style="table-layout:fixed;width:100%;">
-<tr><th colspan="2">メニュー</th></tr>
-<% @ramen_store.menus.each do |menu|%>
-    <tr><td><%= menu.name %></td><td><%= menu.price %></td></tr>
-  <% end %>
+<table class="table menu-table">
+  <tbody>
+    <% @ramen_store.menus.each do |menu|%>
+      <tr>
+        <th><%= menu.name %></th>
+        <td><%= menu.price %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
+

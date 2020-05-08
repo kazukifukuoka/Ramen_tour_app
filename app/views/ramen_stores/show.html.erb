@@ -1,23 +1,23 @@
 <% content_for(:title, @ramen_store.name) %>
 <div class='container'>
   <div class="pt-4 pb-4">
-    <%= link_to "戻る", ramen_stores_path, class: "btn btn-primary" %>
+    <% unless current_user.try(:own?, @ramen_store) %>
+      <%= render partial: 'likes/like', locals: { ramen_store: @ramen_store } %>
+    <% end %>
     <% if current_user.try(:own?, @ramen_store) %>
-      <div class="float-right">
-        <%= link_to "編集する", edit_ramen_store_path, class: "btn btn-success mr-2" %>
-        <%= link_to "削除する", ramen_store_path, method: :delete, class: "btn btn-danger", data: { confirm: "本当に削除しますか？" } %>
-      </div>
-      <% else %>
-        <%= link_to "レビューする", new_ramen_store_review_path(@ramen_store), class: "btn btn-primary float-right", data: {"turbolinks" => false} %>
+    <div class="float-right">
+      <%= link_to "編集", edit_ramen_store_path, class: "btn btn-success mr-2" %>
+      <%= link_to "削除", ramen_store_path, method: :delete, class: "btn btn-danger", data: { confirm: "本当に削除しますか？" } %>
+    </div>
+    <% else %>
+      <%= link_to "レビューする", new_ramen_store_review_path(@ramen_store), class: "btn btn-primary float-right", data: {"turbolinks" => false} %>
     <% end %>
   </div>
   <div class="clearfix pb-2">
     <div class="float-left" ><%= rating_for @ramen_store, 'name', imdb_avg: true, readonly: true %></div>
     <div class="pt-4">
       <h4 class="d-inline"><%= @ramen_store.name %></h4>
-      <% unless current_user.try(:own?, @ramen_store) %>
-        <%= render partial: 'likes/like', locals: { ramen_store: @ramen_store } %>
-      <% end %>
+
     </div>
   </div>
   <!-- 画面左 -->
@@ -36,7 +36,7 @@
       <!--タブ名-->
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab" aria-controls="home" aria-expanded="true">店舗詳細</a>
+          <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab" aria-controls="home" aria-expanded="true">詳細</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#tab2" role="tab" aria-controls="profile">メニュー</a>
@@ -49,7 +49,7 @@
       <div class="tab-content" id="myTabContent">
       <!-- 店舗詳細 -->
         <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="1-tab">
-          <table class="table">
+          <table class="table detail-table">
             <tbody>
               <tr>
                 <th>電話番号</th>
@@ -93,31 +93,15 @@
         </div>
         <!-- メニュー -->
         <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="2-tab">
-          <div class="pt-3">
-            <div class="row">
-              <div class="col-12">
-                <div class="row">
-                  <%= render 'store_menu' %>
-                </div>
-              </div>
-            </div>
-          </div>
+          <%= render 'store_menu' %>
         </div>
         <!-- 写真 -->
         <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="3-tab">
-          <div class="pt-3">
-            <div class="row">
-              <div class="col-12">
-                <div class="row">
-                  <% if @ramen_store.registered_images.present? %>
-                    <%= render 'store_image' %>
-                  <% else %>
-                    <%= '店舗の画像はまだありません' %>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </div>
+          <% if @ramen_store.registered_images.present? %>
+            <%= render 'store_image' %>
+          <% else %>
+            <%= '店舗の画像はまだありません' %>
+          <% end %>
         </div>
       </div>
     </div>
