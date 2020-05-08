@@ -1,9 +1,10 @@
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "bootstrap/scss/bootstrap";
 
-// 背景
+// 全体
 body {
   background-color: #f6f6f0;
+  padding: 0;
 }
 
 // ログイン画面
@@ -95,7 +96,6 @@ input[name="tab_item"] {
 .page-title {
   text-align: center;
 }
-
 
 .example {/*親div*/
   position: relative;
@@ -219,15 +219,54 @@ footer a:hover {
   display: block;
 }
 
-// 一覧画面
+// いいね
 .like {
   color: #ff3333;
 }
 
-.crud-menu-btn a {
+.like-btn a {
   color: black;
 }
 
-.crud-menu-btn a:hover {
+.like-btn a:hover {
   text-decoration: none;
+}
+
+// 詳細画面
+.nav-tabs {
+  border-bottom:none;
+}
+
+.nav-tabs .nav-item a {
+  color: black;
+}
+
+.nav-tabs .nav-link.active {
+  background-color:#e2e2e2;
+  border-bottom:#e2e2e2;
+  font-weight: bold;
+}
+
+.tab-pane.active .tab-pane-header {
+  padding:2rem;
+  background-color:#e2e2e2;
+  border-top-right-radius: .5rem;
+  border-top-left-radius: .5rem;
+  margin-bottom:1rem;
+}
+
+.tab-pane:first-child .tab-pane-header {
+  border-top-left-radius: 0;
+}
+
+.detail-table th {
+  width: 30%;
+}
+
+.menu-table th {
+  width: 30%;
+}
+
+.registered-images-table th {
+  width: 30%;
 }

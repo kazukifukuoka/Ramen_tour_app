@@ -1,7 +1,10 @@
-<table class="table table-bordered mt-3", style="table-layout:fixed;width:100%;">
-<tr><th colspan="2">写真</th></tr>
-  <% @ramen_store.registered_images.each do |image|%>
-    <tr><td><%= image.name %></td>
-    <td><%= image_tag image.image.url(:thumb100) %></td></tr>
-  <% end %>
+<table class="table registered-images-table">
+  <tbody>
+    <% @ramen_store.registered_images.each do |image| %>
+      <tr>
+        <th><%= image.name %></th>
+        <td><%= image_tag image.image.url(:thumb100) %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
