@@ -1,15 +1,5 @@
 <% content_for(:title, @ramen_store.name) %>
 <div class='container'>
-  <div class="pt-4 pb-4">
-    <% if current_user.try(:own?, @ramen_store) %>
-    <div class="float-right">
-      <%= link_to "編集", edit_ramen_store_path, class: "btn btn-success mr-2" %>
-      <%= link_to "削除", ramen_store_path, method: :delete, class: "btn btn-danger", data: { confirm: "本当に削除しますか？" } %>
-    </div>
-    <% else %>
-      <%= link_to "レビューする", new_ramen_store_review_path(@ramen_store), class: "btn btn-primary float-right", data: {"turbolinks" => false} %>
-    <% end %>
-  </div>
   <!-- 画面左 -->
   <div class="row mt-4">
     <div class="col-md-4">
@@ -18,7 +8,7 @@
         <div class="card-body">
           <div class="clearfix mb-2">
             <div class="float-left"><%= rating_for @ramen_store, 'name', imdb_avg: true, readonly: true %></div>
-            <h4 class="card-title pt-4"><%= link_to @ramen_store.name, ramen_store_path(@ramen_store) %></h4 >
+            <h4 class="card-title pt-4"><%= link_to @ramen_store.name, ramen_store_path(@ramen_store) %></h4>
           </div>
           <!--店舗情報-->
           <div class="crud-menu-btn">
@@ -35,6 +25,12 @@
               </div>
             </div>
           </div>
+          <% if current_user.try(:own?, @ramen_store) %>
+            <div class="float-right">
+              <%= link_to "編集", edit_ramen_store_path, class: "btn btn-success mr-2" %>
+              <%= link_to "削除", ramen_store_path, method: :delete, class: "btn btn-danger", data: { confirm: "本当に削除しますか？" } %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
@@ -119,29 +115,36 @@
       </div>
     </div>
   </div>
+  <% unless current_user.try(:own?, @ramen_store) %>
+    <div class="text-right">
+      <%= link_to "レビューする", new_ramen_store_review_path(@ramen_store), class: "btn btn-primary", data: {"turbolinks" => false} %>
+    </div>
+  <% end %>
   <!-- レビュー -->
   <% if @ramen_store.reviews %>
     <% @ramen_store.reviews.order(created_at: :desc).each do |review| %>
-      <div class="row review">
+      <div class="row reviews">
         <div class="col-md-2">
-            <%= link_to user_path(review.user) do %>
-              <%= image_tag review.user.image.url, size: '80x80', class: 'rounded-circle' %>
-              <p><%= review.user.nickname %>（<%= review.user.sex %>）</p>
-            <% end %>
+          <%= link_to user_path(review.user) do %>
+            <%= image_tag review.user.image.url, size: '80x80', class: 'rounded-circle' %>
+            <p><%= review.user.nickname %>（<%= review.user.sex %>）</p>
+          <% end %>
         </div>
 
         <div class="col-md-6 mb-9">
           <div class="review-content">
             <p><%= review.created_at.to_s(:datetime_jp) %></p>
-            <h4 class="mb-3">評価 : <%= Rate.find_by(rater_id: review.user_id, rateable_id: review.ramen_store_id).stars %>点 | <%= review.title %></h4>
-            <div class="example">
-              <%= image_tag 'mid-star.png'%>
-              <p><%= Rate.find_by(rater_id: review.user_id, rateable_id: review.ramen_store_id).stars %></p>
-            </div>
+            <p class="relative">
+              <%= image_tag 'mid-star.png' %>
+              <span class="pt-5"> | <%= review.title %></span>
+              <span class="absolute">
+                <%= Rate.find_by(rater_id: review.user_id, rateable_id: review.ramen_store_id).stars %>
+              </span>
+            </p>
           </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
           <div class="review-img">
             <% if review.images %>
               <%=  image_tag review.images.first.image.url, size: '100x100'  %>
