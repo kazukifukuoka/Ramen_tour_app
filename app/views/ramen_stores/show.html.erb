@@ -1,109 +1,84 @@
 <% content_for(:title, @ramen_store.name) %>
-<%= link_to "戻る", ramen_stores_path, class: "btn btn-primary" %>
-<% if current_user.try(:own?, @ramen_store) %>
-  <%= link_to "編集する", edit_ramen_store_path, class: "btn btn-primary" %>
-  <%= link_to "削除する", ramen_store_path, method: :delete, class: "btn btn-primary", data: { confirm: "本当に削除しますか？" } %>
-<% end %>
-
-
-<%= link_to "レビューする", new_ramen_store_review_path(@ramen_store), class: "btn btn-primary float-right", data: {"turbolinks" => false} %>
-
-
-
-<div class="row">
-  <div class="col-md-4">
-    <div class="card">
-      <%= image_tag @ramen_store.registered_images.first.image.url, class: 'card-img-top thumb' %>
-      <div class="card-body">
-        <h5 class="card-title"><%= @ramen_store.registered_images.first.name %></h5>
-        <p class="card-text">見出し説明文</p>
+<div class='container'>
+  <div class="pt-4 pb-4">
+    <%= link_to "戻る", ramen_stores_path, class: "btn btn-primary" %>
+    <% if current_user.try(:own?, @ramen_store) %>
+      <div class="float-right">
+        <%= link_to "編集する", edit_ramen_store_path, class: "btn btn-success mr-2" %>
+        <%= link_to "削除する", ramen_store_path, method: :delete, class: "btn btn-danger", data: { confirm: "本当に削除しますか？" } %>
       </div>
-    </div>
-  </div>
-  <div class="col-md-8">
-    <div class="float-left"><%= rating_for @ramen_store, 'name', imdb_avg: true, readonly: true %></div><h4 class="page-title"><%= @ramen_store.name %><%= @ramen_store.prefecture.name %></h4><p class="float-right">投稿者：<%= @ramen_store.user.nickname %><%= "作成: #{@ramen_store.created_at.to_s(:datetime_jp)} / 更新:  #{@ramen_store.updated_at.to_s(:datetime_jp)}" %></p>
-    <table class="table">
-      <tbody>
-        <tr>
-          <th>電話番号</th>
-          <td><%= @ramen_store.phone_number %></td>
-        </tr>
-        <tr>
-          <th>営業時間</th>
-          <td><%= @ramen_store.sale %></td>
-        </tr>
-        <tr>
-          <th>定休日</th>
-          <td><%= @ramen_store.holiday %></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h4>いいね数 : <%= @ramen_store.likes.count %></h4>
-    <% if RatingCache.find_by(cacheable_id: @ramen_store.id) %>
-    <% unless current_user.try(:own?, @ramen_store) %>
-    <h4>いいねする<%= render partial: 'likes/like', locals: { ramen_store: @ramen_store } %></h4>
+      <% else %>
+        <%= link_to "レビューする", new_ramen_store_review_path(@ramen_store), class: "btn btn-primary float-right", data: {"turbolinks" => false} %>
     <% end %>
-    <h4>点数<%= RatingCache.find_by(cacheable_id: @ramen_store.id).avg %></h4>
-    <h4>点数順位<%= RatingCache.select('avg, cacheable_id').order(avg: :desc).distinct %></h4>
-    <% end %>
-  </div>
-</div>
+    <!-- カード -->
+    <div class="row mt-4">
+      <div class="col-md-5">
+        <div class="card">
+          <%= image_tag @ramen_store.registered_images.first.image.url, class: 'card-img-top thumb' %>
+          <div class="card-body">
+            <h5 class="card-title"><%= @ramen_store.registered_images.first.name %></h5>
+          </div>
+        </div>
+          <tr><td>説明</td><td><%= simple_format(@ramen_store.content) %></td></tr>
+      </div>
+      <!-- 見出し -->
+      <div class="col-md-7">
+        <div class="clearfix mb-2 text-center">
+          <div class="float-left"><%= rating_for @ramen_store, 'name', imdb_avg: true, readonly: true %></div>
+          <div class="pt-4">
+            <h4><%= @ramen_store.name %></h4>
+            <% unless current_user.try(:own?, @ramen_store) %>
+            <%= render partial: 'likes/like', locals: { ramen_store: @ramen_store } %>
+            <% end %>
+          </div>
+        </div>
 
-<div class="tabs">
-  <input id="all" type="radio" name="tab_item" checked>
-  <label class="tab_item" for="all">店舗詳細</label>
-  <input id="score" type="radio" name="tab_item">
-  <label class="tab_item" for="score">メニュー</label>
-  <input id="design" type="radio" name="tab_item">
-  <label class="tab_item" for="design">写真</label>
-  <!-- 店舗詳細 -->
-  <div class="tab_content" id="all_content">
-    <div class="tab_content_description">
-      <div class="pt-3">
-        <div class="row">
-          <div class="col-12">
-            <div class="row">
-              <%= render 'store_detail' %>
-            </div>
-          </div>
-        </div>
+        <table class="table">
+          <tbody>
+            <tr>
+              <th>電話番号</th>
+              <td><%= @ramen_store.phone_number %></td>
+            </tr>
+            <tr>
+              <th>営業時間</th>
+              <td><%= @ramen_store.sale %></td>
+            </tr>
+            <tr>
+              <th>定休日</th>
+              <td><%= @ramen_store.holiday %></td>
+            </tr>
+            <tr>
+              <th>住所</th>
+              <td><%= @ramen_store.prefecture.name %><%= @ramen_store.address %><%= @ramen_store.city %><%= @ramen_store.building %></td>
+            </tr>
+            <tr>
+              <th>席数</th>
+              <td><%= @ramen_store.seat %></td>
+            </tr>
+            <tr>
+              <th>アクセス</th>
+              <td><%= @ramen_store.access %></td>
+            </tr>
+            <tr>
+              <th>駐車場</th>
+              <td><%= @ramen_store.parking_space %></td>
+            </tr>
+            <tr>
+              <th>SNS</th><td><%= @ramen_store.sns %></td>
+            </tr>
+            <tr>
+              <th>タグ</th>
+              <td><% @ramen_store.tag_list.each do |tag| %>
+                <span class="badge badge-primary mr-1 p-2 mb-1"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span><% end %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
-  <!-- メニュー一覧 -->
-  <div class="tab_content" id="score_content">
-    <div class="tab_content_description">
-      <div class="pt-3">
-        <div class="row">
-          <div class="col-12">
-            <div class="row">
-              <%= render 'store_menu' %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- 店舗画像一覧 -->
-  <div class="tab_content" id="design_content">
-    <div class="tab_content_description">
-      <div class="pt-3">
-        <div class="row">
-          <div class="col-12">
-            <div class="row">
-              <% if @ramen_store.registered_images.present? %>
-                <%= render 'store_image' %>
-              <% else %>
-                <%= '店舗の画像はまだありません' %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+
 
   <!-- レビュー -->
 <% @ramen_store.reviews.order(created_at: :desc).each do |review| %>
@@ -138,3 +113,182 @@
   </div>
 </div>
 <% end %>
+</div>
+
+
+<div class="container">
+
+
+
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab" aria-controls="home" aria-expanded="true">店舗詳細</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#tab2" role="tab" aria-controls="profile">メニュー</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#tab3" role="tab" aria-controls="profile">画像</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="1-tab">
+
+          <div class="row mt-4">
+      <div class="col-md-5">
+        <div class="card">
+          <%= image_tag @ramen_store.registered_images.first.image.url, class: 'card-img-top thumb' %>
+          <div class="card-body">
+            <h5 class="card-title"><%= @ramen_store.registered_images.first.name %></h5>
+          </div>
+        </div>
+          <tr><td>説明</td><td><%= simple_format(@ramen_store.content) %></td></tr>
+      </div>
+      <!-- 見出し -->
+      <div class="col-md-7">
+        <div class="clearfix mb-2 text-center">
+          <div class="float-left"><%= rating_for @ramen_store, 'name', imdb_avg: true, readonly: true %></div>
+          <div class="pt-4">
+            <h4><%= @ramen_store.name %></h4>
+            <% unless current_user.try(:own?, @ramen_store) %>
+            <%= render partial: 'likes/like', locals: { ramen_store: @ramen_store } %>
+            <% end %>
+          </div>
+        </div>
+
+        <table class="table">
+          <tbody>
+            <tr>
+              <th>電話番号</th>
+              <td><%= @ramen_store.phone_number %></td>
+            </tr>
+            <tr>
+              <th>営業時間</th>
+              <td><%= @ramen_store.sale %></td>
+            </tr>
+            <tr>
+              <th>定休日</th>
+              <td><%= @ramen_store.holiday %></td>
+            </tr>
+            <tr>
+              <th>住所</th>
+              <td><%= @ramen_store.prefecture.name %><%= @ramen_store.address %><%= @ramen_store.city %><%= @ramen_store.building %></td>
+            </tr>
+            <tr>
+              <th>席数</th>
+              <td><%= @ramen_store.seat %></td>
+            </tr>
+            <tr>
+              <th>アクセス</th>
+              <td><%= @ramen_store.access %></td>
+            </tr>
+            <tr>
+              <th>駐車場</th>
+              <td><%= @ramen_store.parking_space %></td>
+            </tr>
+            <tr>
+              <th>SNS</th><td><%= @ramen_store.sns %></td>
+            </tr>
+            <tr>
+              <th>タグ</th>
+              <td><% @ramen_store.tag_list.each do |tag| %>
+                <span class="badge badge-primary mr-1 mb-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span><% end %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    </div>
+    <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="2-tab">
+
+
+      <div class="pt-3">
+        <div class="row">
+          <div class="col-12">
+            <div class="row">
+              <%= render 'store_menu' %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="3-tab">
+
+      <div class="pt-3">
+        <div class="row">
+          <div class="col-12">
+            <div class="row">
+              <% if @ramen_store.registered_images.present? %>
+                <%= render 'store_image' %>
+              <% else %>
+                <%= '店舗の画像はまだありません' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <!-- レビュー -->
+  <% @ramen_store.reviews.order(created_at: :desc).each do |review| %>
+  <div class="row review">
+    <div class="col-md-2">
+        <%= link_to user_path(review.user) do %>
+          <%= image_tag review.user.image.url, size: '80x80', class: 'rounded-circle' %>
+          <p><%= review.user.nickname %>（<%= review.user.sex %>）</p>
+        <% end %>
+    </div>
+
+    <div class="col-md-6 mb-9">
+      <div class="review-content">
+        <p><%= review.created_at.to_s(:datetime_jp) %></p>
+        <h4 class="mb-3">評価 : <%= Rate.find_by(rater_id: review.user_id, rateable_id: review.ramen_store_id).stars %>点 | <%= review.title %></h4>
+        <div class="example">
+          <%= image_tag 'mid-star.png'%>
+          <p><%= Rate.find_by(rater_id: review.user_id, rateable_id: review.ramen_store_id).stars %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="review-img">
+        <% if review.images %>
+          <%=  image_tag review.images.first.image.url, size: '100x100'  %>
+          <p><%=  review.images.first.name %></p>
+        <% else %>
+          <p>画像は投稿していません</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  </div>
+
+
+</div>
+<!-- /.container -->
+
+<script>
+$(document).ready(function() {
+ // executes when HTML-Document is loaded and DOM is ready
+
+  
+   if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
+      return $('a[data-toggle="tab"]').on('shown', function(e) {
+      return location.hash = $(e.target).attr('href').substr(1);
+    });
+  
+  
+// document ready  
+});
+
+</script>
