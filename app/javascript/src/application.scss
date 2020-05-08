@@ -1,7 +1,7 @@
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "bootstrap/scss/bootstrap";
 
-// 背景
+// 全体
 body {
   background-color: #f6f6f0;
   padding: 0;
@@ -96,7 +96,6 @@ input[name="tab_item"] {
 .page-title {
   text-align: center;
 }
-
 
 .example {/*親div*/
   position: relative;
@@ -220,85 +219,27 @@ footer a:hover {
   display: block;
 }
 
-// 一覧画面
+// いいね
 .like {
   color: #ff3333;
 }
 
-.crud-menu-btn a {
+.like-btn a {
   color: black;
 }
 
-.crud-menu-btn a:hover {
+.like-btn a:hover {
   text-decoration: none;
 }
 
 // 詳細画面
-
-/*タブ切り替え全体のスタイル*/
-.tabs {
-  margin-top: 50px;
-  padding-bottom: 40px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  margin: 0 auto;
-}
-
-/*タブのスタイル*/
-.show_tab_item {
-  width: calc(100%/2);
-  height: 50px;
-  border-bottom: 3px solid #5ab4bd;
-  background-color: #d9d9d9;
-  line-height: 50px;
-  font-size: 16px;
-  text-align: center;
-  color: #565656;
-  display: block;
-  float: left;
-  text-align: center;
-  font-weight: bold;
-  transition: all 0.2s ease;
-}
-
-.show_tab_item:hover {
-  opacity: 0.75;
-}
-
-/*ラジオボタンを全て消す*/
-input[name="show_tab_item"] {
-  display: none;
-}
-
-/*タブ切り替えの中身のスタイル*/
-.tab_content {
-  display: none;
-  padding: 40px 40px 0;
-  clear: both;
-  overflow: hidden;
-}
-
-
-/*選択されているタブのコンテンツのみを表示*/
-#menu:checked ~ #menu_content,
-#registered_image:checked ~ #registered_image_content {
-  display: block;
-}
-
-/*選択されているタブのスタイルを変える*/
-.tabs input:checked + .show_tab_item {
-  background-color: #5ab4bd;
-  color: #fff;
-}
-
-
-
-
 .nav-tabs {
   border-bottom:none;
 }
 
-
+.nav-tabs .nav-item a {
+  color: black;
+}
 
 .nav-tabs .nav-link.active {
   background-color:#e2e2e2;
@@ -317,3 +258,4 @@ input[name="show_tab_item"] {
 .tab-pane:first-child .tab-pane-header {
   border-top-left-radius: 0;
 }
+
