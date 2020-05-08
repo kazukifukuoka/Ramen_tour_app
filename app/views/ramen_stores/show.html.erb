@@ -11,6 +11,16 @@
         <%= link_to "レビューする", new_ramen_store_review_path(@ramen_store), class: "btn btn-primary float-right", data: {"turbolinks" => false} %>
     <% end %>
   </div>
+  <div class="clearfix pb-2">
+    <div class="float-left" ><%= rating_for @ramen_store, 'name', imdb_avg: true, readonly: true %></div>
+    <div class="pt-4">
+      <h4 class="d-inline"><%= @ramen_store.name %></h4>
+      <% unless current_user.try(:own?, @ramen_store) %>
+        <%= render partial: 'likes/like', locals: { ramen_store: @ramen_store } %>
+      <% end %>
+    </div>
+  </div>
+
   <!--タブ名-->
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item">
@@ -36,14 +46,14 @@
               <h5 class="card-title"><%= @ramen_store.registered_images.first.name %></h5>
             </div>
           </div>
-            <tr><td>説明</td><td><%= simple_format(@ramen_store.content) %></td></tr>
+          <p><%= simple_format(@ramen_store.content) %></p>
         </div>
         <!-- 詳細右 -->
         <div class="col-md-7">
           <div class="clearfix mb-2 text-center">
             <div class="float-left"><%= rating_for @ramen_store, 'name', imdb_avg: true, readonly: true %></div>
             <div class="pt-4">
-              <h4><%= @ramen_store.name %></h4>
+              <h4 class="d-inline mr-2"><%= @ramen_store.name %></h4>
               <% unless current_user.try(:own?, @ramen_store) %>
                 <%= render partial: 'likes/like', locals: { ramen_store: @ramen_store } %>
               <% end %>
@@ -162,19 +172,3 @@
     <p>レビューはまだ投稿されていません</p>
   <% end %>
 </div>
-
-<script>
-$(document).ready(function() {
- // executes when HTML-Document is loaded and DOM is ready
-
-  
-   if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
-      return $('a[data-toggle="tab"]').on('shown', function(e) {
-      return location.hash = $(e.target).attr('href').substr(1);
-    });
-  
-  
-// document ready  
-});
-
-</script>
