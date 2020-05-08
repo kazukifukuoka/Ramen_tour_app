@@ -20,46 +20,35 @@
       <% end %>
     </div>
   </div>
-
-  <!--タブ名-->
-  <ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item">
-      <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab" aria-controls="home" aria-expanded="true">店舗詳細</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#tab2" role="tab" aria-controls="profile">メニュー</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#tab3" role="tab" aria-controls="profile">写真</a>
-    </li>
-  </ul>
-  <!--タブコンテンツ-->
-  <div class="tab-content" id="myTabContent">
-  <!-- 店舗詳細 -->
-    <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="1-tab">
-      <!-- 詳細左 -->
-      <div class="row mt-4">
-        <div class="col-md-5">
-          <div class="card">
-            <%= image_tag @ramen_store.registered_images.first.image.url, class: 'card-img-top thumb' %>
-            <div class="card-body">
-              <h5 class="card-title"><%= @ramen_store.registered_images.first.name %></h5>
-            </div>
-          </div>
-          <p><%= simple_format(@ramen_store.content) %></p>
+  <!-- 画面左 -->
+  <div class="row mt-4">
+    <div class="col-md-5">
+      <div class="card">
+        <%= image_tag @ramen_store.registered_images.first.image.url, class: 'card-img-top thumb' %>
+        <div class="card-body">
+          <h5 class="card-title"><%= @ramen_store.registered_images.first.name %></h5>
         </div>
-        <!-- 詳細右 -->
-        <div class="col-md-7">
-          <div class="clearfix mb-2 text-center">
-            <div class="float-left"><%= rating_for @ramen_store, 'name', imdb_avg: true, readonly: true %></div>
-            <div class="pt-4">
-              <h4 class="d-inline mr-2"><%= @ramen_store.name %></h4>
-              <% unless current_user.try(:own?, @ramen_store) %>
-                <%= render partial: 'likes/like', locals: { ramen_store: @ramen_store } %>
-              <% end %>
-            </div>
-          </div>
-
+      </div>
+      <p><%= simple_format(@ramen_store.content) %></p>
+    </div>
+    <!-- 画面右 -->
+    <div class="col-md-7">
+      <!--タブ名-->
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab" aria-controls="home" aria-expanded="true">店舗詳細</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#tab2" role="tab" aria-controls="profile">メニュー</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#tab3" role="tab" aria-controls="profile">写真</a>
+        </li>
+      </ul>
+      <!--タブコンテンツ-->
+      <div class="tab-content" id="myTabContent">
+      <!-- 店舗詳細 -->
+        <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="1-tab">
           <table class="table">
             <tbody>
               <tr>
@@ -102,38 +91,37 @@
             </tbody>
           </table>
         </div>
-      </div>
-    </div>
-    <!-- メニュー -->
-    <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="2-tab">
-      <div class="pt-3">
-        <div class="row">
-          <div class="col-12">
+        <!-- メニュー -->
+        <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="2-tab">
+          <div class="pt-3">
             <div class="row">
-              <%= render 'store_menu' %>
+              <div class="col-12">
+                <div class="row">
+                  <%= render 'store_menu' %>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <!-- 写真 -->
-    <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="3-tab">
-      <div class="pt-3">
-        <div class="row">
-          <div class="col-12">
+        <!-- 写真 -->
+        <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="3-tab">
+          <div class="pt-3">
             <div class="row">
-              <% if @ramen_store.registered_images.present? %>
-                <%= render 'store_image' %>
-              <% else %>
-                <%= '店舗の画像はまだありません' %>
-              <% end %>
+              <div class="col-12">
+                <div class="row">
+                  <% if @ramen_store.registered_images.present? %>
+                    <%= render 'store_image' %>
+                  <% else %>
+                    <%= '店舗の画像はまだありません' %>
+                  <% end %>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
   <!-- レビュー -->
   <% if @ramen_store.reviews %>
     <% @ramen_store.reviews.order(created_at: :desc).each do |review| %>
