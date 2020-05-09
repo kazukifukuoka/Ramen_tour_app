@@ -2,7 +2,7 @@
   <table class="table form-registered-image-table">
     <tbody>
       <div class="col-md-6">
-        <td><%= f.text_field :name, class: "form-control" %></td>
+        <td><%= f.text_field :name, class: "form-control", placeholder: '例：醤油ラーメン' %></td>
       </div>
       <div class="col-md-6">
         <td><%= f.file_field :image, class: "form-control", id: :user_img, accept: "image/jpg,image/gif,image/jpeg,image/png" %></td>
