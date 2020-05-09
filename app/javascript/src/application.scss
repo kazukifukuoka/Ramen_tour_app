@@ -272,3 +272,12 @@ border-right: 15px solid #e3f9e3;
   margin-right: 0;
   margin-left: 0;
 }
+
+.attention-input {
+  color: tomato;
+}
+
+#ramen_store_menus_attributes_0__destroy + a,
+#ramen_store_registered_images_attributes_0__destroy + a {
+  display: none;
+}

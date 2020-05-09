@@ -3,7 +3,8 @@
   <%= form_with model:@ramen_store, local: true do |f| %>
     <div class="form-group row">
       <div class="col-md-4">
-        <%= f.label :name, "店名 ※必須" %>
+        <%= f.label :name, "店名" %>
+        <small class="attention-input">（必須）</small>
       </div>
       <div class="col-md-7 offset-md-1">
         <%= f.text_field :name, class: "form-control", placeholder: "例：麺屋○○", required: true, autofocus: true %>
@@ -12,10 +13,12 @@
 
     <div class="form-group row">
       <div class="col-md-4">
-        <%= f.label :postcode, "郵便番号(「半角数字、-」で入力)  ※必須" %>
+        <%= f.label :postcode, "郵便番号" %>
+        <small class="attention-input">（必須）</small>
       </div>
       <div class="col-md-7 offset-md-1">
         <%= f.text_field :postcode, class: "form-control", placeholder: "例：123-1234", required: true, autofocus: true %>
+        <small class="attention-input">半角数字で入力し、ハイフン（-）で区切ってください</small>
       </div>
     </div>
 
@@ -40,16 +43,19 @@
 
     <div class="form-group row">
       <div class="col-md-4">
-        <%= f.label :phone_number, "電話番号(「半角数字、-」で入力)  ※必須" %>
+        <%= f.label :phone_number, "電話番号" %>
+        <small class="attention-input">（必須）</small>
       </div>
       <div class="col-md-7 offset-md-1">
         <%= f.text_field :phone_number, class: "form-control", placeholder: "例：0123-12-1234", required: true, autofocus: true %>
+        <small class="attention-input">半角数字で入力し、ハイフン（-）で区切ってください</small>
       </div>
     </div>
 
     <div class="form-group row">
       <div class="col-md-4">
-        <%= f.label :sale, "営業時間 ※必須"%>
+        <%= f.label :sale, "営業時間"%>
+        <small class="attention-input">（必須）</small>
       </div>
       <div class="col-md-7 offset-md-1">
         <%= f.text_field :sale, class: "form-control", placeholder: "例：11:00 〜 23:00" , required: true, autofocus: true%>
@@ -58,7 +64,8 @@
 
     <div class="form-group row">
       <div class="col-md-4">
-        <%= f.label :holiday, "定休日 ※必須"%>
+        <%= f.label :holiday, "定休日"%>
+        <small class="attention-input">（必須）</small>
       </div>
       <div class="col-md-7 offset-md-1">
         <%= f.text_field :holiday, class: "form-control", placeholder: "例：毎週月曜日, 第2水曜日、 など", required: true, autofocus: true %>
@@ -67,7 +74,8 @@
 
     <div class="form-group row">
       <div class="col-md-4">
-        <%= f.label :seat, "席数 ※必須"%>
+        <%= f.label :seat, "席数"%>
+        <small class="attention-input">（必須）</small>
       </div>
       <div class="col-md-7 offset-md-1">
         <%= f.text_field :seat, class: "form-control", placeholder: "例：カウンター10席", required: true, autofocus: true %>
@@ -76,7 +84,8 @@
 
     <div class="form-group row">
       <div class="col-md-4">
-        <%=f.label :access, "アクセス ※必須"%>
+        <%=f.label :access, "アクセス"%>
+        <small class="attention-input">（必須）</small>
       </div>
       <div class="col-md-7 offset-md-1">
         <%= f.text_field :access, class: "form-control", placeholder: "例：○○駅から徒歩10分", required: true, autofocus: true %>
@@ -85,16 +94,18 @@
 
     <div class="form-group row">
       <div class="col-md-4">
-        <%= f.label :parking_space, "駐車場 ※必須" %>
+        <%= f.label :parking_space, "駐車場" %>
+        <small class="attention-input">（必須）</small>
       </div>
       <div class="col-md-7 offset-md-1">
-        <%= f.text_field :parking_space, class: "form-control", placeholder: "例：駐車場無し(近くにコインパーキングあり)、 など", required: true, autofocus: true %>
+        <%= f.text_field :parking_space, class: "form-control", placeholder: "例：駐車場無し（近くにコインパーキングあり）、 など", required: true, autofocus: true %>
       </div>
     </div>
 
     <div class="form-group row">
       <div class="col-md-4">
-        <%= f.label :sns, "SNS ※必須" %>
+        <%= f.label :sns, "SNS" %>
+        <small class="attention-input">（必須）</small>
       </div>
       <div class="col-md-7 offset-md-1">
         <%= f.text_field :sns, class: "form-control", placeholder: "無ければ「無し」と記入", required: true, autofocus: true %>
@@ -103,7 +114,8 @@
 
     <div class="form-group row">
       <div class="col-md-4">
-        <%= f.label :content, "説明 ※必須"%>
+        <%= f.label :content, "説明"%>
+        <small class="attention-input">（必須）</small>
       </div>
       <div class="col-md-7 offset-md-1">
         <%= f.text_area :content, class: "form-control", rows: 3, placeholder: "自由に入力してください", required: true, autofocus: true %>
@@ -112,7 +124,8 @@
 
     <div class="form-group row">
       <div class="col-md-4">
-        <%= f.label :menus_attributes_0_name, "メニュー ※必須"%>
+        <%= f.label :menus_attributes_0_name, "メニュー" %>
+        <small class="attention-input">（必須）</small>
       </div>
       <div class="col-md-7 offset-md-1">
         <table class="table menu-table">
@@ -132,7 +145,7 @@
 
     <div class="form-group row">
       <div class="col-md-4">
-        <%= f.label :registered_images_attributes_0_name, "写真"%>
+        <%= f.label :registered_images_attributes_0_name, "写真" %>
         <% if @ramen_store.registered_images.first.image.present? %>
           <%= image_tag @ramen_store.registered_images.first.image.url, id: :img_prev, class: 'card-img-top thumb' %>
         <% else %>
@@ -172,11 +185,12 @@
 
     <div class="form-group row">
       <div class="col-md-4">
-        <%= f.label :tag_list, "タグ(「,」で区切って入力)  ※必須" %>
+        <%= f.label :tag_list, "タグ" %>
+        <small class="attention-input">（必須）</small>
       </div>
       <div class="col-md-7 offset-md-1">
-        <%= f.text_field :tag_list, value: @ramen_store.tag_list.join(','), class: "form-control", placeholder: "人気店,こってり,駅近、など" ,required: true, autofocus: true %>
-        <small>初めから5つまでのタグが一覧画面に表示されます</small>
+        <%= f.text_field :tag_list, value: @ramen_store.tag_list.join(','), class: "form-control", placeholder: "例：人気店,こってり,駅近" ,required: true, autofocus: true %>
+        <small class="attention-input">タグ間はカンマ（,）で区切って入力してください</small>
       </div>
     </div>
 
