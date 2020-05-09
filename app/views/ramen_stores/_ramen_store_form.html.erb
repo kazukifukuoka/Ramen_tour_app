@@ -25,16 +25,16 @@
     <div class="form-group row">
       <div class="offset-md-5">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-5 ml-3 cp_ipselect cp_sl02 mb-2">
             <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name %>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 mb-2">
             <%= f.text_field :city, class: "form-control", required: true, autofocus: true %>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 mb-2">
             <%= f.text_field :address, class: "form-control" ,required: true, autofocus: true %>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 mb-2">
             <%= f.text_field :building, class: "form-control" %>
           </div>
         </div>
@@ -128,7 +128,7 @@
         <small class="attention-input">（必須）</small>
       </div>
       <div class="col-md-7 offset-md-1">
-        <table class="table menu-table">
+        <table class="form-menu-table">
           <thead>
             <th>メニュー</th>
             <th>金額</th>
@@ -155,7 +155,7 @@
         <% end %>
       </div>
       <div class="col-md-7 offset-md-1">
-        <table class="table menu-table">
+        <table class="form-registered-image-table">
           <thead>
             <th>タイトル</th>
             <th>写真<small>（1枚目の写真が一覧画面に表示されます）</small></th>

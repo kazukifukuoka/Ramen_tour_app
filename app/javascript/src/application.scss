@@ -264,8 +264,12 @@ border-right: 15px solid #e3f9e3;
 }
 
 // 店舗投稿
-.menu-table th {
-  width: 50%;
+.form-menu-table th {
+  width: 10%;
+}
+
+.form-registered-image-table th {
+  width: 10%;
 }
 
 .form-container .row {
@@ -280,4 +284,106 @@ border-right: 15px solid #e3f9e3;
 #ramen_store_menus_attributes_0__destroy + a,
 #ramen_store_registered_images_attributes_0__destroy + a {
   display: none;
+}
+
+.cp_ipselect {
+	overflow: hidden;
+	width: 90%;
+  text-align: center;
+  margin-right: 37px;
+}
+
+.cp_ipselect select {
+	width: 100%;
+	padding-right: 1em;
+	cursor: pointer;
+	text-indent: 0.01px;
+	text-overflow: ellipsis;
+	border: none;
+	outline: none;
+	background: transparent;
+	background-image: none;
+	box-shadow: none;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.cp_ipselect select::-ms-expand {
+    display: none;
+}
+
+.cp_ipselect.cp_sl02 {
+	position: relative;
+	border: 1px solid #bbbbbb;
+	border-radius: 2px;
+	background: #ffffff;
+}
+
+.cp_ipselect.cp_sl02::before {
+	position: absolute;
+	top: 1.0em;
+	right: 0.9em;
+	width: 0;
+	height: 0;
+	padding: 0;
+	content: '';
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid #666666;
+	pointer-events: none;
+}
+
+.cp_ipselect.cp_sl02:after {
+	position: absolute;
+	top: 0;
+	right: 2.5em;
+	bottom: 0;
+	width: 1px;
+	content: '';
+	border-left: 1px solid #bbbbbb;
+}
+
+.cp_ipselect.cp_sl02 select {
+	padding: 8px 38px 8px 8px;
+	color: #666666;
+}
+
+.form-registered-image-table td {
+  width: 50%;
+}
+
+@media screen and (max-width: 640px) {
+  .form-menu-table tr td,
+  .form-registered-image-table tr td {
+    border-left: none;
+    display: block;
+    height: 64px;
+    width: 315px;
+  }
+  .form-menu-table thead tr,
+  .form-registered-image-table tr {
+    width: 100%;
+  }
+  .form-menu-table tbody,
+  .form-registered-image-table tbody {
+    display: block;
+    float: left;
+    width: 100%;
+  }
+  .form-menu-table tbody tr,
+  .form-registered-image-table tbody tr {
+    width: 100%;
+  }
+  .form-menu-table tr td + td,
+  .form-registered-image-table tr td + td  {
+    border-left: none;
+  }
+  .form-menu-table tbody td:last-child,
+  .form-registered-image-table tbody td:last-child {
+    border-bottom: solid 1px #ccc;
+  }
+
+  .remove_fields {
+    margin-bottom: 15px;
+  }
 }
