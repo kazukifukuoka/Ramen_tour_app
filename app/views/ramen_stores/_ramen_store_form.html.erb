@@ -1,110 +1,188 @@
 <% content_for(:title, '店舗投稿') %>
-<%= form_with model:@ramen_store, local: true do |f| %>
-  <div class="form-group">
-    <%= f.label :name, "店名 ※必須" %>
-    <%= f.text_field :name, class: "form-control", placeholder: "例：麺屋○○", required: true, autofocus: true %>
-  </div>
-  <div class="form-group">
-    <%= f.label :postcode, "郵便番号(「半角数字、-」で入力)  ※必須" %>
-    <%= f.text_field :postcode, class: "form-control", placeholder: "例：123-1234", required: true, autofocus: true %>
-  </div>
-  <div class="form-inline pb-3">
-    <div class="form-group col-2">
-      <%= f.label :prefecture_id, "都道府県"%>
-      <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name %>
+<div class="container mt-5 form-container">
+  <%= form_with model:@ramen_store, local: true do |f| %>
+    <div class="form-group row">
+      <div class="col-md-4">
+        <%= f.label :name, "店名 ※必須" %>
+      </div>
+      <div class="col-md-7 offset-md-1">
+        <%= f.text_field :name, class: "form-control", placeholder: "例：麺屋○○", required: true, autofocus: true %>
+      </div>
     </div>
-    <div class="form-group col-3">
-      <%= f.label :city, "市町村" %>
-      <%= f.text_field :city, class: "form-control", required: true, autofocus: true %>
+
+    <div class="form-group row">
+      <div class="col-md-4">
+        <%= f.label :postcode, "郵便番号(「半角数字、-」で入力)  ※必須" %>
+      </div>
+      <div class="col-md-7 offset-md-1">
+        <%= f.text_field :postcode, class: "form-control", placeholder: "例：123-1234", required: true, autofocus: true %>
+      </div>
     </div>
-    <div class="form-group col-4">
-      <%= f.label :address, "丁・番地 ※必須" %>
-      <%= f.text_field :address, class: "form-control" ,required: true, autofocus: true %>
+
+    <div class="form-group row">
+      <div class="offset-md-5">
+        <div class="row">
+          <div class="col-md-6">
+            <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name %>
+          </div>
+          <div class="col-md-6">
+            <%= f.text_field :city, class: "form-control", required: true, autofocus: true %>
+          </div>
+          <div class="col-md-6">
+            <%= f.text_field :address, class: "form-control" ,required: true, autofocus: true %>
+          </div>
+          <div class="col-md-6">
+            <%= f.text_field :building, class: "form-control" %>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="form-group col-3">
-      <%= f.label :building, "建物" %>
-      <%= f.text_field :building, class: "form-control" %>
+
+    <div class="form-group row">
+      <div class="col-md-4">
+        <%= f.label :phone_number, "電話番号(「半角数字、-」で入力)  ※必須" %>
+      </div>
+      <div class="col-md-7 offset-md-1">
+        <%= f.text_field :phone_number, class: "form-control", placeholder: "例：0123-12-1234", required: true, autofocus: true %>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :phone_number, "電話番号(「半角数字、-」で入力)  ※必須" %>
-    <%= f.text_field :phone_number, class: "form-control", placeholder: "例：0123-12-1234", required: true, autofocus: true %>
-  </div>
-  <div class="form-group">
-    <%= f.label :sale, "営業時間 ※必須"%>
-    <%= f.text_field :sale, class: "form-control", placeholder: "例：11:00 〜 23:00" , required: true, autofocus: true%>
-  </div>
-  <div class="form-group">
-    <%= f.label :holiday, "定休日 ※必須"%>
-    <%= f.text_field :holiday, class: "form-control", placeholder: "例：毎週月曜日, 第2水曜日、 など", required: true, autofocus: true %>
-  </div>
-  <div class="form-group">
-    <%= f.label :seat, "席数 ※必須"%>
-    <%= f.text_field :seat, class: "form-control", placeholder: "例：カウンター10席", required: true, autofocus: true %>
-  </div>
-  <div class="form-group">
-    <%=f.label :access, "アクセス ※必須"%>
-    <%= f.text_field :access, class: "form-control", placeholder: "例：○○駅から徒歩10分", required: true, autofocus: true %>
-  </div>
-  <div class="form-group">
-    <%= f.label :parking_space, "駐車場 ※必須" %>
-    <%= f.text_field :parking_space, class: "form-control", placeholder: "例：駐車場無し(近くにコインパーキングあり)、 など", required: true, autofocus: true %>
-  </div>
-  <div class="form-group">
-    <%= f.label :sns, "SNS ※必須" %>
-    <%= f.text_field :sns, class: "form-control", placeholder: "無ければ「無し」と記入", required: true, autofocus: true %>
-  </div>
-  <div class="form-group">
-    <%= f.label :content, "説明 ※必須"%>
-    <%= f.text_area :content, class: "form-control", rows: 3, placeholder: "自由に入力してください", required: true, autofocus: true %>
-  </div>
 
-<div class="form-inline">
-  <%= f.fields_for :menus do |f| %>
-    <%= render 'menu_fields', f: f %>
-  <% end %>
-  <div class="links">
-    <%= link_to_add_association f, :menus, class: 'btn btn-primary' %>
-  </div>
-</div>
+    <div class="form-group row">
+      <div class="col-md-4">
+        <%= f.label :sale, "営業時間 ※必須"%>
+      </div>
+      <div class="col-md-7 offset-md-1">
+        <%= f.text_field :sale, class: "form-control", placeholder: "例：11:00 〜 23:00" , required: true, autofocus: true%>
+      </div>
+    </div>
 
+    <div class="form-group row">
+      <div class="col-md-4">
+        <%= f.label :holiday, "定休日 ※必須"%>
+      </div>
+      <div class="col-md-7 offset-md-1">
+        <%= f.text_field :holiday, class: "form-control", placeholder: "例：毎週月曜日, 第2水曜日、 など", required: true, autofocus: true %>
+      </div>
+    </div>
 
-  <%= f.fields_for :registered_images do |f| %>
-    <%= render 'registered_image_fields', f: f %>
-  <% end %>
-<div class="col-sm-12 col-lg-4 mb-3">
+    <div class="form-group row">
+      <div class="col-md-4">
+        <%= f.label :seat, "席数 ※必須"%>
+      </div>
+      <div class="col-md-7 offset-md-1">
+        <%= f.text_field :seat, class: "form-control", placeholder: "例：カウンター10席", required: true, autofocus: true %>
+      </div>
+    </div>
 
-  <% if @ramen_store.registered_images.first.image.present? %>
-    <%= image_tag @ramen_store.registered_images.first.image.url, id: :img_prev, class: 'thumb card-img-top' %>
-  <% else %>
-    <%= image_tag "no_image.png", id: :img_prev %>
-  <% end %>
+    <div class="form-group row">
+      <div class="col-md-4">
+        <%=f.label :access, "アクセス ※必須"%>
+      </div>
+      <div class="col-md-7 offset-md-1">
+        <%= f.text_field :access, class: "form-control", placeholder: "例：○○駅から徒歩10分", required: true, autofocus: true %>
+      </div>
+    </div>
 
-</div>
-  <div class="links">
-    <%= link_to_add_association f, :registered_images, class: 'btn btn-primary' %>
-  </div>
+    <div class="form-group row">
+      <div class="col-md-4">
+        <%= f.label :parking_space, "駐車場 ※必須" %>
+      </div>
+      <div class="col-md-7 offset-md-1">
+        <%= f.text_field :parking_space, class: "form-control", placeholder: "例：駐車場無し(近くにコインパーキングあり)、 など", required: true, autofocus: true %>
+      </div>
+    </div>
 
-  <% if defined?(:edit_local) %>
-    <div class="form-inline">
-      <% @ramen_store.registered_images.each do |registered| %>
-        <% if registered.image? %>
-          <div class="form-inline pb-3 pr-5 mx-auto">
-            <%= registered.name %>
-            <%= image_tag registered.image.url(:thumb100) %>
+    <div class="form-group row">
+      <div class="col-md-4">
+        <%= f.label :sns, "SNS ※必須" %>
+      </div>
+      <div class="col-md-7 offset-md-1">
+        <%= f.text_field :sns, class: "form-control", placeholder: "無ければ「無し」と記入", required: true, autofocus: true %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-md-4">
+        <%= f.label :content, "説明 ※必須"%>
+      </div>
+      <div class="col-md-7 offset-md-1">
+        <%= f.text_area :content, class: "form-control", rows: 3, placeholder: "自由に入力してください", required: true, autofocus: true %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-md-4">
+        <%= f.label :menus_attributes_0_name, "メニュー ※必須"%>
+      </div>
+      <div class="col-md-7 offset-md-1">
+        <table class="table menu-table">
+          <thead>
+            <th>メニュー</th>
+            <th>金額</th>
+          </thead>
+        </table>
+          <%= f.fields_for :menus do |f| %>
+            <%= render 'menu_fields', f: f %>
+          <% end %>
+        <div class="links text-right mr-4">
+          <%= link_to_add_association f, :menus, class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-md-4">
+        <%= f.label :registered_images_attributes_0_name, "写真"%>
+        <% if @ramen_store.registered_images.first.image.present? %>
+          <%= image_tag @ramen_store.registered_images.first.image.url, id: :img_prev, class: 'card-img-top thumb' %>
+        <% else %>
+          <div class="pt-3">
+            <%= image_tag "no_image.png", id: :img_prev, size: '200x200' %>
           </div>
         <% end %>
-      <% end %>
+      </div>
+      <div class="col-md-7 offset-md-1">
+        <table class="table menu-table">
+          <thead>
+            <th>タイトル</th>
+            <th>写真<small>（1枚目の写真が一覧画面に表示されます）</small></th>
+          </thead>
+        </table>
+          <%= f.fields_for :registered_images do |f| %>
+            <%= render 'registered_image_fields', f: f %>
+          <% end %>
+        <div class="links text-right mr-4">
+          <%= link_to_add_association f, :registered_images, class: 'btn btn-primary' %>
+        </div>
+      </div>
     </div>
-  <% end %>
 
-  <div class="form-group">
-    <%= f.label :tag_list, "タグ(「,」で区切って入力)  ※必須" %>
-    <%= f.text_field :tag_list, value: @ramen_store.tag_list.join(','), class: "form-control", placeholder: "人気店,こってり,駅近、など" ,required: true, autofocus: true %>
-    <small>初めから5つまでのタグが一覧画面に表示されます</small>
-  </div>
-  <%= f.submit submit_message, class: "btn btn-primary btn-block mt-5" %>
-<% end %>
+    <% if defined?(:edit_local) %>
+      <div class="form-inline">
+        <% @ramen_store.registered_images.each do |registered| %>
+          <% if registered.image? %>
+            <div class="form-inline pb-3 pr-5 mx-auto">
+              <%= registered.name %>
+              <%= image_tag registered.image.url(:thumb100) %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="form-group row">
+      <div class="col-md-4">
+        <%= f.label :tag_list, "タグ(「,」で区切って入力)  ※必須" %>
+      </div>
+      <div class="col-md-7 offset-md-1">
+        <%= f.text_field :tag_list, value: @ramen_store.tag_list.join(','), class: "form-control", placeholder: "人気店,こってり,駅近、など" ,required: true, autofocus: true %>
+        <small>初めから5つまでのタグが一覧画面に表示されます</small>
+      </div>
+    </div>
+
+    <%= f.submit submit_message, class: "btn btn-primary btn-block mt-5" %>
+  <% end %>
+</div>
 
 <script>
 	$(function () {
