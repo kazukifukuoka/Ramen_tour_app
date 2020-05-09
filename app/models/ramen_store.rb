@@ -8,7 +8,6 @@ class RamenStore < ApplicationRecord
   has_many :registered_images, class_name: 'RamenStoreUserImage', dependent: :destroy
   has_many :reviews, class_name: 'RamenStoreReview', dependent: :destroy
   has_many :images, class_name: 'RamenStoreReviewImage', dependent: :destroy
-  has_many :score, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :like_users, through: :likes, source: :user
 
