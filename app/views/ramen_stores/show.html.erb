@@ -116,14 +116,14 @@
     </div>
   </div>
   <% unless current_user.try(:own?, @ramen_store) %>
-    <div class="text-right">
-      <%= link_to "レビューする", new_ramen_store_review_path(@ramen_store), class: "btn btn-primary", data: {"turbolinks" => false} %>
+    <div class="text-left">
+      <%= link_to "レビューする", new_ramen_store_review_path(@ramen_store), class: "btn btn-success", data: {"turbolinks" => false} %>
     </div>
   <% end %>
   <!-- レビュー -->
   <% if @ramen_store.reviews.count > 0 %>
     <% @ramen_store.reviews.order(created_at: :desc).each do |review| %>
-      <div class="row reviews">
+      <div class="row reviews mt-4">
         <div class="col-md-2">
           <%= link_to user_path(review.user) do %>
             <%= image_tag review.user.image.url, size: '80x80', class: 'rounded-circle' %>
@@ -157,6 +157,8 @@
       </div>
     <% end %>
   <% else %>
-    <p>レビューはまだ投稿されていません</p>
+    <div class="mt-4">
+      <p>レビューはまだ投稿されていません</p>
+    </div>
   <% end %>
 </div>
