@@ -121,7 +121,7 @@
     </div>
   <% end %>
   <!-- レビュー -->
-  <% if @ramen_store.reviews %>
+  <% if @ramen_store.reviews.count > 0 %>
     <% @ramen_store.reviews.order(created_at: :desc).each do |review| %>
       <div class="row reviews">
         <div class="col-md-2">
