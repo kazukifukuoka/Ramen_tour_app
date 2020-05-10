@@ -135,9 +135,9 @@
           <% end %>
         </div>
 
-        <div class="col-md-6 mb-9">
+        <div class="col-md-6 mb-9 review-content">
           <%= link_to ramen_store_review_path(review, ramen_store_id: review.ramen_store_id) do %>
-          <div class="review-content">
+          <div class="balloon">
             <p><%= review.created_at.to_s(:datetime_jp) %></p>
             <p class="relative-star">
               <%= image_tag 'mid-star.png' %>

@@ -216,7 +216,7 @@ footer a:hover {
   padding: 10px 0;
 }
 
-.review-content {
+.balloon {
   position: relative;
   display: inline-block;
   padding: 7px 10px;
@@ -228,14 +228,18 @@ footer a:hover {
   border-radius: 15px;
 }
 
-.review-content:before {
-content: "";
-position: absolute;
-top: 35px;
-left: -30px;
-margin-top: -15px;
-border: 15px solid transparent;
-border-right: 15px solid #e3f9e3;
+.balloon:before {
+  content: "";
+  position: absolute;
+  top: 35px;
+  left: -30px;
+  margin-top: -15px;
+  border: 15px solid transparent;
+  border-right: 15px solid #e3f9e3;
+}
+
+.review-content a {
+  color: black;
 }
 
 .review-img {
@@ -290,7 +294,8 @@ border-right: 15px solid #e3f9e3;
 }
 
 #ramen_store_menus_attributes_0__destroy + a,
-#ramen_store_registered_images_attributes_0__destroy + a {
+#ramen_store_registered_images_attributes_0__destroy + a,
+#ramen_store_review_images_attributes_0__destroy + a {
   display: none;
 }
 
