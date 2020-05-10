@@ -130,13 +130,13 @@
             <p><%= review.user.nickname %>（<%= review.user.sex %>）</p>
           <% end %>
           <% if current_user.own?(review) %>
-            <%= link_to "編集", edit_ramen_store_review_path(review), class: "btn btn-success mr-2", data: {"turbolinks" => false} %>
-            <%= link_to "削除", ramen_store_review_path(review), method: :delete, class: "btn btn-danger", data: { confirm: "本当に削除しますか？" } %>
+            <%= link_to "編集", edit_ramen_store_review_path(review, ramen_store_id: review.ramen_store_id), class: "btn btn-success mr-2", data: {"turbolinks" => false} %>
+            <%= link_to "削除", ramen_store_review_path(review, ramen_store_id: review.ramen_store_id), method: :delete, class: "btn btn-danger", data: { confirm: "本当に削除しますか？" } %>
           <% end %>
         </div>
 
         <div class="col-md-6 mb-9">
-          <%= link_to ramen_store_review_path(review) do %>
+          <%= link_to ramen_store_review_path(review, ramen_store_id: review.ramen_store_id) do %>
           <div class="review-content">
             <p><%= review.created_at.to_s(:datetime_jp) %></p>
             <p class="relative-star">
