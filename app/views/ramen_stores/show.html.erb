@@ -8,7 +8,7 @@
         <div class="card-body">
           <div class="clearfix mb-2">
             <div class="float-left"><%= rating_for @ramen_store, 'name', imdb_avg: true, readonly: true %></div>
-            <h4 class="card-title pt-4"><%= link_to @ramen_store.name, ramen_store_path(@ramen_store) %></h4>
+            <h4 class="card-title pt-4"><%= @ramen_store.name %></h4>
           </div>
           <!--店舗情報-->
           <div class="crud-menu-btn">
@@ -129,24 +129,36 @@
             <%= image_tag review.user.image.url, size: '80x80', class: 'rounded-circle' %>
             <p><%= review.user.nickname %>（<%= review.user.sex %>）</p>
           <% end %>
+          <% if current_user.own?(review) %>
+            <%= link_to "編集", edit_ramen_store_review_path(review), class: "btn btn-success mr-2", data: {"turbolinks" => false} %>
+            <%= link_to "削除", ramen_store_review_path(review), method: :delete, class: "btn btn-danger", data: { confirm: "本当に削除しますか？" } %>
+          <% end %>
         </div>
 
         <div class="col-md-6 mb-9">
+          <%= link_to ramen_store_review_path(review) do %>
           <div class="review-content">
             <p><%= review.created_at.to_s(:datetime_jp) %></p>
-            <p class="relative">
+            <p class="relative-star">
               <%= image_tag 'mid-star.png' %>
               <span class="pt-5"> | <%= review.title %></span>
-              <span class="absolute">
+              <% if Rate.find_by(rater_id: review.user_id, rateable_id: review.ramen_store_id) %>
+              <span class="rank-star">
                 <%= Rate.find_by(rater_id: review.user_id, rateable_id: review.ramen_store_id).stars %>
               </span>
+              <% else %>
+                <span class="no-star">
+                  未評価
+                </span>
+              <% end %>
             </p>
           </div>
+          <% end %>
         </div>
 
         <div class="col-md-3">
           <div class="review-img">
-            <% if review.images %>
+            <% if review.images.first %>
               <%=  image_tag review.images.first.image.url, size: '100x100'  %>
               <p><%=  review.images.first.name %></p>
             <% else %>

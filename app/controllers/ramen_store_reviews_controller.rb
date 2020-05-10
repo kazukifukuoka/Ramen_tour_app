@@ -1,12 +1,12 @@
 class RamenStoreReviewsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_ramen_store, only: %i[create show update destroy]
-  before_action :set_ramen_store_review, only: %i[show edit update destroy]
+  before_action :set_ramen_store, only: %i[create]
+
 
   def new
     @ramen_store = RamenStore.find(params[:ramen_store_id])
-    @ramen_store_review = RamenStoreReview.new
-    @ramen_store_review_image = @ramen_store_review.images.build
+    @ramen_store_review = @ramen_store.reviews.build
+    @ramen_store_review.images.build
   end
 
   def create
@@ -23,11 +23,19 @@ class RamenStoreReviewsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @ramen_store = RamenStore.find(params[:id])
+    @ramen_store_review = @ramen_store.reviews.find(params[:ramen_store_id])
+  end
 
-  def edit; end
+  def edit
+    @ramen_store = RamenStore.find(params[:id])
+    @ramen_store_review = @ramen_store.reviews.find(params[:ramen_store_id])
+  end
 
   def update
+    @ramen_store = RamenStore.find(params[:id])
+    @ramen_store_review = @ramen_store.reviews.find(params[:ramen_store_id])
     if @ramen_store_review.update(review_params)
       flash[:notice] = 'レビューを編集しました'
       redirect_to ramen_store_review_path(@ramen_store, @ramen_store_review)
@@ -38,6 +46,8 @@ class RamenStoreReviewsController < ApplicationController
   end
 
   def destroy
+    @ramen_store = RamenStore.find(params[:id])
+    @ramen_store_review = @ramen_store.reviews.find(params[:ramen_store_id])
     if @ramen_store_review.destroy!
       redirect_to ramen_store_path(@ramen_store), success: 'レビューを削除しました'
     end

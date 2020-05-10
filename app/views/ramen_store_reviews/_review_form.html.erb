@@ -1,51 +1,69 @@
-<% content_for(:title, 'レビュー投稿') %>
-<%= form_with model: [@ramen_store, @ramen_store_review], url: ramen_store_reviews_path, local: true do |f| %>
-
 <div class='form-group row'>
-  <%= f.label :title, 'タイトル ※必須', class: 'col-md-3 col-form-label' %>
+  <div class="col-md-3">
+    <%= f.label :title %>
+    <small class="attention-input">（必須）</small>
+  </div>
   <div class='col-md-9'>
     <%= f.text_field :title, class: 'form-control', required: true, autofocus: true %>
   </div>
 </div>
 
-<div class='form-group row'>
-  <div class='col-md-3'>
-    <%= hidden_field_tag :ramen_store_id, @ramen_store.id %>
-  <p>評価</p>
-  </div>
-  <div class='col-md-9'>
-    <%= rating_for @ramen_store, 'name', half_show: true, star_on: 'star-on.png', space: true, star: 10 %>
-  </div>
-</div>
-
-<div class='form-group row'>
-  <%= f.label :content, 'レビュー内容 ※必須', class:'col-md-3 col-form-label' %>
-  <div class='col-md-9'>
-    <%= f.text_area :content, class: 'form-control', rows: 8, required: true, autofocus: true, placeholder: '口コミ内容がなくても、タイトルと評価のみで投稿できます。まずは投稿してみましょう！投稿してから編集もできますよ！' %>
-  </div>
-</div>
-
-<%= f.fields_for :images do |i| %>
   <div class='form-group row'>
-    <%= i.label :name, '写真', class: 'col-md-3 col-form-label'%>
-    <div class='col-md-4'>
-      <%= i.text_field :name, class: 'form-control' %>
+    <div class='col-md-3'>
+      <%= hidden_field_tag :ramen_store_id, ramen_store.id %>
+    <p>評価</p>
     </div>
-    <%= i.file_field :image, class: 'form-control col-md-4', accept: 'image/jpg,image/gif,image/jpeg,image/png' %>
+    <div class='col-md-9'>
+      <%= rating_for ramen_store, 'name', half_show: true, star_on: 'star-on.png', space: true, star: 10 %>
+    </div>
   </div>
-<% end %>
 
-<div class='form-group row'>
-  <%= f.label :tag_list, 'タグ(「,」で区切って入力)  ※必須', class: 'col-md-3 col-form-label' %>
-  <div class='col-md-9'>
-  <%= f.text_field :tag_list, value: @ramen_store_review.tag_list.join(','), class: 'form-control', placeholder: '人気店,こってり,駅近、など' , required: true, autofocus: true %>
+  <div class='form-group row'>
+    <div class="col-md-3">
+      <%= f.label :content %>
+      <small class="attention-input">（必須）</small>
+    </div>
+    <div class='col-md-9'>
+      <%= f.text_area :content, class: 'form-control', rows: 8, required: true, autofocus: true, placeholder: '口コミ内容がなくても、タイトルと評価のみで投稿できます。まずは投稿してみましょう！投稿してから編集もできますよ！' %>
+    </div>
   </div>
-</div>
 
-<div class="form-group row justify-content-end mt-5">
+  <div class="form-group row">
+    <div class="col-md-4">
+      <%= f.label :images_attributes_0_name, "写真" %>
+      <% if @ramen_store_review.images.first.image.present? %>
+        <%= image_tag @ramen_store_review.images.first.image.url, id: :img_prev, class: 'card-img-top thumb' %>
+      <% else %>
+        <div class="pt-3">
+          <%= image_tag "no_image.png", id: :review_img_prev, size: '200x200' %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-7 offset-md-1">
+      <table class="form-registered-image-table">
+        <thead>
+          <th>タイトル</th>
+          <th>写真<small>（1枚目の写真が一覧画面に表示されます）</small></th>
+        </thead>
+      </table>
+        <%= f.fields_for :images do |f| %>
+          <%= render 'image_fields', f: f %>
+        <% end %>
+      <div class="links text-right mr-4">
+        <%= link_to_add_association f, :images, class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+
+  <div class='form-group row'>
+    <%= f.label :tag_list, 'タグ(「,」で区切って入力)  ※必須', class: 'col-md-3 col-form-label' %>
+    <div class='col-md-9'>
+    <%= f.text_field :tag_list, value: ramen_store_review.tag_list.join(','), class: 'form-control', placeholder: '人気店,こってり,駅近、など' , required: true, autofocus: true %>
+    </div>
+  </div>
+
+  <div div class="form-group row justify-content-end mt-5">
   <div class="col-md-9">
-    <%= f.submit submit_message, class:"btn btn-success" %>
+    <%= f.submit submit_message, class:"btn btn-success btn-block" %>
   </div>
 </div>
-
-<% end %>
