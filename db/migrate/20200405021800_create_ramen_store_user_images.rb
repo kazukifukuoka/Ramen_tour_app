@@ -4,7 +4,6 @@ class CreateRamenStoreUserImages < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :image
       t.boolean :main
-      t.references :user, null: false, foreign_key: true
       t.references :ramen_store, null: false, foreign_key: true
 
       t.timestamps

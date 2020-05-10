@@ -92,7 +92,6 @@ User.all.ids.sort.each do |user_id|
         { name: "#{MENU[rand(0..5)]}",
           image: File.open(REGISTERED_IMAGE[rand(0..6)]),
           ramen_store_id: ramen_store.id,
-          user_id: user_id
         }
     end
   end

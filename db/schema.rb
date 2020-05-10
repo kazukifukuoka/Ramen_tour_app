@@ -76,12 +76,10 @@ ActiveRecord::Schema.define(version: 2020_04_19_092016) do
     t.string "name"
     t.string "image"
     t.boolean "main"
-    t.bigint "user_id", null: false
     t.bigint "ramen_store_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["ramen_store_id"], name: "index_ramen_store_user_images_on_ramen_store_id"
-    t.index ["user_id"], name: "index_ramen_store_user_images_on_user_id"
   end
 
   create_table "ramen_stores", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -186,6 +184,5 @@ ActiveRecord::Schema.define(version: 2020_04_19_092016) do
   add_foreign_key "ramen_store_reviews", "ramen_stores"
   add_foreign_key "ramen_store_reviews", "users"
   add_foreign_key "ramen_store_user_images", "ramen_stores"
-  add_foreign_key "ramen_store_user_images", "users"
   add_foreign_key "ramen_stores", "users"
 end
