@@ -24,7 +24,7 @@
         </div>
       </div>
       <!--タグ-->
-        <div class="tag_list pb-2"><% ramen_store.tag_list.each_with_index do |tag, index| %>
+      <div class="tag_list pb-2"><% ramen_store.tag_list.each_with_index do |tag, index| %>
         <% if @path.is('ramen_stores#index') %>
           <span class="badge badge-primary mr-1 mb-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span>
           <% elsif @path.is('ramen_stores#likes') %>
@@ -34,9 +34,9 @@
           <% end %>
             <% break if index == 4 %>
         <% end %>
-        </div>
+      </div>
         <!--店舗紹介文-->
-        <p class="card-text"><%= ramen_store.content.truncate(40) %></p>
+        <p class="card-text"><%= simple_format(ramen_store.content.truncate(40)) %></p>
       </div>
     </div>
   </div>

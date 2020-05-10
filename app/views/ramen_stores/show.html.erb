@@ -124,18 +124,20 @@
   <% if @ramen_store.reviews.count > 0 %>
     <% @ramen_store.reviews.order(created_at: :desc).each do |review| %>
       <div class="row reviews mt-4">
-        <div class="col-md-2">
-          <%= link_to user_path(review.user) do %>
-            <%= image_tag review.user.image.url, size: '80x80', class: 'rounded-circle' %>
-            <p><%= review.user.nickname %>（<%= review.user.sex %>）</p>
-          <% end %>
-          <% if current_user.own?(review) %>
-            <%= link_to "編集", edit_ramen_store_review_path(review, ramen_store_id: review.ramen_store_id), class: "btn btn-success mr-2", data: {"turbolinks" => false} %>
-            <%= link_to "削除", ramen_store_review_path(review, ramen_store_id: review.ramen_store_id), method: :delete, class: "btn btn-danger", data: { confirm: "本当に削除しますか？" } %>
-          <% end %>
+        <div class="col-md-2 mt-3 pl-4">
+          <div class="text-center">
+            <%= link_to user_path(review.user) do %>
+              <%= image_tag review.user.image.url, size: '80x80', class: 'rounded-circle' %>
+              <p class="pt-2"><%= review.user.nickname %>（<%= review.user.sex %>）</p>
+            <% end %>
+            <% if current_user.own?(review) %>
+              <%= link_to "編集", edit_ramen_store_review_path(review, ramen_store_id: review.ramen_store_id), class: "btn btn-success mr-2", data: {"turbolinks" => false} %>
+              <%= link_to "削除", ramen_store_review_path(review, ramen_store_id: review.ramen_store_id), method: :delete, class: "btn btn-danger", data: { confirm: "本当に削除しますか？" } %>
+            <% end %>
+          </div>
         </div>
 
-        <div class="col-md-6 mb-9 review-content">
+        <div class="col-md-6 mb-9 mt-2 review-content">
           <%= link_to ramen_store_review_path(review, ramen_store_id: review.ramen_store_id) do %>
           <div class="balloon">
             <p><%= review.created_at.to_s(:datetime_jp) %></p>
@@ -152,17 +154,21 @@
                 </span>
               <% end %>
             </p>
+            <%= simple_format(review.content.truncate(33)) %>
           </div>
           <% end %>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-2 mt-1 text-center">
           <div class="review-img">
-            <% if review.images.first %>
-              <%=  image_tag review.images.first.image.url, size: '100x100'  %>
-              <p><%=  review.images.first.name %></p>
-            <% else %>
-              <p>画像は投稿していません</p>
+            <%= image_tag review.images.first.image.url, size: '100x100'  %>
+            <p><%= review.images.first.name %></p>
+          </div>
+        </div>
+        <div class="col-md-2 mt-3">
+          <div class="tag_list pb-2"><% review.tag_list.each_with_index do |tag, index| %>
+            <span class="badge badge-primary mr-1 mb-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span>
+            <% break if index == 4 %>
             <% end %>
           </div>
         </div>
