@@ -12,10 +12,6 @@ class RamenStoreReviewsController < ApplicationController
   def create
     @ramen_store_review = @ramen_store.reviews.build(review_params)
     @ramen_store_review.user_id = current_user.id
-    @ramen_store_review.images.each do |review_image|
-      review_image.ramen_store_id = @ramen_store.id
-    end
-    binding.pry
     if @ramen_store_review.save
       redirect_to ramen_store_path(@ramen_store), success: 'レビューを投稿しました'
     else
@@ -31,7 +27,6 @@ class RamenStoreReviewsController < ApplicationController
   end
 
   def update
-
     if @ramen_store_review.update(review_params)
       flash[:notice] = 'レビューを編集しました'
       redirect_to ramen_store_review_path(@ramen_store, @ramen_store_review)

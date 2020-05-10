@@ -134,7 +134,6 @@ User.all.ids.sort.each do |user_id|
         {
           name: "#{MENU[rand(0..5)]}",
           image: File.open(REGISTERED_IMAGE[rand(0..6)]),
-          ramen_store_id: ramen_store.id,
           ramen_store_review_id: n
         }
     end
@@ -142,33 +141,6 @@ User.all.ids.sort.each do |user_id|
 end
 RamenStoreReview.create!(reviews_list)
 puts "レビュー投入成功"
-
-# RamenStoreReview.all.ids.sort.each do |review_id|
-#   RamenStore.all.each do |ramen_store|
-#     ramen_store.reviews.each do |review|
-#       if review.ramen_store_id == ramen_store.id
-#           review_images_list <<
-#           { name: "#{MENU[rand(0..5)]}",
-#             image: File.open(REGISTERED_IMAGE[rand(0..6)]),
-#             ramen_store_id: ramen_store.id,
-#             ramen_store_review_id: review_id
-#           }
-#       end
-#     end
-#   end
-# end
-# RamenStore.all.ids.sort.each do |store_id|
-#   RamenStoreReview.all.each do |review|
-#     if review.ramen_store_id == store_id
-#       review_images_list <<
-#       { name: "#{MENU[rand(0..5)]}",
-#         image: File.open(REGISTERED_IMAGE[rand(0..6)]),
-#         ramen_store_id: store_id,
-#         ramen_store_review_id: review.id
-#       }
-#     end
-#   end
-# end
 RamenStoreReviewImage.create!(review_images_list)
 puts "レビュー画像投稿成功"
 
