@@ -21,10 +21,6 @@ class RamenStoresController < ApplicationController
   def create
     @ramen_store = RamenStore.new(ramen_store_params)
     @ramen_store.user = current_user
-    @ramen_store.registered_images.each do |registered_image|
-      registered_image.user = current_user
-    end
-
     if @ramen_store.save
       redirect_to ramen_stores_path, success: '店舗を登録しました'
     else
