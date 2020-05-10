@@ -158,12 +158,8 @@
 
         <div class="col-md-3">
           <div class="review-img">
-            <% if review.images.first %>
-              <%=  image_tag review.images.first.image.url, size: '100x100'  %>
-              <p><%=  review.images.first.name %></p>
-            <% else %>
-              <p>画像は投稿していません</p>
-            <% end %>
+            <%= image_tag review.images.first.image.url, size: '100x100'  %>
+            <p><%= review.images.first.name %></p>
           </div>
         </div>
       </div>
