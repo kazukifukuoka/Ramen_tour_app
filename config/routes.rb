@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   root to: 'static_pages#top'
 
   resources :ramen_stores do
-    resources :ramen_store_reviews, as: :reviews, path: '/reviews', except: [:index]
+    resources :ramen_store_reviews, as: :reviews, path: '/reviews', only: %i[new create show edit update destroy]
     resources :likes, only: %i[create destroy]
     get 'likes', on: :collection
     get 'rank', on: :collection
