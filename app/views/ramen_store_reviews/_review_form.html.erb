@@ -1,29 +1,29 @@
 <div class='form-group row'>
-  <div class="col-md-3">
+  <div class="col-md-4">
     <%= f.label :title %>
     <small class="attention-input">（必須）</small>
   </div>
-  <div class='col-md-9'>
+  <div class='col-md-7  offset-md-1'>
     <%= f.text_field :title, class: 'form-control', required: true, autofocus: true %>
   </div>
 </div>
 
   <div class='form-group row'>
-    <div class='col-md-3'>
+    <div class='col-md-4'>
       <%= hidden_field_tag :ramen_store_id, ramen_store.id %>
     <p>評価</p>
     </div>
-    <div class='col-md-9'>
+    <div class='col-md-7  offset-md-1'>
       <%= rating_for ramen_store, 'name', half_show: true, star_on: 'star-on.png', space: true, star: 10 %>
     </div>
   </div>
 
   <div class='form-group row'>
-    <div class="col-md-3">
+    <div class="col-md-4">
       <%= f.label :content %>
       <small class="attention-input">（必須）</small>
     </div>
-    <div class='col-md-9'>
+    <div class='col-md-7  offset-md-1'>
       <%= f.text_area :content, class: 'form-control', rows: 8, required: true, autofocus: true, placeholder: '口コミ内容がなくても、タイトルと評価のみで投稿できます。まずは投稿してみましょう！投稿してから編集もできますよ！' %>
     </div>
   </div>
@@ -31,7 +31,7 @@
   <div class="form-group row">
     <div class="col-md-4">
       <%= f.label :images_attributes_0_name, "写真" %>
-      <% if @ramen_store_review.images.first.image.present? %>
+      <% if @ramen_store_review.images.first.image.present?  %>
         <%= image_tag @ramen_store_review.images.first.image.url, id: :img_prev, class: 'card-img-top thumb' %>
       <% else %>
         <div class="pt-3">
@@ -43,7 +43,7 @@
       <table class="form-registered-image-table">
         <thead>
           <th>タイトル</th>
-          <th>写真<small>（1枚目の写真が一覧画面に表示されます）</small></th>
+          <th>写真<small>（1枚目の写真がレビュー一覧に表示されます）</small></th>
         </thead>
       </table>
         <%= f.fields_for :images do |f| %>
@@ -55,15 +55,16 @@
     </div>
   </div>
 
-  <div class='form-group row'>
-    <%= f.label :tag_list, 'タグ(「,」で区切って入力)  ※必須', class: 'col-md-3 col-form-label' %>
-    <div class='col-md-9'>
-    <%= f.text_field :tag_list, value: ramen_store_review.tag_list.join(','), class: 'form-control', placeholder: '人気店,こってり,駅近、など' , required: true, autofocus: true %>
+  <div class="form-group row">
+    <div class="col-md-4">
+      <%= f.label :tag_list, "タグ" %>
+      <small class="attention-input">（必須）</small>
+    </div>
+    <div class="col-md-7 offset-md-1">
+      <%= f.text_field :tag_list, value: @ramen_store.tag_list.join(','), class: "form-control", placeholder: "例：人気店,こってり,駅近" ,required: true, autofocus: true %>
+      <small class="attention-input">タグ間はカンマ（,）で区切って入力してください</small>
     </div>
   </div>
 
-  <div div class="form-group row justify-content-end mt-5">
-  <div class="col-md-9">
-    <%= f.submit submit_message, class:"btn btn-success btn-block" %>
-  </div>
+  <%= f.submit submit_message, class:"btn btn-success btn-block" %>
 </div>

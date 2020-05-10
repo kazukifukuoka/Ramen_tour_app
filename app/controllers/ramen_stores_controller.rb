@@ -15,7 +15,6 @@ class RamenStoresController < ApplicationController
   def new
     @ramen_store = RamenStore.new
     @ramen_store.menus.build
-    # 2.times { @ramen_store.registered_images.build }
     @ramen_store.registered_images.build
   end
 
