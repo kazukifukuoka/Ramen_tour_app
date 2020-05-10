@@ -252,16 +252,24 @@ border-right: 15px solid #e3f9e3;
   padding: 10px 0;
 }
 
-.relative {
+.relative-star {
   position: relative;
 }
 
-.absolute {
+.rank-star {
   position: absolute;
   top: 20px;
   left: 20px;
   font-size: .8rem;
 }
+
+.no-star {
+  position: absolute;
+  top: 20px;
+  left: 11px;
+  font-size: .8rem;
+}
+
 
 // 店舗投稿
 .form-menu-table th {

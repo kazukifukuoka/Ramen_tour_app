@@ -1,12 +1,12 @@
 class RamenStoreReviewsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_ramen_store, only: %i[create show update destroy]
+  before_action :set_ramen_store, only: %i[new create show edit update destroy]
   before_action :set_ramen_store_review, only: %i[show edit update destroy]
 
+
   def new
-    @ramen_store = RamenStore.find(params[:ramen_store_id])
-    @ramen_store_review = RamenStoreReview.new
-    @ramen_store_review_image = @ramen_store_review.images.build
+    @ramen_store_review = @ramen_store.reviews.build
+    @ramen_store_review.images.build
   end
 
   def create
@@ -23,9 +23,11 @@ class RamenStoreReviewsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+  end
 
-  def edit; end
+  def edit
+  end
 
   def update
     if @ramen_store_review.update(review_params)
@@ -50,7 +52,7 @@ class RamenStoreReviewsController < ApplicationController
   end
 
   def set_ramen_store_review
-    @ramen_store_review = RamenStoreReview.find(params[:id])
+    @ramen_store_review = @ramen_store.reviews.find(params[:id])
   end
 
   def review_params

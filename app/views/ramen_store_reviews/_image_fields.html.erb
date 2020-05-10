@@ -5,7 +5,7 @@
         <td><%= f.text_field :name, class: "form-control", placeholder: '例：醤油ラーメン' %></td>
       </div>
       <div class="col-md-6">
-        <td><%= f.file_field :image, class: "form-control", id: :registered_img, accept: "image/jpg,image/gif,image/jpeg,image/png" %></td>
+        <td><%= f.file_field :image, class: "form-control", id: :review_img, accept: "image/jpg,image/gif,image/jpeg,image/png" %></td>
       </div>
     </tbody>
     <div class="text-right">
@@ -20,12 +20,12 @@
         if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-    $('#registered_img_prev').attr('src', e.target.result);
+    $('#review_img_prev').attr('src', e.target.result);
         }
         reader.readAsDataURL(input.files[0]);
         }
     }
-    $("#registered_img").change(function(){
+    $("#review_img").change(function(){
         readURL(this);
     });
   });

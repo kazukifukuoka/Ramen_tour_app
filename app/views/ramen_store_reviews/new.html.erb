@@ -1,2 +1,7 @@
+<% content_for(:title, 'レビュー投稿') %>
 <%= render partial: "shared/error_messages", locals: { object: @ramen_store_review } %>
-<%= render partial: "review_form", locals: { submit_message: "レビューを投稿する"}%>
+<div class="container mt-5">
+  <%= form_with model: @ramen_store_review, url: ramen_store_reviews_path, method: :post, local: true do |f| %>
+  <%= render partial: "review_form", locals: { ramen_store: @ramen_store, ramen_store_review: @ramen_store_review, f: f, submit_message: "レビューを投稿する" } %>
+  <% end %>
+</div>
