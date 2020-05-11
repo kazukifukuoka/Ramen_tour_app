@@ -1,24 +1,68 @@
 <% content_for(:title, @ramen_store_review.title) %>
-<%= link_to "戻る", ramen_store_path(@ramen_store), class: "btn btn-primary" %>
-<% if current_user.try(:own?, @ramen_store_review) %>
-<%= link_to "編集する", edit_ramen_store_review_path, class: "btn btn-primary" %>
-<%= link_to "削除する", ramen_store_review_path, method: :delete, class: "btn btn-primary", data: { confirm: "本当に削除しますか？" } %>
-<% end %>
+<div class="container">
+  <div class="row mt-4">
+    <div class="review-wrapper mx-auto">
+      <div class="row reviews mt-4">
+        <div class="col-md-2 offset-md-1 mt-3 pl-4">
+          <div class="text-center">
+            <%= link_to user_path(@ramen_store_review.user) do %>
+              <%= image_tag @ramen_store_review.user.image.url, size: '80x80', class: 'rounded-circle' %>
+              <div class="pt-2"><%= @ramen_store_review.user.nickname %></div>
+              （<%= @ramen_store_review.user.sex %>）
+            <% end %>
+          </div>
+        </div>
 
-<table class="table table-bordered mt-3", style="table-layout:fixed;width:100%;">
-  <tr><th><%= link_to "#{@ramen_store_review.title}", ramen_store_review_path(@ramen_store_review) %></th><td><%= "作成: #{@ramen_store_review.created_at.to_s(:datetime_jp)} / 更新:  #{@ramen_store_review.updated_at.to_s(:datetime_jp)}" %></td></tr>
-  <tr><th colspan="2">レビュー</th></tr>
-  <tr><td colspan="2"><%= simple_format(@ramen_store_review.content) %></td></tr>
-  <tr><th colspan="2">写真</th></tr>
-  <% @ramen_store_review.images.each do |review| %>
-    <% if review.image? %>
-      <tr><td><%= review.name %></td><td><%=image_tag review.image.url(:thumb100) %></td></tr>
-    <% else %>
-      <tr><td colspan="2", class="text-center">写真は投稿されていません</td></tr>
-    <% end %>
-  <% end %>
-  <tr><td>タグ</td>
-  <td><% @ramen_store_review.tag_list.each do |tag| %>
-    <span class="badge badge-primary mr-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span>
-  <% end %></td></tr>
-</table>
+        <div class="col-md-8 mt-2 review-content">
+          <%= link_to ramen_store_review_path(@ramen_store_review, ramen_store_id: @ramen_store_review.ramen_store_id) do %>
+          <div class="balloon">
+            <p><%= @ramen_store_review.created_at.to_s(:datetime_jp) %></p>
+            <p class="relative-star">
+              <%= image_tag 'mid-star.png' %>
+              <span class="pt-5"> | <%= @ramen_store_review.title %></span>
+              <% if Rate.find_by(rater_id: @ramen_store_review.user_id, rateable_id: @ramen_store_review.ramen_store_id) %>
+              <span class="rank-star">
+                <%= Rate.find_by(rater_id: @ramen_store_review.user_id, rateable_id: @ramen_store_review.ramen_store_id).stars %>
+              </span>
+              <% else %>
+                <span class="no-star">
+                  未評価
+                </span>
+              <% end %>
+            </p>
+            <%= simple_format(@ramen_store_review.content) %>
+          </div>
+          <% end %>
+        </div>
+
+        <div class="col-md-12 mt-1 pl-4">
+          <% @ramen_store_review.images.each do |review_img| %>
+            <div class="review-img mr-3">
+              <%= image_tag review_img.image.url, size: '100x100' %>
+              <div class="text-center mt-2"><%= review_img.name %></div>
+            </div>
+          <% end %>
+        </div>
+        <div class="col-md-12 mt-3 pl-4">
+          <div class="tag_list pb-2"><% @ramen_store_review.tag_list.each_with_index do |tag, index| %>
+            <span class="badge badge-primary mr-1 mb-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span>
+            <% break if index == 4 %>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-md-12 text-right">
+          <% if current_user.own?(@ramen_store_review) %>
+            <div class="lg-btn">
+              <%= link_to "レビューを編集", edit_ramen_store_review_path(@ramen_store_review, ramen_store_id: @ramen_store_review.ramen_store_id), class: "btn btn-outline-success mr-2", data: {"turbolinks" => false} %>
+              <%= link_to "レビューを削除", ramen_store_review_path(@ramen_store_review, ramen_store_id: @ramen_store_review.ramen_store_id), method: :delete, class: "btn btn-outline-danger", data: { confirm: "本当に削除しますか？" } %>
+            </div>
+            <div class="sm-btn">
+              <%= link_to "編集", edit_ramen_store_review_path(@ramen_store_review, ramen_store_id: @ramen_store_review.ramen_store_id), class: "btn btn-outline-success mr-2", data: {"turbolinks" => false} %>
+              <%= link_to "削除", ramen_store_review_path(@ramen_store_review, ramen_store_id: @ramen_store_review.ramen_store_id), method: :delete, class: "btn btn-outline-danger", data: { confirm: "本当に削除しますか？" } %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
