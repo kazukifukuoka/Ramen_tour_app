@@ -1,22 +1,29 @@
 <% content_for(:title, '見つける') %>
-<!-- 検索フォーム -->
-<div class="row">
-  <div class="col-lg-10 offset-lg-1">
-    <%= render 'search_form' %>
-  </div>
-</div>
-<!-- 店舗一覧 -->
-<div class="pt-3">
-  <div class="row">
-    <div class="col-12">
-      <div class="row">
-        <% if @ramen_stores.present? %>
-        <%= render @ramen_stores %>
-      </div>
-        <%= paginate @ramen_stores %>
-        <% else %>
-          店舗がまだありません
+<div class="container">
+  <div class="pt-4">
+    <div class="row">
+      <div class="col-12">
+        <% unless @ramen_stores.present? %>
+          <h3 class="text-center pb-3">条件から探す</h3>
         <% end %>
+          <%= render 'search_form' %>
+        <div class="row">
+        <!-- 店舗一覧 -->
+          <% if @ramen_stores.present? %>
+            <%= render @ramen_stores %>
+        </div>
+          <%= paginate @ramen_stores %>
+          <% else %>
+            <div class="recommend-tag">
+              <h3 class="text-center">人気タグから探す</h3>
+              <ul class="tag-lists inner">
+                <% ActsAsTaggableOn::Tag.all.order(taggings_count: :desc).limit(40).each do |tag| %>
+                  <li><%= link_to tag, ramen_stores_path(tag_name: tag.name) %></li>
+                <% end %>
+              </ul>
+            </div>
+        </div>
+          <% end %>
       </div>
     </div>
   </div>

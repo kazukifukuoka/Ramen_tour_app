@@ -1,14 +1,28 @@
 <%= search_form_for @q, url: search_ramen_stores_path do |f| %>
-  <div class="input-group mb-3">
-    <%= f.search_field :ramen_store_cont, class: 'form-control', placeholder: '検索ワード' %>
-    <%= f.search_field :menus_name_cont, class: 'form-control', placeholder: '検索ワード' %>
-    <%= form_tag(ramen_stores_path, method: "get") do %>
-
-      <select id="pref", name="q[store_pref_cont]"><option value="">都道府県を選択してください</option></select>
-      <select id="select-city", name="q[store_address_cont]"><option value="">市区町村を選択してください</option></select>
-    <% end %>
-    <div class="input-group-append">
-      <%= f.submit '検索', class: 'btn btn-primary' %>
+  <div class="row pb-4">
+    <div class="col-md-9">
+      <div class="row">
+          <div class="col-md-4 text-center">
+            <p>キーワードで検索：</p>
+          </div>
+          <div class="col-md-8 mb-4">
+            <%= f.search_field :ramen_store_cont, class: 'form-control mb-3', placeholder: '店名や最寄り駅などで検索してみよう！' %>
+            <%= f.search_field :menus_name_cont, class: 'form-control mb-3', placeholder: 'メニューで検索してみよう！' %>
+          </div>
+          <div class="col-md-4 text-center">
+            <p>都道府県で検索：</p>
+            <small>（市町村まで選択してください）</small>
+          </div>
+        <div class="col-md-8">
+          <%= form_tag(ramen_stores_path, method: "get") do %>
+            <select id="pref", name="q[store_pref_cont]" class="form-control mb-3"><option value="">都道府県を選択してください</option></select>
+            <select id="select-city", name="q[store_address_cont]" class="form-control"><option value="">市区町村を選択してください</option></select>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 d-flex align-items-end mt-5">
+      <%= f.submit '検索', class: 'btn btn-primary btn-block' %>
     </div>
   </div>
 <% end %>

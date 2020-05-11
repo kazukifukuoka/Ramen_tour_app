@@ -70,14 +70,7 @@ class RamenStoresController < ApplicationController
 
   def search
     @q = RamenStore.ransack(params[:q])
-    if params[:q] != nil
-      @ramen_stores = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
-    else
-      @ramen_store = RamenStore.new
-    end
-    return unless params[:tag_name]
-
-    @ramen_stores = RamenStore.tagged_with(params[:tag_name].to_s).page(params[:page])
+    @ramen_stores = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page]) if params[:q] != nil
   end
 
   private

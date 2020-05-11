@@ -29,10 +29,8 @@
           <span class="badge badge-primary mr-1 mb-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span>
           <% elsif @path.is('ramen_stores#likes') %>
             <span class="badge badge-primary mr-1 mb-1 p-2"><%= link_to tag, likes_ramen_stores_path(tag_name: tag), class: "text-white" %></span>
-          <% else %>
-            <span class="badge badge-primary mr-1 mb-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span>
           <% end %>
-            <% break if index == 4 %>
+          <% break if index == 4 %>
         <% end %>
       </div>
         <!--店舗紹介文-->
