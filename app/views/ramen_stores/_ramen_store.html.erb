@@ -1,8 +1,18 @@
 <div class="col-sm-12 col-lg-4 mb-3">
   <div id=<%= "ramen_store-id-#{ramen_store.id}" %>>
+    <% if ramen_store_counter == 0 %>
+      <div class="text-center"><%= image_tag 'rank1.jpg', class: 'rank-img' %></div>
+    <% elsif ramen_store_counter == 1 %>
+      <div class="text-center"><%= image_tag 'rank2.jpg', class: 'rank-img' %></div>
+    <% elsif ramen_store_counter == 2 %>
+      <div class="text-center"><%= image_tag 'rank3.jpg', class: 'rank-img' %></div>
+    <% else %>
+      <div class="text-center"><span class="ramen_store_counter">第<%= ramen_store_counter + 1 %>位</span></div>
+    <% end %>
     <div class="card">
       <%= link_to ramen_store_path(ramen_store) do %>
-        <%= image_tag ramen_store.registered_images.first.image.url, class: 'card-img-top thumb' %><% end %>
+        <%= image_tag ramen_store.registered_images.first.image.url, class: 'card-img-top thumb' %>
+      <% end %>
       <div class="card-body">
       <div class="clearfix mb-2">
         <div class="float-left"><%= rating_for ramen_store, 'name', imdb_avg: true, readonly: true %></div>
@@ -25,7 +35,7 @@
       </div>
       <!--タグ-->
       <div class="tag_list pb-2"><% ramen_store.tag_list.each_with_index do |tag, index| %>
-        <% if @path.is('ramen_stores#index') %>
+        <% if @path.is('ramen_stores#index') || @path.is('ramen_stores#rank') %>
           <span class="badge badge-primary mr-1 mb-1 p-2"><%= link_to tag, ramen_stores_path(tag_name: tag), class: "text-white" %></span>
           <% elsif @path.is('ramen_stores#likes') %>
             <span class="badge badge-primary mr-1 mb-1 p-2"><%= link_to tag, likes_ramen_stores_path(tag_name: tag), class: "text-white" %></span>
@@ -33,7 +43,7 @@
           <% break if index == 4 %>
         <% end %>
       </div>
-        <!--店舗紹介文-->
+      <!--店舗紹介文-->
         <p class="card-text"><%= simple_format(ramen_store.content.truncate(40)) %></p>
       </div>
     </div>

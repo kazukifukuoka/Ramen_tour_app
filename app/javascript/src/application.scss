@@ -69,9 +69,9 @@ input[name="tab_item"] {
 
 
 /*選択されているタブのコンテンツのみを表示*/
-#all:checked ~ #all_content,
 #score:checked ~ #score_content,
-#design:checked ~ #design_content {
+#likes:checked ~ #likes_content,
+#review:checked ~ #review_content {
   display: block;
 }
 
@@ -477,4 +477,13 @@ footer a:hover {
     width: 48%;
     margin-right: 0;
   }
+}
+
+.rank-img {
+  width: 30%;
+}
+
+.ramen_store_counter {
+  font-size: 1.5rem;
+  margin-left: 25px;
 }

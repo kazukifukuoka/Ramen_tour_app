@@ -115,7 +115,7 @@
       </div>
     </div>
   </div>
-  <div class="review-wrapper mx-auto">
+  <div class="review-wrapper mx-auto mt-4">
     <% unless current_user.try(:own?, @ramen_store) %>
       <div class="text-left">
         <%= link_to "レビューする", new_ramen_store_review_path(@ramen_store), class: "btn btn-success", data: {"turbolinks" => false} %>
