@@ -1,25 +1,29 @@
 <% content_for(:title, 'お気に入り') %>
-<!-- 検索フォーム -->
-<div class="row">
-  <div class="col-lg-10 offset-lg-1">
-    <form>
-    <%= render 'search_form' %>
-    </form>
-  </div>
-</div>
-<!-- お気に入り一覧 -->
-<div class="pt-3">
-  <div class="row">
-    <div class="col-12">
-      <div class="row">
-        <% if @like_ramen_stores.present? %>
-          <%= render @like_ramen_stores %>
-        <% else %>
-          <%= '店舗がまだありません' %>
-        <% end %>
+<div class="container">
+  <div class="pt-4">
+    <!-- 検索フォーム -->
+    <div class="row">
+      <div class="col-lg-10 offset-lg-1">
+        <form>
+        <%= render 'search_form' %>
+        </form>
       </div>
     </div>
+    <!-- お気に入り一覧 -->
+    <div class="pt-3">
+      <div class="row">
+        <div class="col-12">
+          <div class="row">
+            <% if @like_ramen_stores.present? %>
+              <%= render @like_ramen_stores %>
+            <% else %>
+              <%= '店舗がまだありません' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= paginate @like_ramen_stores %>
   </div>
 </div>
-
-<%= paginate @like_ramen_stores %>
