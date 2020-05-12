@@ -1,13 +1,15 @@
 <div class="col-sm-12 col-lg-4 mb-3">
   <div id=<%= "ramen_store-id-#{ramen_store.id}" %>>
-    <% if ramen_store_counter == 0 %>
-      <div class="text-center"><%= image_tag 'rank1.jpg', class: 'rank-img' %></div>
-    <% elsif ramen_store_counter == 1 %>
-      <div class="text-center"><%= image_tag 'rank2.jpg', class: 'rank-img' %></div>
-    <% elsif ramen_store_counter == 2 %>
-      <div class="text-center"><%= image_tag 'rank3.jpg', class: 'rank-img' %></div>
-    <% else %>
-      <div class="text-center"><span class="ramen_store_counter">第<%= ramen_store_counter + 1 %>位</span></div>
+    <% if @path.is('ramen_stores#rank') %>
+      <% if ramen_store_counter == 0 %>
+        <div class="text-center"><%= image_tag 'rank1.jpg', class: 'rank-img' %></div>
+      <% elsif ramen_store_counter == 1 %>
+        <div class="text-center"><%= image_tag 'rank2.jpg', class: 'rank-img' %></div>
+      <% elsif ramen_store_counter == 2 %>
+        <div class="text-center"><%= image_tag 'rank3.jpg', class: 'rank-img' %></div>
+      <% else %>
+        <div class="text-center"><span class="ramen_store_counter">第<%= ramen_store_counter + 1 %>位</span></div>
+      <% end %>
     <% end %>
     <div class="card">
       <%= link_to ramen_store_path(ramen_store) do %>
