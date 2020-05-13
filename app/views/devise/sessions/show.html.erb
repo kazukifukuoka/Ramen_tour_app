@@ -38,9 +38,15 @@
           <div class="tab-content" id="myTabContent">
             <!-- 店舗投稿 -->
             <div class="tab-pane fade show active" id="my-page-store-tab" role="tabpanel" aria-labelledby="1-tab">
-              <div class="row">
-                <%= render partial: 'ramen_stores/ramen_store', collection: @post_ramen_store %>
-              </div>
+              <% if @post_ramen_store.present? %>
+                <div class="row">
+                  <%= render partial: 'ramen_stores/ramen_store', collection: @post_ramen_store %>
+                </div>
+              <% else %>
+                <div class="mt-4">
+                  <p>店舗をまだ投稿していません</p>
+                </div>
+              <% end %>
               <%= paginate @post_ramen_store, :param_name => 'store_page' %>
             </div>
             <!-- レビュー投稿 -->

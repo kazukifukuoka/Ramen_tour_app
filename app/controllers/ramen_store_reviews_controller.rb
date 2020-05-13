@@ -37,9 +37,7 @@ class RamenStoreReviewsController < ApplicationController
   end
 
   def destroy
-    if @ramen_store_review.destroy!
-      redirect_to ramen_store_path(@ramen_store), success: 'レビューを削除しました'
-    end
+    redirect_back fallback_location: root_path, success: 'レビューを削除しました' if @ramen_store_review.destroy!
   end
 
   private
