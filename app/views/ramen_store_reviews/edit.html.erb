@@ -1,7 +1,7 @@
 <% content_for(:title, 'レビュー編集') %>
 <%= render partial: "shared/error_messages", locals: { object: @ramen_store_review } %>
-<div class="container mt-5">
+<div class="container pt-4">
   <%= form_with model: [@ramen_store, @ramen_store_review], url: ramen_store_review_path, method: :patch, local: true do |f| %>
-  <%= render partial: "review_form", locals: { ramen_store: @ramen_store, ramen_store_review: @ramen_store_review, f: f, submit_message: "レビューを編集する"} %>
+  <%= render partial: "review_form", locals: { ramen_store: @ramen_store, ramen_store_review: @ramen_store_review, f: f, submit_message: "レビューを編集する", title: 'レビュー編集'} %>
   <% end %>
 </div>

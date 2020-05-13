@@ -1,6 +1,6 @@
 <% content_for(:title, t('.resend_confirmation_instructions'))%>
 <div class="container-login">
-  <h3 class="text-center"><%= t('.resend_confirmation_instructions') %></h3>
+  <h4 class="text-center"><%= t('.resend_confirmation_instructions') %></h4>
 
   <%= form_for(resource, as: resource_name, url: user_confirmation_path(@resource, confirmation_token: @token), html: { method: :post }) do |f| %>
     <%= devise_error_messages! %>

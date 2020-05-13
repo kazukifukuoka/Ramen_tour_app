@@ -5,6 +5,7 @@ class RamenStoreReviewsController < ApplicationController
 
 
   def new
+    return redirect_back fallback_location: root_path, warning: '既にレビューを投稿しています' if RamenStoreReview.find_by(user_id: current_user.id)
     @ramen_store_review = @ramen_store.reviews.build
     @ramen_store_review.images.build
   end
@@ -37,9 +38,7 @@ class RamenStoreReviewsController < ApplicationController
   end
 
   def destroy
-    if @ramen_store_review.destroy!
-      redirect_to ramen_store_path(@ramen_store), success: 'レビューを削除しました'
-    end
+    redirect_back fallback_location: root_path, success: 'レビューを削除しました' if @ramen_store_review.destroy!
   end
 
   private
