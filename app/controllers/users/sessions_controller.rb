@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
+  add_flash_types :success, :info, :warning, :danger
   before_action :request_path
   MY_STORE_PER = 6
   MY_REVIEW_PER = 5
@@ -22,6 +23,7 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   def show
+    return redirect_to new_user_session_path, danger: 'アカウント登録もしくはログインしてください' unless current_user
     @user = User.find(params[:id])
     @post_ramen_store = @user.ramen_stores.page(params[:store_page]).per(MY_STORE_PER)
     @post_reviews = @user.ramen_store_reviews.page(params[:review_page]).per(MY_REVIEW_PER)
