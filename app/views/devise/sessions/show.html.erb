@@ -13,7 +13,7 @@
             <hr>
             <p class="font-weight-bold">プロフィール</p>
             <% if @user.profile? %>
-              <p class="font-weight-bold"><%= @user.nickname %></p>
+              <p><%= @user.profile %></p>
             <% else %>
               <p class="text-muted">プロフィールは設定されていません</p>
             <% end %>
