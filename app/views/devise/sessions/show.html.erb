@@ -29,31 +29,47 @@
           <!--タブ名-->
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" href="#my-page-store-tab" role="tab" aria-controls="home" aria-expanded="true">投稿した店舗</a>
+              <a class="nav-link active" data-toggle="tab" href="#my-page-store-tab" role="tab" aria-controls="post-store" aria-expanded="true">投稿した店舗</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#my-page-review-tab" role="tab" aria-controls="profile">投稿したレビュー</a>
+              <a class="nav-link" data-toggle="tab" href="#my-page-review-tab" role="tab" aria-controls="review">投稿したレビュー</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#high-score-review-tab" role="tab" aria-controls="high-score">高評価した店舗</a>
             </li>
           </ul>
           <!--タブコンテンツ-->
           <div class="tab-content" id="myTabContent">
             <!-- 店舗投稿 -->
             <div class="tab-pane fade show active" id="my-page-store-tab" role="tabpanel" aria-labelledby="1-tab">
-              <% if @post_ramen_store.present? %>
+              <% if @post_ramen_stores.present? %>
                 <div class="row">
-                  <%= render partial: 'ramen_stores/ramen_store', collection: @post_ramen_store %>
+                  <%= render partial: 'ramen_stores/ramen_store', collection: @post_ramen_stores %>
                 </div>
               <% else %>
                 <div class="mt-4">
                   <p>店舗をまだ投稿していません</p>
                 </div>
               <% end %>
-              <%= paginate @post_ramen_store, :param_name => 'store_page' %>
+              <%= paginate @post_ramen_stores, :param_name => 'store_page' %>
             </div>
             <!-- レビュー投稿 -->
             <div class="tab-pane fade" id="my-page-review-tab" role="tabpanel" aria-labelledby="2-tab">
               <%= render 'devise/sessions/review', user_reviews: @post_reviews %>
               <%= paginate @post_reviews, :param_name => 'review_page' %>
+            </div>
+            <!-- レビュー投稿 -->
+            <div class="tab-pane fade" id="high-score-review-tab" role="tabpanel" aria-labelledby="3-tab">
+              <% if @high_score_stores.present? %>
+                <div class="row">
+                  <%= render partial: 'ramen_stores/ramen_store', collection: @high_score_stores %>
+                </div>
+              <% else %>
+                <div class="mt-4">
+                  <p>店舗をまだ投稿していません</p>
+                </div>
+              <% end %>
+              <%= paginate @high_score_stores, :param_name => 'high_score_store_page' %>
             </div>
           </div>
         </div>

@@ -45,20 +45,24 @@
         <% end %>
       </div>
     </div>
-    <div class="col-md-12 text-right">
-      <% if current_user.own?(review) %>
-        <div class="lg-btn">
+
+    <% if current_user.own?(review) %>
+      <div class="col-md-12">
+        <div class="lg-btn text-right">
           <% if @path.is('users/sessions#show') %>
-            <%= link_to '店舗詳細画面へ', ramen_store_path(review.ramen_store), class: 'btn btn-outline-secondary' %>
+            <%= link_to '店舗詳細へ', ramen_store_path(review.ramen_store), class: 'btn btn-outline-secondary' %>
           <% end %>
           <%= link_to "レビューを編集", edit_ramen_store_review_path(review, ramen_store_id: review.ramen_store_id), class: "btn btn-outline-success mx-2", data: {"turbolinks" => false} %>
           <%= link_to "レビューを削除", ramen_store_review_path(review, ramen_store_id: review.ramen_store_id), method: :delete, class: "btn btn-outline-danger", data: { confirm: "本当に削除しますか？" } %>
         </div>
-        <div class="sm-btn">
-          <%= link_to "編集", edit_ramen_store_review_path(review, ramen_store_id: review.ramen_store_id), class: "btn btn-outline-success mr-2", data: {"turbolinks" => false} %>
-          <%= link_to "削除", ramen_store_review_path(review, ramen_store_id: review.ramen_store_id), method: :delete, class: "btn btn-outline-danger", data: { confirm: "本当に削除しますか？" } %>
+        <div class="sm-btn text-center">
+          <% if @path.is('users/sessions#show') %>
+            <%= link_to '店舗詳細へ', ramen_store_path(review.ramen_store), class: 'btn btn-outline-secondary' %>
+          <% end %>
+            <%= link_to "編集", edit_ramen_store_review_path(review, ramen_store_id: review.ramen_store_id), class: "btn btn-outline-success mx-2", data: {"turbolinks" => false} %>
+            <%= link_to "削除", ramen_store_review_path(review, ramen_store_id: review.ramen_store_id), method: :delete, class: "btn btn-outline-danger", data: { confirm: "本当に削除しますか？" } %>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 <% end %>

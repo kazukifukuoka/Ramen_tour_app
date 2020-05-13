@@ -25,8 +25,11 @@ class Users::SessionsController < Devise::SessionsController
   def show
     return redirect_to new_user_session_path, danger: 'アカウント登録もしくはログインしてください' unless current_user
     @user = User.find(params[:id])
-    @post_ramen_store = @user.ramen_stores.page(params[:store_page]).per(MY_STORE_PER)
+    @post_ramen_stores = @user.ramen_stores.page(params[:store_page]).per(MY_STORE_PER)
     @post_reviews = @user.ramen_store_reviews.page(params[:review_page]).per(MY_REVIEW_PER)
+    high_score_store_ids = Rate.where(rater_id: @user.id, stars: 7..10).order(stars: :desc).pluck(:rateable_id)
+    high_score_stores = RamenStore.find(high_score_store_ids)
+    @high_score_stores = Kaminari.paginate_array(high_score_stores).page(params[:high_score_store_page]).per(MY_STORE_PER)
   end
 
   def new_guest
