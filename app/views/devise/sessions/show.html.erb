@@ -18,8 +18,8 @@
               <p class="text-muted">プロフィールは設定されていません</p>
             <% end %>
             <hr>
-            <p>投稿店舗 <%= current_user.ramen_stores.count %> 件</p>
-            <p>投稿レビュー <%= current_user.ramen_store_reviews.count %> 件</p>
+            <p>投稿した店舗 <%= current_user.ramen_stores.count %> 件</p>
+            <p>投稿したレビュー <%= current_user.ramen_store_reviews.count %> 件</p>
           </div>
         </div>
       </div>
@@ -28,10 +28,10 @@
           <!--タブ名-->
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" href="#my-page-store-tab" role="tab" aria-controls="home" aria-expanded="true">投稿店舗</a>
+              <a class="nav-link active" data-toggle="tab" href="#my-page-store-tab" role="tab" aria-controls="home" aria-expanded="true">投稿した店舗</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#my-page-review-tab" role="tab" aria-controls="profile">投稿レビュー</a>
+              <a class="nav-link" data-toggle="tab" href="#my-page-review-tab" role="tab" aria-controls="profile">投稿したレビュー</a>
             </li>
           </ul>
           <!--タブコンテンツ-->
