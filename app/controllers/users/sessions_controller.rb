@@ -23,8 +23,8 @@ class Users::SessionsController < Devise::SessionsController
 
   def show
     @user = User.find(params[:id])
-    @post_ramen_store = current_user.ramen_stores.page(params[:store_page]).per(MY_STORE_PER)
-    @post_reviews = current_user.ramen_store_reviews.page(params[:review_page]).per(MY_REVIEW_PER)
+    @post_ramen_store = @user.ramen_stores.page(params[:store_page]).per(MY_STORE_PER)
+    @post_reviews = @user.ramen_store_reviews.page(params[:review_page]).per(MY_REVIEW_PER)
   end
 
   def new_guest
