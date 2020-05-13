@@ -1,4 +1,8 @@
-<div class="col-sm-12 col-lg-4 mb-3">
+<% if @path.is('users/sessions#show') %>
+  <div class="col-md-6 mb-3">
+<%else%>
+  <div class="col-md-4 mb-3">
+<% end %>
   <div id=<%= "ramen_store-id-#{ramen_store.id}" %>>
     <% if @path.is('ramen_stores#rank') %>
       <% if ramen_store_counter == 0 %>

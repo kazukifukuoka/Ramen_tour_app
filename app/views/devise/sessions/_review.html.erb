@@ -1,0 +1,7 @@
+<% if user_reviews.count > 0 %>
+  <%= render 'ramen_store_reviews/review_contents', reviews: user_reviews %>
+<% else %>
+  <div class="mt-4">
+    <p>レビューをまだ投稿していません</p>
+  </div>
+<% end %>

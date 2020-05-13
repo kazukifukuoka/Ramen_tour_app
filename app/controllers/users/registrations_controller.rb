@@ -55,7 +55,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def correct_user
     @user = User.find(current_user.id)
-    redirect_to root_path, danger: 'アクセス権限がありません' if @user
+    redirect_to root_path, danger: 'アクセス権限がありません' unless @user
   end
 
   # If you have extra params to permit, append them to the sanitizer.
