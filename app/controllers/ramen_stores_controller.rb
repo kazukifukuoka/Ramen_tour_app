@@ -91,13 +91,6 @@ class RamenStoresController < ApplicationController
     )
   end
 
-  def request_path
-    @path = controller_path + '#' + action_name
-    def @path.is(*str)
-      str.map { |s| include?(s) }.include?(true)
-    end
-  end
-
   def self.search(search)
     return RamenStore.all unless search
     RamenStore.where(['content LIKE ?', "%#{search}%"])

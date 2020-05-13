@@ -20,4 +20,11 @@ class ApplicationController < ActionController::Base
   def store_current_location
     store_location_for(:user, request.url)
   end
+
+  def request_path
+    @path = controller_path + '#' + action_name
+    def @path.is(*str)
+      str.map { |s| include?(s) }.include?(true)
+    end
+  end
 end
