@@ -118,6 +118,13 @@ input[name="tab_item"] {
   align-items: center;
 }
 
+@media screen and (max-width: 640px) {
+  .lp-container {
+    top: 5%;
+    left: 22%;
+  }
+}
+
 .lp-container p {
   font-size: 1.2rem;
   color: midnightblue;
